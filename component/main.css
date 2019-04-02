@@ -1,0 +1,172 @@
+/*
+	Online MD Document Share
+	White Style
+*/
+body{
+	background: #fff;
+	color:#000;
+	
+	font-family: meiryo;
+}
+
+#header{
+	position:fixed;
+	background:#ddd;
+	width:100%;
+	top:0;
+	left:0;
+	height:60px;
+	z-index: 1;
+}
+
+#menuButton{
+	position: absolute;
+	top:0;
+	right:0;
+	width:7em;
+}
+
+#doc{
+	position: absolute;
+	top:65px;
+	left:5px;
+	width:calc(100% - 5px);
+	height:calc(100% - 65px);
+}
+
+#new{
+	position:fixed;
+	top:20px;
+	left:0px;
+	width:100%;
+	height:calc(100% - 30px);
+	background:#eee;
+	display: none;
+}
+
+#new.show{
+	display: block;
+	z-index: 3;
+}
+
+#new.show + #doc{
+	overflow: hidden;
+}
+
+#windowBack{
+	position: fixed;
+	background: rgba(0,0,0,0.6);
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	z-index: 2;
+	opacity: 0;
+	pointer-events: none;
+	transition-duration: 0.2s;
+}
+
+#windowBack.show{
+	opacity: 1;
+	pointer-events:auto;
+}
+
+#editor{
+	position:absolute;
+	top:2.4em;
+	left:0;
+	width:calc(50% - 5px);
+	height:calc(100% - 3em - 49px);
+	border:1px solid #3c3c3c;
+	resize: none;
+}
+
+#preview{
+	position: absolute;
+	top:2em;
+	right:0;
+	width:50%;
+	height:calc(100% - 3em - 40px);
+	background:#fff;
+	border:1px solid #3c3c3c;
+	overflow: auto;
+}
+
+#save{
+	position: absolute;
+	bottom: 0;
+	left:0;
+	background:#aaa;
+	width:100%;
+	height:40px;
+}
+
+#saveLink{
+	position:absolute;
+	top:0;
+	left:14em;
+	width:calc(100% - 15em);
+	height:30px;
+	background:#ddd;
+	border:3px solid #aaa;
+}
+
+#newWindowClose{
+	position: absolute;
+	top:0;
+	right:0;
+	width:7em;
+	height:2em;
+	background:#aa0000;
+	border:3px solid #ff0000;
+	color:#fff;
+}
+
+#docTitle{
+	font-size: 14pt;
+	font-weight: bold;
+}
+
+#author{
+	font-size: 10pt;
+	color:#4c4c4c;
+}
+
+
+button{
+	background:#86bce5;
+	border:3px solid #4978d1;
+	width:14em;
+	height:40px;
+}
+
+#tools{
+	position: absolute;
+	top:0;
+	right:5px;
+}
+#tools svg{
+	height:25px;
+	width:25px;
+}
+/*マークダウン設定*/
+	
+#preview th,#preview td, #doc th, #doc td {
+    border: solid 1px;  /* 枠線指定 */
+    padding: 10px;      /* 余白指定 */
+}
+ 
+table {
+    border-collapse:  collapse; /* セルの線を重ねる */
+}
+
+#preview h1, #doc h1{
+	border-bottom: 1px solid #aaa;
+	padding-left: 5px;
+}
+
+#preview h2, #preview h3, #doc h2, #doc h3{
+	border-left:8px solid #aaa;
+	border-bottom: 1px solid #aaa;
+	padding-left: 5px;
+}
