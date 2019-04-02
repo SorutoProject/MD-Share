@@ -48,7 +48,7 @@ window.onload = function () {
 		var mdInfoJson = JSON.parse(mdInfo);
 		if (mdInfoJson.title) {
 			$$("#docTitle").textContent = mdInfoJson.title;
-			document.title = mdInfoJson.title + " - MD Note";
+			document.title = mdInfoJson.title + " - MD Share";
 		}
 		if (mdInfoJson.author) $$("#author").textContent = "by " + mdInfoJson.author;
 	}
