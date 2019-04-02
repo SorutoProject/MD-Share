@@ -1,2 +1,4 @@
 # MD-Note
-Share MD documents.
+Share MD Documents.
+
+Visit http://mdnote.cf
