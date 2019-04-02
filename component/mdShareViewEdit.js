@@ -102,6 +102,12 @@ window.onload = function () {
 	});
 
 	$$("#gen").addEventListener("click", function () {
+		if($$("#editor").value.indexOf("<!--") === -1 || $$("#editor").value.indexOf("-->") === -1){
+			console.log("input user info");
+			var title = prompt("このドキュメントのタイトルを入力してください");
+			var author = prompt("このドキュメントの作者名を入力してください");
+			$$("#editor").value = '<!--\n{\n\t"title":"' + title + '",\n\t"author":"' + author + '"\n}\n-->\n' + $$("#editor").value;
+		}
 		var userMd = LZString.compressToEncodedURIComponent($$("#editor").value);
 		$$("#saveLink").value = location.protocol + "//" + location.hostname + location.pathname + "?q=" + userMd;
 		console.log(userMd);
