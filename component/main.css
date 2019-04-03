@@ -2,202 +2,257 @@
 	Online MD Document Share
 	White Style
 */
-body{
+body {
 	background: #fff;
-	color:#000;
-	
+	color: #000;
+
 	font-family: meiryo;
 }
 
-#header{
-	position:fixed;
-	background:#ddd;
-	width:100%;
-	top:0;
-	left:0;
-	height:60px;
+#header {
+	position: fixed;
+	background: #ddd;
+	width: 100%;
+	top: 0;
+	left: 0;
+	height: 60px;
 	z-index: 1;
 }
 
-#menuButton{
+#menuButton {
 	position: absolute;
-	top:0;
-	right:0;
-	width:7em;
+	top: 0;
+	right: 0;
+	width: 7em;
 }
 
-#doc{
+#doc {
 	position: absolute;
-	top:65px;
-	left:5px;
-	width:calc(100% - 5px);
-	height:calc(100% - 65px);
+	top: 65px;
+	left: 5px;
+	width: calc(100% - 5px);
+	height: calc(100% - 65px);
 }
 
-#new{
-	position:fixed;
-	top:20px;
-	left:0px;
-	width:100%;
-	height:calc(100% - 30px);
-	background:#eee;
+#new {
+	position: fixed;
+	top: 20px;
+	left: 0px;
+	width: 100%;
+	height: calc(100% - 30px);
+	background: #eee;
 	display: none;
 }
 
-#new.show{
+#new.show {
 	display: block;
 	z-index: 3;
 }
 
-#new.show + #doc{
+#new.show + #doc {
 	overflow: hidden;
 }
 
-#windowBack{
+#windowBack {
 	position: fixed;
-	background: rgba(0,0,0,0.6);
-	top:0;
-	left:0;
-	width:100%;
-	height:100%;
+	background: rgba(0, 0, 0, 0.8);
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 	z-index: 2;
 	opacity: 0;
 	pointer-events: none;
 }
 
-#windowBack.show{
+#windowBack.show {
 	opacity: 1;
-	pointer-events:auto;
+	pointer-events: auto;
 }
 
-#editor{
-	position:absolute;
-	top:2.4em;
-	left:0;
-	width:calc(100% - 10px);
-	height:calc(100% - 3em - 49px);
-	border:1px solid #3c3c3c;
+#editor {
+	position: absolute;
+	top: 2.4em;
+	left: 0;
+	width: calc(100% - 10px);
+	height: calc(100% - 3em - 49px);
+	border: 1px solid #3c3c3c;
 	resize: none;
 }
 
-#preview{
+#preview {
 	position: absolute;
-	top:2em;
-	right:0;
-	width:100%;
-	height:calc(100% - 3em - 40px);
-	background:#fff;
-	border:1px solid #3c3c3c;
+	top: 2em;
+	right: 0;
+	width: 100%;
+	height: calc(100% - 3em - 40px);
+	background: #fff;
+	border: 1px solid #3c3c3c;
 	overflow: auto;
 	display: none;
 }
 
-#save{
+#save {
 	position: absolute;
 	bottom: 0;
-	left:0;
-	background:#aaa;
-	width:100%;
-	height:40px;
+	left: 0;
+	background: #aaa;
+	width: 100%;
+	height: 40px;
 }
 
-#saveLink{
-	position:absolute;
-	top:0;
-	left:14em;
-	width:calc(100% - 15em);
-	height:30px;
-	background:#ddd;
-	border:3px solid #aaa;
-}
-
-#newWindowClose{
+#saveLink {
 	position: absolute;
-	top:0;
-	right:0;
-	width:7em;
-	height:2em;
-	background:#aa0000;
-	border:3px solid #ff0000;
-	color:#fff;
+	top: 0;
+	left: 14em;
+	width: calc(100% - 15em);
+	height: 30px;
+	background: #ddd;
+	border: 3px solid #aaa;
 }
 
-#docTitle{
+#newWindowClose {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 7em;
+	height: 2em;
+	background: #aa0000;
+	border: 3px solid #ff0000;
+	color: #fff;
+}
+
+#docTitle {
 	font-size: 14pt;
 	font-weight: bold;
 }
 
-#author{
+#author {
 	font-size: 10pt;
-	color:#4c4c4c;
+	color: #4c4c4c;
 }
 
 
-button{
-	background:#86bce5;
-	border:3px solid #4978d1;
-	width:14em;
-	height:40px;
+button {
+	background: #86bce5;
+	border: 3px solid #4978d1;
+	width: 14em;
+	height: 40px;
 }
 
-#tools{
-	position: absolute;
-	top:0;
-	right:5px;
+/*端末別設定*/
+/*スマホ用*/
+@media (max-width:600px) {
+	#tools {
+		position: fixed;
+		top: 60px;
+		right: 0px;
+		height: calc(100% - 60px);
+		width: 100%;
+		background: rgba(200, 200, 200, 0.8);
+		z-index: 2;
+		transition-duration: 0.2s;
+	}
+
+	#tools.close {
+		opacity: 0;
+	}
+
+	#tools button {
+		text-decoration: none;
+		color: #000;
+		height: 35px;
+		width: 100%;
+		background: #ddd;
+		border: none;
+		border-top: 1px solid #5c5c5c;
+		border-bottom: 1px solid #5c5c5c;
+	}
+
+	#tools button:active {
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6) inset;
+	}
+
+	#menuButton {
+		background: #ddd;
+		border: 2px solid #5c5c5c;
+	}
 }
-#tools button{
-	height:55px;
-	width:4em;
-	background:#ddd;
-	border:none;
-	border-left:1px solid #3c3c3c;
-	border-right:1px solid #3c3c3c;
-	box-shadow: 0px 0px 4px rgba(0,0,0,0.5) inset;
+
+/*PC用*/
+@media (min-width:601px) {
+	#tools {
+		position: fixed;
+		top: 0;
+		right: 0;
+		z-index: 2;
+	}
+
+	#tools button {
+		height: 55px;
+		width: 4em;
+		background: #ddd;
+		border: none;
+		border-left: 1px solid #3c3c3c;
+		border-right: 1px solid #3c3c3c;
+		box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5) inset;
+	}
+	#menuButton{
+		display: none;
+	}
 }
+
 /*選択不可の設定*/
-#header,#new label{
-	 -ms-user-select: none; /* IE 10+ */
-   -moz-user-select: -moz-none;
-   -khtml-user-select: none;
-   -webkit-user-select: none;
-   user-select: none;
+#header,
+#new label {
+	-ms-user-select: none;
+	/* IE 10+ */
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
 }
+
 /*マークダウン設定*/
-	
-#preview th,#preview td, #doc th, #doc td {
-    border: solid 1px;  /* 枠線指定 */
-    padding: 10px;      /* 余白指定 */
+
+#preview th,
+#preview td,
+#doc th,
+#doc td {
+	border: solid 1px;
+	/* 枠線指定 */
+	padding: 10px;
+	/* 余白指定 */
 }
- 
+
 table {
-    border-collapse:  collapse; /* セルの線を重ねる */
+	border-collapse: collapse;
+	/* セルの線を重ねる */
 }
 
-#preview h1, #doc h1{
-	border-bottom: 1px solid #aaa;
-	padding-left: 5px;
-}
-#preview h2, #doc h2{
-	background:#3c3c3c;
-	padding:5px;
-	margin-right:5px;
-	color:#fff;
-}
-
-#preview h3,  #doc h3{
-	border-left:8px solid #aaa;
+#preview h1,
+#doc h1 {
 	border-bottom: 1px solid #aaa;
 	padding-left: 5px;
 }
 
-#preview code,#doc code{
-display: inline-block;
-background:#3c3c3c;
-color:#fff;
-padding-left:10px;
-padding-right:10px;
-margin-left:10px;
-margin-right: 10px;
-overflow:auto;
-max-width:calc(100% - 40px);
+#preview h2,
+#doc h2 {
+	background: #3c3c3c;
+	padding: 5px;
+	margin-right: 5px;
+	color: #fff;
+}
+
+#preview h3,
+#doc h3 {
+	border-left: 8px solid #aaa;
+	border-bottom: 1px solid #aaa;
+	padding-left: 5px;
+}
+
+#preview blockquote, #doc blockquote{
+	border-left: 7px solid #ccc;
+	padding-left: 10px;
+	color:#7c7c7c;
 }

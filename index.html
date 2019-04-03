@@ -7,19 +7,19 @@
 	<meta name="description" content="Share MD Documents!">
 	<title>MD Share</title>
 	<link rel="stylesheet" href="component/main.css">
+	<link rel="stylesheet" href="component/github.highlight.css">
+	<script src="component/highlight.min.js"></script>
 	<script src="component/marked.min.js"></script>
 	<script src="component/mdShareViewEdit.js"></script>
 	<script src="component/lz-string.min.js"></script>
 </head>
 
 <body>
-	<div id="header"><span id="docInfo"><span id="docTitle"></span><br><span id="author"></span></span>
-		<div id="tools">
+	<div id="header"><span id="docInfo"><span id="docTitle"></span><br><span id="author"></span></span><button id="menuButton">メニュー</button></div>
+	<div id="tools" class="close">
 			<button id="newButton" title="新しいドキュメントを作成します">新規</button>
 			<button id="editButton" title="このドキュメントを編集します">編集</button>
 			<button id="infoButton" title="このソフトウェアの情報を表示します">情報</button>
-		</div>
-
 	</div>
 	<div id="doc"></div>
 	<div id="new">
