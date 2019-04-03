@@ -153,7 +153,7 @@ window.onload = function () {
 			var userMd = LZString.compressToEncodedURIComponent($$("#editor").value);
 			var genURL = location.protocol + "//" + location.hostname + location.pathname + "?q=" + userMd;
 			if (genURL.length > 5000) {
-				alert("マークダウンに記述された文字数が多すぎるため、URLの生成をキャンセルしました。\nマークダウンの文字数を減らすしたり、内容を2つのマークダウンに記述したりしてください。");
+				alert("マークダウンに記述された文字数が多すぎるため、URLの生成をキャンセルしました。\nマークダウンの文字数を減らしたり、内容を2つのマークダウンに記述したりしてください。");
 			} else {
 				$$("#saveLink").value = genURL;
 				console.log(userMd);
