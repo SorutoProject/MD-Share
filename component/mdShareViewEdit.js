@@ -90,8 +90,10 @@ window.onload = function () {
 	$$("#previewCheck").addEventListener("click", function(e){
 		if(e.target.checked === true){
 			$$("#preview").style.display = "block";
+			$$("#editor").style.display = "none";
 		}else{
 			$$("#preview").style.display = "none";
+			$$("#editor").style.display = "block";
 		}
 	})
 

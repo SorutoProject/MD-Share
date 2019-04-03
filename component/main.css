@@ -155,6 +155,14 @@ button{
 	border-right:1px solid #3c3c3c;
 	box-shadow: 0px 0px 4px rgba(0,0,0,0.5) inset;
 }
+/*選択不可の設定*/
+#header,#new label{
+	 -ms-user-select: none; /* IE 10+ */
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   user-select: none;
+}
 /*マークダウン設定*/
 	
 #preview th,#preview td, #doc th, #doc td {
@@ -181,4 +189,16 @@ table {
 	border-left:8px solid #aaa;
 	border-bottom: 1px solid #aaa;
 	padding-left: 5px;
+}
+
+#preview code,#doc code{
+display: inline-block;
+background:#3c3c3c;
+color:#fff;
+padding-left:10px;
+padding-right:10px;
+margin-left:10px;
+margin-right: 10px;
+overflow:auto;
+max-width:calc(100% - 40px);
 }
