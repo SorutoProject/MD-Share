@@ -75,7 +75,7 @@ body{
 	position:absolute;
 	top:2.4em;
 	left:0;
-	width:calc(50% - 5px);
+	width:calc(100% - 10px);
 	height:calc(100% - 3em - 49px);
 	border:1px solid #3c3c3c;
 	resize: none;
@@ -85,11 +85,12 @@ body{
 	position: absolute;
 	top:2em;
 	right:0;
-	width:50%;
+	width:100%;
 	height:calc(100% - 3em - 40px);
 	background:#fff;
 	border:1px solid #3c3c3c;
 	overflow: auto;
+	display: none;
 }
 
 #save{

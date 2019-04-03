@@ -86,6 +86,14 @@ window.onload = function () {
 			window.onbeforeunload = function (e) {};
 		}
 	});
+	
+	$$("#previewCheck").addEventListener("click", function(e){
+		if(e.target.checked === true){
+			$$("#preview").style.display = "block";
+		}else{
+			$$("#preview").style.display = "none";
+		}
+	})
 
 	document.getElementById("editor").addEventListener("keyup", function () {
 		$$("#preview").innerHTML = marked($$("#editor").value);
