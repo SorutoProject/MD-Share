@@ -1,4 +1,12 @@
 # MD-Share
 Share MD Documents.
+マークダウンドキュメントを使って、予定やお知らせなどをシェアしよう。
 
-Visit http://mdshare.cf
+なお、このWebアプリは、
+
+https://mdshare.cf
+
+で使用できます。
+
+(C)2019 Soruto Project.  
+MIT Licensed.
