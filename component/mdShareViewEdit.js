@@ -144,20 +144,27 @@ window.onload = function () {
 	});
 
 	$$("#gen").addEventListener("click", function () {
-		if ($$("#editor").value.length > 3000) {
-			alert("マークダウンの記述は、タイトルなどのメタデータや改行を含めて3000文字以内に収まるようにしてください。");
-		} else if ($$("#editor").value.indexOf("<!---") === -1 || $$("#editor").value.indexOf("--->") === -1) {
+		if ($$("#editor").value.indexOf("<!---") === -1 || $$("#editor").value.indexOf("--->") === -1) {
 			console.log("input user info");
 			var title = prompt("このドキュメントのタイトルを入力してください");
 			var author = prompt("このドキュメントの作者名を入力してください");
 			var updateMd = '<!---\n{\n\t"title":"' + title + '",\n\t"author":"' + author + '"\n}\n--->\n' + $$("#editor").value;
-			if (updateMd.length > 3000) {
-				alert("マークダウンの記述は、タイトルなどのメタデータや改行を含めて3000文字以内に収まるようにしてください。");
-
+			$$("#editor").value = updateMd;
+			var userMd = LZString.compressToEncodedURIComponent($$("#editor").value);
+			var genURL = location.protocol + "//" + location.hostname + location.pathname + "?q=" + userMd;
+			if (genURL.length > 5000) {
+				alert("マークダウンに記述された文字数が多すぎるため、URLの生成をキャンセルしました。\nマークダウンの文字数を減らすしたり、内容を2つのマークダウンに記述したりしてください。");
 			} else {
-				$$("#editor").value = updateMd;
-				var userMd = LZString.compressToEncodedURIComponent($$("#editor").value);
-				$$("#saveLink").value = location.protocol + "//" + location.hostname + location.pathname + "?q=" + userMd;
+				$$("#saveLink").value = genURL;
+				console.log(userMd);
+			}
+		} else {
+			var userMd = LZString.compressToEncodedURIComponent($$("#editor").value);
+			var genURL = location.protocol + "//" + location.hostname + location.pathname + "?q=" + userMd;
+			if (genURL.length > 5000) {
+				alert("マークダウンに記述された文字数が多すぎるため、URLの生成をキャンセルしました。\nマークダウンの文字数を減らすしたり、内容を2つのマークダウンに記述したりしてください。");
+			} else {
+				$$("#saveLink").value = genURL;
 				console.log(userMd);
 			}
 		}
