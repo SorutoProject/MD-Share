@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>マークダウンの書き方</title>
+	<link rel="stylesheet" href="../component/main.css">
+	<link rel="stylesheet" href="../component/github.highlight.css">
+</head>
+<body>
+<h1 id="マークダウンの書き方">マークダウンの書き方</h1>
+<p>このページでは、マークダウンの記述方法を説明します。</p>
+<p>※注意※<br>[]で囲われている文字は、実際には書きません。</p>
+<h2 id="普通の文字">普通の文字</h2>
+<p>普通に書きます。</p>
+<h3 id="記述例">記述例</h3>
+<pre><code class="hljs">こんにちは。</code></pre><h3 id="表示例">表示例</h3>
+<p>こんにちは。</p>
+<h2 id="改行">改行</h2>
+<p>改行する前の行の行末に半角スペースを2個書いてから改行で、改行します。</p>
+<h3 id="記述例-1">記述例</h3>
+<pre><code class="hljs">こんにちは。[<span class="hljs-string">半角スペース</span>][<span class="hljs-symbol">半角スペース</span>]
+こんばんは。</code></pre><h3 id="表示例-1">表示例</h3>
+<p>こんにちは。<br>こんばんは。</p>
+<h2 id="見出し">見出し</h2>
+<p>行頭に「#[半角スペース]」と書くと、見出しに変換されます。</p>
+<h3 id="記述例-2">記述例</h3>
+<pre><code class="hljs"><span class="hljs-meta">#</span><span class="bash"> 見出し1</span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 見出し2</span></span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">## 見出し3</span></span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">### 見出し4</span></span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">#### 見出し5</span></span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">##### 見出し6</span></span></code></pre><h3 id="表示例-2">表示例</h3>
+<h1 id="見出し1">見出し1</h1>
+<h2 id="見出し2">見出し2</h2>
+<h3 id="見出し3">見出し3</h3>
+<h4 id="見出し4">見出し4</h4>
+<h5 id="見出し5">見出し5</h5>
+<h6 id="見出し6">見出し6</h6>
+<h2 id="太字、斜体（イタリック）">太字、斜体（イタリック）</h2>
+<p>「<em>」もしくは「_」で文字を囲めば斜体(イタリック)に、「*</em>」もしくは「__」で囲めば、太字になります。</p>
+<h3 id="記述例-3">記述例</h3>
+<pre><code class="hljs"><span class="hljs-emphasis">*斜体*</span>  
+<span class="hljs-emphasis">_斜体_</span>  
+<span class="hljs-strong">**太字**</span>  
+<span class="hljs-strong">__太字__</span></code></pre><h3 id="表示例-3">表示例</h3>
+<p><em>斜体</em><br><em>斜体</em><br><strong>太字</strong><br><strong>太字</strong>  </p>
+<h2 id="リスト">リスト</h2>
+<p>文頭に「*」、「+」、「-」のいずれかを入れると箇条書きになります。<br>文頭に「1.[半角スペース]」「2.[半角スペース]」「3.[半角スペース]」のように書くと番号付きのリストが作成されます。</p>
+<p>※リストの上下に<strong>空行</strong>が必要です。</p>
+<h3 id="記述例-4">記述例</h3>
+<pre><code class="hljs">[空行]
+<span class="hljs-bullet">* </span>項目1
+<span class="hljs-bullet">* </span>項目2
+<span class="hljs-bullet">* </span>項目3
+[空行]
+[空行]
+<span class="hljs-bullet">1. </span>項目1
+<span class="hljs-bullet">2. </span>項目2
+<span class="hljs-bullet">3. </span>項目3
+[空行]</code></pre><h3 id="表示例-4">表示例</h3>
+<ul>
+<li>項目1</li>
+<li>項目2</li>
+<li>項目3</li>
+</ul>
+<ol>
+<li>項目1</li>
+<li>項目2</li>
+<li>項目3</li>
+</ol>
+<h2 id="箇条書きリスト">箇条書きリスト</h2>
+<p>箇条書きリストは、「-」、「+」、「*」のいずれかを使って書きます。
+番号付き箇条書きリストは、「1.[半角スペース]」のように書きます。
+サブのリスト項目(下の記述例の「リスト1-1」とか)の印の前には、TABを1つもしくは半角スペース4つを書きます。<br>サブのサブのリスト項目(下の記述例の「リスト1-1-1」とか)の印の前には、TABを2つもしくは半角スペース8つを書きます。</p>
+<h3 id="記述例-5">記述例</h3>
+<pre><code class="hljs"><span class="hljs-bullet">* </span>リスト1
+<span class="hljs-code">    * リスト1-1</span>
+<span class="hljs-code">        * リスト1-1-1</span>
+
+<span class="hljs-bullet">1. </span>リスト1
+<span class="hljs-code">    1. リスト1-1</span>
+<span class="hljs-code">        1. リスト1-1-1</span></code></pre><h3 id="表示例-5">表示例</h3>
+<ul>
+<li>リスト1<ul>
+<li>リスト1-1<ul>
+<li>リスト1-1-1</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>リスト1<ol>
+<li>リスト1-1<ol>
+<li>リスト1-1-1</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="引用">引用</h2>
+<p>行頭に「&gt;[半角スペース]」を書きます。複数行書く場合は、改行のたびに「&gt;[半角スペース]」を書きます。</p>
+<h3 id="記述例-6">記述例</h3>
+<pre><code class="hljs"><span class="hljs-quote">&gt; 雨ニモマケズ。  </span>
+<span class="hljs-quote">&gt; 風ニモマケズ。</span></code></pre><h3 id="表示例-6">表示例</h3>
+<blockquote>
+<p>雨ニモマケズ。<br>風ニモマケズ。</p>
+</blockquote>
+<h2 id="二重引用">二重引用</h2>
+<p>二重引用をする場合は、行頭に「&gt;&gt;[半角スペース]」を書きます。改行のたびに「&gt;&gt;[半角スペース]」を書きます。</p>
+<blockquote>
+<p>雨ニモマケズ<br>宮沢賢治</p>
+<blockquote>
+<p>雨ニモマケズ。<br>風ニモマケズ。</p>
+</blockquote>
+</blockquote>
+<h2 id="ソースコード複数行">ソースコード(複数行)</h2>
+<p>「```」でソースコードを囲います。</p>
+<p>※記述例は仕様により表示できません。<br>どうしても見たい場合は、(スマホの場合は「メニュー」をクリックしてから)「編集」をクリックして確認できます。</p>
+<h3 id="表示例-7">表示例</h3>
+<pre><code class="hljs"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Hello World!!"</span>);</code></pre><h2 id="ソースコード文章中で">ソースコード(文章中で)</h2>
+<p>「`」で囲います。</p>
+<h3 id="記述例-7">記述例</h3>
+<pre><code class="hljs">JavaScriptで「Hello World」を表示するプログラムは`<span class="javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Hello World"</span>);</span>`です。</code></pre><h3 id="表示例-8">表示例</h3>
+<p>JavaScriptで「Hello World」を表示するプログラムは<code>console.log("Hello World");</code>です。</p>
+<h2 id="表">表</h2>
+<h3 id="記述例-8">記述例</h3>
+<pre><code class="hljs"><span class="hljs-params">|普通|</span>左揃え<span class="hljs-params">|中央揃え|</span>右揃え<span class="hljs-params">|
+|</span>---<span class="hljs-params">|:--|</span><span class="hljs-symbol">:-</span><span class="hljs-symbol">:|--</span><span class="hljs-symbol">:|</span>
+<span class="hljs-params">|あ|</span>い<span class="hljs-params">|う|</span>え<span class="hljs-params">|
+|</span>お<span class="hljs-params">|か|</span>き<span class="hljs-params">|く|</span></code></pre><h3 id="表示例-9">表示例</h3>
+<table>
+<thead>
+<tr>
+<th>普通</th>
+<th align="left">左揃え</th>
+<th align="center">中央揃え</th>
+<th align="right">右揃え</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>あ</td>
+<td align="left">い</td>
+<td align="center">う</td>
+<td align="right">え</td>
+</tr>
+<tr>
+<td>お</td>
+<td align="left">か</td>
+<td align="center">き</td>
+<td align="right">く</td>
+</tr>
+</tbody></table>
+<h2 id="水平線">水平線</h2>
+<p>「-」、「*」、「_」を3つ以上連続して書くと水平線になります。<br>※連続する記号の間にはスペースがあってもかまいません。</p>
+<h3 id="記述例-9">記述例</h3>
+<pre><code class="hljs">---
+<span class="hljs-emphasis">***</span>
+<span class="hljs-emphasis">___</span>
+<span class="hljs-bullet">* </span><span class="hljs-bullet">* *</span></code></pre><h3 id="表示例-10">表示例</h3>
+<hr>
+<hr>
+<hr>
+<hr>
+<h2 id="リンク">リンク</h2>
+<p>リンクにしたい文字を「[]」で囲み、リンク先URLを「()」で囲むとリンクになります。<br>また、URLをそのまま書くとリンクになります。</p>
+<h3 id="記述例-10">記述例</h3>
+<pre><code class="hljs">[<span class="hljs-string">Google</span>](<span class="hljs-link">https://google.com</span>)  
+https://google.com</code></pre><h3 id="表示例-11">表示例</h3>
+<p><a href="https://google.com">Google</a><br><a href="https://google.com">https://google.com</a></p>
+<h2 id="取り消し線">取り消し線</h2>
+<p>「~~」で文字を囲むと取り消し線が惹かれます。</p>
+<h3 id="記述例-11">記述例</h3>
+<pre><code class="hljs">~~取り消し線~~</code></pre><h3 id="表示例-12">表示例</h3>
+<p><del>取り消し線</del></p>
+<p>ここまでマスターすれば、Good!</p>
+</body>
+</html>
