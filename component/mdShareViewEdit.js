@@ -85,6 +85,7 @@ window.onload = function () {
 		$$("#new").className = $$("#windowBack").className = "show";
 		document.body.style.overflow = "hidden";
 		$$("#tools").className = "close";
+		$$("#saveLink").value = "";
 	});
 
 	$$("#editButton").addEventListener("click", function () {
@@ -94,6 +95,7 @@ window.onload = function () {
 		$$("#editor").value = mdWithInfo;
 		$$("#preview").innerHTML = marked(mdWithInfo);
 		$$("#new").className = $$("#windowBack").className = "show";
+		$$("#saveLink").value = "";
 		document.body.style.overflow = "hidden";
 		$$("#tools").className = "close";
 	})
