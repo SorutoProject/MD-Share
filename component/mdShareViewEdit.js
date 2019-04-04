@@ -150,7 +150,7 @@ window.onload = function () {
 			return false;
 		}
 	});
-	$$("#saveLink").addEventListener("focus",function(e){
+	$$("#saveLink").addEventListener("click",function(e){
 		e.target.select();
 	});
 
