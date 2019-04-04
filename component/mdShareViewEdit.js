@@ -79,12 +79,18 @@ window.onload = function () {
 
 	//addEventListener
 	$$("#newButton").addEventListener("click", function () {
+		$$("#previewCheck").checked = false;
+		$$("#preview").style.display = "none";
+		$$("#editor").style.display = "block";
 		$$("#new").className = $$("#windowBack").className = "show";
 		document.body.style.overflow = "hidden";
 		$$("#tools").className = "close";
 	});
 
 	$$("#editButton").addEventListener("click", function () {
+		$$("#previewCheck").checked = false;
+		$$("#preview").style.display = "none";
+		$$("#editor").style.display = "block";
 		$$("#editor").value = mdWithInfo;
 		$$("#preview").innerHTML = marked(mdWithInfo);
 		$$("#new").className = $$("#windowBack").className = "show";
@@ -110,7 +116,7 @@ window.onload = function () {
 		}
 	});
 
-	$$("#previewCheck").addEventListener("click", function (e) {
+	$$("#previewCheck").addEventListener("change", function (e) {
 		if (e.target.checked === true) {
 			$$("#preview").style.display = "block";
 			$$("#editor").style.display = "none";
