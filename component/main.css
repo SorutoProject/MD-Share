@@ -154,6 +154,7 @@ button {
 
 	#tools.close {
 		opacity: 0;
+		pointer-events: none;
 	}
 
 	#tools button {
