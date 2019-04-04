@@ -126,16 +126,16 @@ window.onload = function () {
 			$$("#preview").style.display = "none";
 			$$("#editor").style.display = "block";
 		}
-	})
+	});
 
-	document.getElementById("editor").addEventListener("keyup", function () {
+	$$("#editor").addEventListener("keyup", function () {
 		$$("#preview").innerHTML = marked($$("#editor").value);
 		window.onbeforeunload = function (e) {
 			return "編集内容が破棄されます。続行しますか？";
 		};
 		flags.edited = true;
 	});
-	document.getElementById('editor').addEventListener('keydown', function (e) {
+	$$('#editor').addEventListener('keydown', function (e) {
 		var elem, end, start, value;
 		if (e.keyCode === 9) {
 			if (e.preventDefault) {
@@ -149,6 +149,9 @@ window.onload = function () {
 			elem.selectionStart = elem.selectionEnd = start + 1;
 			return false;
 		}
+	});
+	$$("#saveLink").addEventListener("focus",function(e){
+		e.target.select();
 	});
 
 	$$("#gen").addEventListener("click", function () {
