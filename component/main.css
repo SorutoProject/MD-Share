@@ -225,6 +225,10 @@ button {
 	/* 余白指定 */
 }
 
+table tr:nth-child(even) {
+	background: #ddd;
+}
+
 table {
 	border-collapse: collapse;
 	/* セルの線を重ねる */

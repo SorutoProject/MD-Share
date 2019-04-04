@@ -4,6 +4,9 @@ th,td {
 	padding: 10px;
 	/* 余白指定 */
 }
+table tr:nth-child(even) {
+	background: #ddd;
+}
 
 table {
 	border-collapse: collapse;
