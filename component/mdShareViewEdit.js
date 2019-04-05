@@ -79,25 +79,11 @@ window.onload = function () {
 
 	//addEventListener
 	$$("#newButton").addEventListener("click", function () {
-		$$("#previewCheck").checked = false;
-		$$("#preview").style.display = "none";
-		$$("#editor").style.display = "block";
-		$$("#new").className = $$("#windowBack").className = "show";
-		document.body.style.overflow = "hidden";
-		$$("#tools").className = "close";
-		$$("#saveLink").value = "";
+		newDoc();
 	});
 
 	$$("#editButton").addEventListener("click", function () {
-		$$("#previewCheck").checked = false;
-		$$("#preview").style.display = "none";
-		$$("#editor").style.display = "block";
-		$$("#editor").value = mdWithInfo;
-		$$("#preview").innerHTML = marked(mdWithInfo);
-		$$("#new").className = $$("#windowBack").className = "show";
-		$$("#saveLink").value = "";
-		document.body.style.overflow = "hidden";
-		$$("#tools").className = "close";
+		editDoc();
 	})
 
 	$$("#newWindowClose").addEventListener("click", function () {
@@ -150,7 +136,7 @@ window.onload = function () {
 			return false;
 		}
 	});
-	$$("#saveLink").addEventListener("click",function(e){
+	$$("#saveLink").addEventListener("click", function (e) {
 		e.target.select();
 	});
 
@@ -193,6 +179,20 @@ window.onload = function () {
 	$$("#infoButton").addEventListener("click", function () {
 		window.open("./help/index.html");
 	});
+	
+	$$("#temButton").addEventListener("click",function(){
+		window.open("./template/index.html");
+	});
+
+	if (arg.e === "t") {
+		$$("#windowBack").className = "show";
+		$$("#windowBack").textContent = "お待ち下さい...";
+		setTimeout(function(){
+			editDoc();
+			$$("#windowBack").textContent = "";
+		},1000)
+		
+	}
 }
 
 function getBrowserName() {
@@ -214,4 +214,26 @@ function getBrowserName() {
 	} else {
 		return "Unknown";
 	}
+}
+
+function newDoc() {
+	$$("#previewCheck").checked = false;
+	$$("#preview").style.display = "none";
+	$$("#editor").style.display = "block";
+	$$("#new").className = $$("#windowBack").className = "show";
+	document.body.style.overflow = "hidden";
+	$$("#tools").className = "close";
+	$$("#saveLink").value = "";
+}
+
+function editDoc() {
+	$$("#previewCheck").checked = false;
+	$$("#preview").style.display = "none";
+	$$("#editor").style.display = "block";
+	$$("#editor").value = mdWithInfo;
+	$$("#preview").innerHTML = marked(mdWithInfo);
+	$$("#new").className = $$("#windowBack").className = "show";
+	$$("#saveLink").value = "";
+	document.body.style.overflow = "hidden";
+	$$("#tools").className = "close";
 }
