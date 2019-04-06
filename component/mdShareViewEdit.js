@@ -57,6 +57,12 @@ window.onload = function () {
 		mdWithInfo = LZString.decompressFromEncodedURIComponent(arg["q"]);
 		console.log(mdWithInfo);
 	}
+	//There is not md data
+	if(mdWithInfo == "" || mdWithInfo == undefined){
+		var NMDPageData = "DwQgtBBQDekJACIAuBLJAbApggXAgogE6ED2hABGOQLIAi5AygBYCGh2ANPAiwK5JMyuBAwCeAZySYAtgkgBfSBDAA+SAGJyRUoQ2btZcgGMSAE0w5yAFSaZ25FOPIA7EknKmSR3tMzP3pixILAB0kICncoDQcoB2DIAiDIBaDIAxDIDSDNGA+cqAB2qA1gyAEQyAUQyAgAyAWwyAPwyAHQyASQyAFhGAXJ6A5gyAsgyAfgyA2gyAyQyAQAyQkABU5ACqAEoAMoCLDICXDICHDCWA-QzR5AgAjgjkE9MzWYCEjoCdSoBWDIAkCoAyDIDgxoBZ2oCqDImAZgyxgNEMXX2AYwyAtQyAnQyAEwyAowaAjBqHAAyABYZACUM72igEmGZ6AU4ZJoBnhnedUAQgz3XrkQDKDNFAGsM40AZQyANoZDgUhmMprN5ksVmtSfsKoAzxUAYC6NXaxDpAA";
+		mdWithInfo = LZString.decompressFromEncodedURIComponent(NMDPageData);
+		$$("#editButton").style.display = "none";
+	}
 	//md with document info
 	if (mdWithInfo.indexOf("<!---") !== -1) {
 		var mdInfo = mdWithInfo.split("<!---")[1].split("--->")[0];
