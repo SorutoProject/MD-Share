@@ -151,6 +151,7 @@ body {
 		background: rgba(200, 200, 200, 0.8);
 		z-index: 2;
 		transition-duration: 0.2s;
+		overflow: auto;
 	}
 
 	#tools.close {
