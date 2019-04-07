@@ -108,6 +108,8 @@ window.onload = function () {
 
 			window.onbeforeunload = function (e) {};
 			flags.edited = false;
+			//現在フォーカスがあたっている要素を探して、フォーカスを解除(スマホでのバグ対策)
+			document.activeElement.blur();
 		}
 	});
 
