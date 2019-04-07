@@ -37,10 +37,10 @@ body {
 
 #new {
 	position: fixed;
-	top: 20px;
+	top: 0px;
 	left: 0px;
 	width: 100%;
-	height: calc(100% - 30px);
+	height: 100%;
 	background: #eee;
 	display: none;
 }
@@ -203,6 +203,15 @@ body {
 	}
 }
 
+/*スマホで横画面で入力しているとき*/
+@media (max-height:160px){
+	#save{
+		display: none;
+	}
+	#preview,#editor{
+		height: calc(100% - 3em);
+	}
+}
 /*選択不可の設定*/
 #header,
 #new label {
