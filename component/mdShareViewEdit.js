@@ -36,6 +36,7 @@ var $$ = function (e) {
 	}
 }
 
+//ページの読み込み完了時
 window.onload = function () {
 	//IEを弾く
 	if (getBrowserName() == "IE") {
@@ -58,7 +59,7 @@ window.onload = function () {
 		console.log(mdWithInfo);
 	}
 	//There is not md data
-	if(mdWithInfo == "" || mdWithInfo == undefined){
+	if (mdWithInfo == "" || mdWithInfo == undefined) {
 		var NMDPageData = "DwQgtBBQDekJACIAuBLJAbApggXAgogE6ED2hABGOQLIAi5AygBYCGh2ANPAiwK5JMyuBAwCeAZySYAtgkgBfSBDAA+SAGJyRUoQ2btZcgGMSAE0w5yAFSaZ25FOPIA7EknKmSR3tMzP3pixILAB0kICncoDQcoB2DIAiDIBaDIAxDIDSDNGA+cqAB2qA1gyAEQyAUQyAgAyAWwyAPwyAHQyASQyAFhGAXJ6A5gyAsgyAfgyA2gyAyQyAQAyQkABU5ACqAEoAMoCLDICXDICHDCWA-QzR5AgAjgjkE9MzWYCEjoCdSoBWDIAkCoAyDIDgxoBZ2oCqDImAZgyxgNEMXX2AYwyAtQyAnQyAEwyAowaAjBqHAAyABYZACUM72igEmGZ6AU4ZJoBnhnedUAQgz3XrkQDKDNFAGsM40AZQyANoZDgUhmMprN5ksVmtSfsKoAzxUAYC6NXaxDpAA";
 		mdWithInfo = LZString.decompressFromEncodedURIComponent(NMDPageData);
 		$$("#editButton").style.display = "none";
@@ -114,9 +115,11 @@ window.onload = function () {
 		if (e.target.checked === true) {
 			$$("#preview").style.display = "block";
 			$$("#editor").style.display = "none";
+			$$("#preview").className = "show";
 		} else {
 			$$("#preview").style.display = "none";
 			$$("#editor").style.display = "block";
+			$$("#preview").className = "";
 		}
 	});
 
@@ -185,21 +188,42 @@ window.onload = function () {
 	$$("#infoButton").addEventListener("click", function () {
 		window.open("./help/index.html");
 	});
-	
-	$$("#temButton").addEventListener("click",function(){
+
+	$$("#temButton").addEventListener("click", function () {
 		window.open("./template/index.html");
 	});
 
 	if (arg.e === "t") {
 		$$("#windowBack").className = "show";
 		$$("#windowBack").textContent = "お待ち下さい...";
-		setTimeout(function(){
+		setTimeout(function () {
 			editDoc();
 			$$("#windowBack").textContent = "";
-		},1000)
-		
+		}, 1000)
+
 	}
 }
+
+// プリントするとき
+window.onbeforeprint = function () {
+	//新規作成・編集ウィンドウ表示時にプリントが開始されたら、プレビューを表示する
+	$$("#previewCheck").checked = true;
+	$$("#preview").style.display = "block";
+	$$("#editor").style.display = "none";
+	$$("#preview").className = "show";
+}
+//for safari
+var mediaQueryList = window.matchMedia('print');
+mediaQueryList.addListener(function (mql) {
+	if (mql.matches) {
+		//ここに書く
+		//新規作成・編集ウィンドウ表示時にプリントが開始されたら、プレビューを表示する
+		$$("#previewCheck").checked = true;
+		$$("#preview").style.display = "block";
+		$$("#editor").style.display = "none";
+		$$("#preview").className = "show";
+	}
+});
 
 function getBrowserName() {
 	var userAgent = window.navigator.userAgent.toLowerCase();

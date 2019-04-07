@@ -264,6 +264,29 @@ table {
 	color: #7c7c7c;
 }
 
+/*印刷用*/
+@media print{
+	#header,#tools{
+		display: none;
+	}
+	#doc{
+		position: absolute;
+		top:0;
+		left:0;
+	}
+	
+	
+  #preview.show{
+		position: fixed;
+		top:0;
+		left:0;
+		width:100%;
+		min-height:100%;
+		z-index: 3;
+		border:none;
+	}
+}
+
 /*keyframes*/
 @keyframes zoomIn {
 	0% {
