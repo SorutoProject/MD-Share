@@ -100,6 +100,11 @@ window.onload = function () {
 			var conf = true;
 		}
 		if (conf === true) {
+			//現在フォーカスがあたっている要素を探して、フォーカスを解除
+			document.activeElement.blur();
+			//テキストの選択を解除(スマホでのバグ対策)
+			deSelect();
+			
 			$$("#new").className = $$("#windowBack").className = "";
 			$$("#editor").value = "";
 			$$("#saveLink").value = "";
@@ -108,8 +113,6 @@ window.onload = function () {
 
 			window.onbeforeunload = function (e) {};
 			flags.edited = false;
-			//現在フォーカスがあたっている要素を探して、フォーカスを解除(スマホでのバグ対策)
-			document.activeElement.blur();
 		}
 	});
 
@@ -196,11 +199,11 @@ window.onload = function () {
 	$$("#temButton").addEventListener("click", function () {
 		window.open("./template/index.html");
 	});
-	
+
 	//印刷ボタン
 	var printButton = $$(".printButton");
-	for(var i = 0; i < printButton.length; i++){
-		printButton[i].addEventListener("click",function(){
+	for (var i = 0; i < printButton.length; i++) {
+		printButton[i].addEventListener("click", function () {
 			window.print();
 		})
 	}
@@ -278,4 +281,16 @@ function editDoc() {
 	$$("#saveLink").value = "";
 	document.body.style.overflow = "hidden";
 	$$("#tools").className = "close";
+}
+//COPIED FROM http://unimakura.jp/javascript/javascript-1.html
+//テキストの選択解除
+function deSelect() {
+	if (window.getSelection) {
+		var selection = window.getSelection();
+		selection.collapse(document.body, 0);
+	} else {
+		var selection = document.selection.createRange();
+		selection.setEndPoint("EndToStart", selection);
+		selection.select();
+	}
 }
