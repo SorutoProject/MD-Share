@@ -266,7 +266,7 @@ table {
 
 /*印刷用*/
 @media print{
-	#header,#tools{
+	#header,#tools,#save,#newWindowClose,.printDelete{
 		display: none;
 	}
 	#doc{
