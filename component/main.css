@@ -110,6 +110,12 @@ body {
 	background: #ddd;
 	border: 3px solid #aaa;
 }
+#save button{
+	width:7em;
+	height:37px;
+	border:1px solid #3c3c3c;
+	background: #ddd;
+}
 
 #newWindowClose {
 	position: absolute;
@@ -132,14 +138,6 @@ body {
 	color: #4c4c4c;
 }
 
-
-button {
-	background: #86bce5;
-	border: 3px solid #4978d1;
-	width: 14em;
-	height: 40px;
-}
-
 /*端末別設定*/
 /*スマホ用*/
 @media (max-width:600px) {
@@ -160,7 +158,6 @@ button {
 	}
 
 	#tools button {
-		text-decoration: none;
 		color: #000;
 		height: 50px;
 		width: 100%;

@@ -163,6 +163,7 @@ window.onload = function () {
 			} else {
 				$$("#saveLink").value = genURL;
 				console.log(userMd);
+				$$("#saveLink").select();
 			}
 		} else {
 			var userMd = LZString.compressToEncodedURIComponent($$("#editor").value);
@@ -172,6 +173,7 @@ window.onload = function () {
 			} else {
 				$$("#saveLink").value = genURL;
 				console.log(userMd);
+				$$("#saveLink").select();
 			}
 		}
 	});
@@ -192,6 +194,14 @@ window.onload = function () {
 	$$("#temButton").addEventListener("click", function () {
 		window.open("./template/index.html");
 	});
+	
+	//印刷ボタン
+	var printButton = $$(".printButton");
+	for(var i = 0; i < printButton.length; i++){
+		printButton[i].addEventListener("click",function(){
+			window.print();
+		})
+	}
 
 	if (arg.e === "t") {
 		$$("#windowBack").className = "show";
