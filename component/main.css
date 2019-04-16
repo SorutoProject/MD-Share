@@ -232,7 +232,7 @@ body {
 	#save{
 		display: none;
 	}
-	#preview,#editor{
+	#preview,#edit{
 		height: calc(100% - 3em);
 	}
 }
