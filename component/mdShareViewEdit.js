@@ -3,12 +3,15 @@
  MD Share
  (c)2019 Soruto Project.
  
+ Ver.2019.04.16
+ 
  MIT Licensed.
  
  Required:
  
  	lz-string(https://github.com/pieroxy/lz-string/)(MIT Licensed)
 	marked.js(https://github.com/markedjs/marked)(MIT Licensed)
+	highlight.js(https://github.com/highlightjs/highlight.js)(3-Clause BSD Licensed)
  
 */
 //marked.js config
@@ -104,7 +107,7 @@ window.onload = function () {
 			document.activeElement.blur();
 			//テキストの選択を解除(スマホでのバグ対策)
 			deSelect();
-			
+
 			$$("#new").className = $$("#windowBack").className = "";
 			$$("#editor").value = "";
 			$$("#saveLink").value = "";
@@ -200,6 +203,18 @@ window.onload = function () {
 		window.open("./template/index.html");
 	});
 
+	//エディタのMDでよく使う文字ボタン
+	var editSymbolButtons = $$("#mdSymbols button");
+	for (var i = 0; i < editSymbolButtons.length; i++) {
+		editSymbolButtons[i].addEventListener("click", function (e) {
+			if (e.target.dataset.text) {
+				addTextToEditor(e.target.dataset.text);
+			} else {
+				addTextToEditor(e.target.textContent);
+			}
+		});
+	}
+
 	//印刷ボタン
 	var printButton = $$(".printButton");
 	for (var i = 0; i < printButton.length; i++) {
@@ -293,4 +308,24 @@ function deSelect() {
 		selection.setEndPoint("EndToStart", selection);
 		selection.select();
 	}
+}
+
+//COPIED FROM https://qiita.com/noraworld/items/d6334a4f9b07792200a5
+//エディターのカーソル位置に文字を追加
+function addTextToEditor(t) {
+	var textarea = $$("#editor");
+
+	var sentence = textarea.value;
+	var len = sentence.length;
+	var pos = textarea.selectionStart;
+	var end = textarea.selectionEnd;
+
+	var before = sentence.substr(0, pos);
+	var word = t;
+	var after = sentence.substr(pos, len);
+
+	sentence = before + word + after;
+
+	textarea.value = sentence;
+	textarea.selectionEnd = end + word.length;
 }

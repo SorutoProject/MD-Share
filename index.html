@@ -35,7 +35,20 @@
 			<input type="checkbox" id="previewCheck">プレビュー表示
 		</label>
 		<button id="newWindowClose">× 閉じる</button><br>
-		<textarea id="editor" placeholder="新規マークダウンを入力...(多く書きすぎると保存時にエラーが出ます。ご注意ください。)"></textarea>
+		<div id="edit">
+			<textarea id="editor" placeholder="新規マークダウンを入力...(多く書きすぎると保存時にエラーが出ます。ご注意ください。)"></textarea>
+			<div id="mdSymbols">
+				<button>#</button>
+				<button>*</button>
+				<button data-text=" ">Space</button>
+				<button>|</button>
+				<button>-</button>
+				<button>></button>
+				<button>`</button>
+				<button>~</button>
+				<button>[]()</button>
+			</div>
+		</div>
 		<div id="preview"></div>
 		<div id="save">
 			<button id="gen">URLを生成</button><button class="printButton">印刷</button><input type="text" id="saveLink" placeholder="保存＆共有用URLはここに生成されます..." readonly>
