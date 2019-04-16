@@ -208,9 +208,9 @@ window.onload = function () {
 	for (var i = 0; i < editSymbolButtons.length; i++) {
 		editSymbolButtons[i].addEventListener("click", function (e) {
 			if (e.target.dataset.text) {
-				addTextToEditor(e.target.dataset.text);
+				addTextToEditor(e.target.dataset.text,e.target.dataset.fs);
 			} else {
-				addTextToEditor(e.target.textContent);
+				addTextToEditor(e.target.textContent,e.target.dataset.fs);
 			}
 		});
 	}
@@ -312,9 +312,13 @@ function deSelect() {
 
 //COPIED FROM https://qiita.com/noraworld/items/d6334a4f9b07792200a5
 //エディターのカーソル位置に文字を追加
-function addTextToEditor(t) {
+function addTextToEditor(t,firstSelection) {
 	var textarea = $$("#editor");
-
+	
+	if(!firstSelection){
+		var firstSelection = 0;
+	}
+	
 	var sentence = textarea.value;
 	var len = sentence.length;
 	var pos = textarea.selectionStart;
@@ -327,5 +331,6 @@ function addTextToEditor(t) {
 	sentence = before + word + after;
 
 	textarea.value = sentence;
-	textarea.selectionEnd = end + word.length;
+	textarea.selectionEnd = end + word.length + parseInt(firstSelection, 10);//十進法で処理
+	textarea.focus();
 }
