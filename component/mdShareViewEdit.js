@@ -360,6 +360,7 @@ function addTextToEditor(t, firstSelection) {
 var presentation = {
 	//プレゼンの開始
 	start: function (md) {
+		$$("#tools").className = "close";
 		//初期化
 		flags.presentation = {};
 		//改ページ記号(---)ごとに区切る

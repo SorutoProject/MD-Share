@@ -182,6 +182,11 @@ body {
 	right:5px;
 	background:rgba(0,0,0,0.6);
 	padding:5px;
+	opacity: 0.2;
+}
+
+#presentation #presentationControl:hover{
+	opacity: 1;
 }
 #presentation #presentationControl button{
 	background:#3c3c3c;
@@ -192,6 +197,11 @@ body {
 }
 
 #presentationView{
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
 	overflow:auto;
 }
 
