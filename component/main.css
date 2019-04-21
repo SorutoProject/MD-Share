@@ -175,7 +175,6 @@ body {
 }
 #presentation:fullscreen{
 	display: block;
-	overflow:auto;
 }
 #presentation #presentationControl{
 	position: absolute;
@@ -190,6 +189,10 @@ body {
 	border:#8c8c8c 1px solid;
 	height:35px;
 	width:5em;
+}
+
+#presentationView{
+	overflow:auto;
 }
 
 #shareWindow{
