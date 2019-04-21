@@ -29,6 +29,7 @@
 //flags
 var flags = {};
 flags.edited = false;
+flags.presentation = {};
 
 var $$ = function (e) {
 	var el = document.querySelectorAll(e);
@@ -124,6 +125,8 @@ window.onload = function () {
 			$$("#preview").style.display = "block";
 			$$("#editor").style.display = "none";
 			$$("#preview").className = "show";
+			$$("#preview").innerHTML = marked($$("#editor").value);
+
 		} else {
 			$$("#preview").style.display = "none";
 			$$("#editor").style.display = "block";
@@ -131,8 +134,7 @@ window.onload = function () {
 		}
 	});
 
-	$$("#editor").addEventListener("keyup", function () {
-		$$("#preview").innerHTML = marked($$("#editor").value);
+	$$("#editor").addEventListener("change", function () {
 		window.onbeforeunload = function (e) {
 			return "編集内容が破棄されます。続行しますか？";
 		};
@@ -153,9 +155,6 @@ window.onload = function () {
 			return false;
 		}
 	});
-	$$("#saveLink").addEventListener("click", function (e) {
-		e.target.select();
-	});
 
 	$$("#gen").addEventListener("click", function () {
 		if ($$("#editor").value.indexOf("<!---") === -1 || $$("#editor").value.indexOf("--->") === -1) {
@@ -169,9 +168,8 @@ window.onload = function () {
 			if (genURL.length > 5000) {
 				alert("マークダウンに記述された文字数が多すぎるため、URLの生成をキャンセルしました。\nマークダウンの文字数を減らしたり、内容を2つのマークダウンに記述したりしてください。");
 			} else {
-				$$("#saveLink").value = genURL;
+				share(genURL);
 				console.log(userMd);
-				$$("#saveLink").select();
 			}
 		} else {
 			var userMd = LZString.compressToEncodedURIComponent($$("#editor").value);
@@ -179,11 +177,14 @@ window.onload = function () {
 			if (genURL.length > 5000) {
 				alert("マークダウンに記述された文字数が多すぎるため、URLの生成をキャンセルしました。\nマークダウンの文字数を減らしたり、内容を2つのマークダウンに記述したりしてください。");
 			} else {
-				$$("#saveLink").value = genURL;
+				share(genURL);
 				console.log(userMd);
-				$$("#saveLink").select();
 			}
 		}
+	});
+
+	$$("#presenPreview").addEventListener("click", function () {
+		presentation.start($$("#editor").value);
 	});
 
 	$$("#menuButton").addEventListener("click", function () {
@@ -203,14 +204,28 @@ window.onload = function () {
 		window.open("./template/index.html");
 	});
 
+	$$("#presenButton").addEventListener("click", function () {
+		presentation.start(mdWithInfo);
+	});
+
+	$$("#presentationBack").addEventListener("click", function () {
+		presentation.back();
+	});
+	$$("#presentationForward").addEventListener("click", function () {
+		presentation.forward();
+	});
+	$$("#presentationEnd").addEventListener("click", function () {
+		presentation.end();
+	});
+
 	//エディタのMDでよく使う文字ボタン
 	var editSymbolButtons = $$("#mdSymbols button");
 	for (var i = 0; i < editSymbolButtons.length; i++) {
 		editSymbolButtons[i].addEventListener("click", function (e) {
 			if (e.target.dataset.text) {
-				addTextToEditor(e.target.dataset.text,e.target.dataset.fs);
+				addTextToEditor(e.target.dataset.text, e.target.dataset.fs);
 			} else {
-				addTextToEditor(e.target.textContent,e.target.dataset.fs);
+				addTextToEditor(e.target.textContent, e.target.dataset.fs);
 			}
 		});
 	}
@@ -312,13 +327,13 @@ function deSelect() {
 
 //COPIED FROM https://qiita.com/noraworld/items/d6334a4f9b07792200a5
 //エディターのカーソル位置に文字を追加
-function addTextToEditor(t,firstSelection) {
+function addTextToEditor(t, firstSelection) {
 	var textarea = $$("#editor");
-	
-	if(!firstSelection){
+
+	if (!firstSelection) {
 		var firstSelection = 0;
 	}
-	
+
 	var sentence = textarea.value;
 	var len = sentence.length;
 	var pos = textarea.selectionStart;
@@ -331,6 +346,97 @@ function addTextToEditor(t,firstSelection) {
 	sentence = before + word + after;
 
 	textarea.value = sentence;
-	textarea.selectionEnd = end + word.length + parseInt(firstSelection, 10);//十進法で処理
+	textarea.selectionEnd = end + word.length + parseInt(firstSelection, 10); //十進法で処理
 	textarea.focus();
+
+	//編集済みフラグをtrueにする
+	flags.edited = true;
+	window.onbeforeunload = function (e) {
+		return "編集内容が破棄されます。続行しますか？";
+	};
+}
+
+//プレゼン機能の関数群
+var presentation = {
+	//プレゼンの開始
+	start: function (md) {
+		//初期化
+		flags.presentation = {};
+		//改ページ記号(---)ごとに区切る
+		flags.presentation.slides = md.split("\n---\n");
+		flags.presentation.nowPage = 0;
+		$$("#presentationView").innerHTML = marked(flags.presentation.slides[0]);
+		$$("#presentationBack").style.display = $$("#presentationForward").style.display = "inline";
+		screenfull.request($$("#presentation"));
+
+	},
+	//戻る
+	back: function () {
+		if (flags.presentation.nowPage > 0) {
+			$$("#presentationView").innerHTML = marked(flags.presentation.slides[flags.presentation.nowPage - 1]);
+			flags.presentation.nowPage = flags.presentation.nowPage - 1;
+		}
+	},
+	//進む
+	forward: function () {
+		if (flags.presentation.nowPage + 1 < flags.presentation.slides.length) {
+			$$("#presentationView").innerHTML = marked(flags.presentation.slides[flags.presentation.nowPage + 1]);
+			flags.presentation.nowPage = flags.presentation.nowPage + 1;
+		} else {
+			$$("#presentationView").textContent = "最後のスライドまで表示しました";
+			$$("#presentationBack").style.display = $$("#presentationForward").style.display = "none";
+			/*console.log("flags.presentation.nowPage + 1 = " +
+				parseInt(flags.presentation.nowPage + 1));
+			console.log("flags.presentation.slides.length = " + flags.presentation.slides.length);*/
+		}
+	},
+	//プレゼンの終了
+	end: function () {
+		screenfull.exit();
+	}
+}
+
+//共有
+function share(url) {
+	$$("#shareWindow").className = "show";
+	var urlEncoded = encodeURIComponent(url);
+	$$("#copyButton").addEventListener("click", function (e) {
+		e.preventDefault();
+		// 空div 生成
+		var tmp = document.createElement("div");
+		// 選択用のタグ生成
+		var pre = document.createElement('pre');
+
+		// 親要素のCSSで user-select: none だとコピーできないので書き換える
+		pre.style.webkitUserSelect = 'auto';
+		pre.style.userSelect = 'auto';
+
+		tmp.appendChild(pre).textContent = url;
+
+		// 要素を画面外へ
+		var s = tmp.style;
+		s.position = 'fixed';
+		s.right = '200%';
+
+		// body に追加
+		document.body.appendChild(tmp);
+		// 要素を選択
+		document.getSelection().selectAllChildren(tmp);
+
+		// クリップボードにコピー
+		var result = document.execCommand("copy");
+
+		// 要素削除
+		document.body.removeChild(tmp);
+
+		$$("#shareWindow").className = "";
+	});
+
+	$$("#twitterButton").href = "https://twitter.com/intent/tweet?url=" + urlEncoded;
+	$$("#lineButton").href = "https://social-plugins.line.me/lineit/share?url=" + urlEncoded;
+
+	$$("#shareCancel").addEventListener("click", function (e) {
+		e.preventDefault();
+		$$("#shareWindow").className = "";
+	});
 }

@@ -136,7 +136,7 @@ body {
 	border: 3px solid #aaa;
 }
 #save button{
-	width:7em;
+	width:calc(100% / 3);
 	height:37px;
 	border:1px solid #3c3c3c;
 	background: #ddd;
@@ -161,6 +161,76 @@ body {
 #author {
 	font-size: 10pt;
 	color: #4c4c4c;
+}
+
+#presentation{
+	position: fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background:#fff;
+	z-index: 3;
+	display: none;	
+}
+#presentation:fullscreen{
+	display: block;
+	overflow:auto;
+}
+#presentation #presentationControl{
+	position: absolute;
+	bottom:5px;
+	right:5px;
+	background:rgba(0,0,0,0.6);
+	padding:5px;
+}
+#presentation #presentationControl button{
+	background:#3c3c3c;
+	color:#fff;
+	border:#8c8c8c 1px solid;
+	height:35px;
+	width:5em;
+}
+
+#shareWindow{
+	position: fixed;
+	top:0;
+	left:0;
+	color:#fff;
+	background:rgba(0,0,0,0.8);
+	z-index: 4;
+	text-align: center;
+	width:100%;
+	height:100%;
+	overflow:auto;
+	display: none;
+}
+
+#shareWindow.show{
+	display: block;
+}
+
+#shareWindow a{
+	display: block;
+	width:calc(100% - 10px);
+	padding:5px;
+	padding-top:10px;
+	padding-bottom: 10px;
+	color:#fff;
+	text-decoration: none;
+	font-weight: bold;
+	cursor:pointer;
+}
+
+#copyButton, #shareCancel{
+	background:rgba(100,100,100,0.8);
+}
+
+#twitterButton{
+	background:rgba(100,200,255,0.8);
+}
+#lineButton{
+	background:rgba(0,200,0,0.8);
 }
 
 /*端末別設定*/
@@ -291,6 +361,66 @@ table {
 
 #preview blockquote,
 #doc blockquote {
+	border-left: 7px solid #ccc;
+	padding-left: 10px;
+	color: #7c7c7c;
+}
+
+/*スライドの表示用*/
+#presentationView th,
+#presentationView td {
+	border: solid 1px;
+	/* 枠線指定 */
+	padding: 10px;
+	/* 余白指定 */
+}
+
+#presentationView table tr:nth-child(even) {
+	background: #ddd;
+}
+
+#presentationView table {
+	border-collapse: collapse;
+	/* セルの線を重ねる */
+}
+
+#presentationView *{
+	font-size:16pt;
+}
+
+#presentationView h1{
+	border-bottom: 1px solid #aaa;
+	padding-left: 5px;
+	font-size:32pt;
+}
+
+#presentationView h2{
+	background: #3c3c3c;
+	padding: 5px;
+	color: #fff;
+	font-size:24pt;
+}
+
+#presentationView h3{
+	border-left: 8px solid #aaa;
+	border-bottom: 1px solid #aaa;
+	padding-left: 5px;
+	font-size:20pt;
+}
+
+#presentationView h4{
+	font-size:18pt;
+}
+
+#presentation h5{
+	font-size:14pt;
+}
+
+#presentationView h6{
+	font-size:12pt;
+}
+
+#presentationView blockquote {
 	border-left: 7px solid #ccc;
 	padding-left: 10px;
 	color: #7c7c7c;

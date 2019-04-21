@@ -18,14 +18,16 @@
 	<script src="component/marked.min.js"></script>
 	<script src="component/mdShareViewEdit.js"></script>
 	<script src="component/lz-string.min.js"></script>
+	<script src="component/screenfull.js"></script>
 </head>
 
 <body>
 	<div id="header"><span id="docInfo"><span id="docTitle"></span><br><span id="author"></span></span><button id="menuButton">メニュー</button></div>
 	<div id="tools" class="close">
-			<button id="temButton" title="テンプレートから新しいドキュメントを作成します">テンプレート</button>
 			<button id="newButton" title="新しいドキュメントを作成します">新規</button>
 			<button id="editButton" title="このドキュメントを編集します">編集</button>
+			<button id="presenButton" title="このドキュメントをプレゼンテーションのスライドとして使います">プレゼン</button>
+			<button id="temButton" title="テンプレートから新しいドキュメントを作成します">テンプレ</button>
 			<button class="printButton" title="このドキュメントを印刷します">印刷</button>
 			<button id="infoButton" title="このソフトウェアの情報を表示します">情報</button>
 	</div>
@@ -51,10 +53,25 @@
 		</div>
 		<div id="preview"></div>
 		<div id="save">
-			<button id="gen">URLを生成</button><button class="printButton">印刷</button><input type="text" id="saveLink" placeholder="保存＆共有用URLはここに生成されます..." readonly>
+			<button id="presenPreview">プレゼン</button><button id="gen">共有</button><button class="printButton">印刷</button>
 		</div>
 	</div>
 	<div id="windowBack"></div>
+	<div id="presentation">
+		<div id="presentationView"></div>
+		<div id="presentationControl">
+			<button id="presentationBack">前へ</button>
+			<button id="presentationForward">次へ</button>
+			<button id="presentationEnd">終了</button>
+		</div>
+	</div>
+	<div id="shareWindow">
+		<h2>共有</h2>
+		<a id="copyButton">URLをコピー</a>
+		<a id="twitterButton" target="_blank">Twitter</a>
+		<a id="lineButton" target="_blank">LINE</a>
+		<a id="shareCancel">キャンセル</a>
+	</div>
 </body>
 
 </html>
