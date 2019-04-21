@@ -399,7 +399,7 @@ var presentation = {
 //共有
 function share(url) {
 	$$("#shareWindow").className = "show";
-	var urlEncoded = encodeURIComponent(url);
+	//var urlEncoded = encodeURIComponent(url);
 	$$("#copyButton").addEventListener("click", function (e) {
 		e.preventDefault();
 		// 空div 生成
@@ -432,8 +432,8 @@ function share(url) {
 		$$("#shareWindow").className = "";
 	});
 
-	$$("#twitterButton").href = "https://twitter.com/intent/tweet?url=" + urlEncoded;
-	$$("#lineButton").href = "https://social-plugins.line.me/lineit/share?url=" + urlEncoded;
+	$$("#twitterButton").href = "https://twitter.com/intent/tweet?url=" + url;
+	$$("#lineButton").href = "https://social-plugins.line.me/lineit/share?url=" + url;
 
 	$$("#shareCancel").addEventListener("click", function (e) {
 		e.preventDefault();
