@@ -434,7 +434,7 @@ function share(url) {
 	});
 
 	$$("#twitterButton").href = "https://twitter.com/intent/tweet?url=" + urlEncoded;
-	$$("#lineButton").href = "https://social-plugins.line.me/lineit/share?url=" + url;
+	$$("#lineButton").href = "https://social-plugins.line.me/lineit/share?url=" + urlEncoded;
 
 	$$("#shareCancel").addEventListener("click", function (e) {
 		e.preventDefault();
