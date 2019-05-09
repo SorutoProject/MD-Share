@@ -22,7 +22,7 @@
         return '<pre><code class="hljs">' + hljs.highlightAuto(code).value + '</code></pre>';
     };
 
-    renderer.heading = function (text, level) {
+    /*renderer.heading = function (text, level) {
             var escapedText = text.toLowerCase();
 
             return '<h' + level + '><a name="' +
@@ -31,7 +31,7 @@
                 escapedText +
                 '"><span class="header-link"></span></a>' +
                 text + '</h' + level + '>';
-        },
+        },*/
 
         marked.setOptions({
             renderer: renderer,
