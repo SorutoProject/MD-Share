@@ -170,7 +170,9 @@ window.onload = function () {
         if ($$("#editor").value.indexOf("<!---") === -1 || $$("#editor").value.indexOf("--->") === -1) {
             console.log("input user info");
             var title = prompt("このドキュメントのタイトルを入力してください");
+            if(title===null) return false;
             var author = prompt("このドキュメントの作者名を入力してください");
+            if(author === null) return false;
             var updateMd = '<!---\n{\n\t"title":"' + title + '",\n\t"author":"' + author + '"\n}\n--->\n' + $$("#editor").value;
             $$("#editor").value = updateMd;
             var userMd = LZString.compressToEncodedURIComponent($$("#editor").value);
