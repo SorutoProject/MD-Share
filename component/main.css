@@ -13,7 +13,7 @@ body {
     position: fixed;
     background: #ddd;
     width: 100%;
-    top: 0;
+    bottom: 0;
     left: 0;
     height: 60px;
     z-index: 1;
@@ -29,10 +29,11 @@ body {
 
 #doc {
     position: absolute;
-    top: 65px;
-    left: 5px;
+    top: 0px;
+    left: 0px;
     width: calc(100% - 5px);
-    height: calc(100% - 65px);
+    height: calc(100% - 60px);
+    overflow: auto;
 }
 
 #new {
@@ -257,16 +258,6 @@ body {
 /*スマホ用*/
 @media (max-width:600px) {
 
-    #header {
-        position: fixed;
-        background: #ddd;
-        width: 100%;
-        bottom: 0;
-        left: 0;
-        height: 60px;
-        z-index: 1;
-    }
-
     #tools {
         position: fixed;
         top: 0px;
@@ -308,13 +299,13 @@ body {
 @media (min-width:601px) {
     #tools {
         position: fixed;
-        top: 0;
+        bottom: 0;
         right: 0;
         z-index: 2;
     }
 
     #tools button {
-        height: 55px;
+        height: 60px;
         width: auto;
         background: #ddd;
         border: none;
@@ -382,7 +373,6 @@ table {
 #doc h2 {
     background: #3c3c3c;
     padding: 5px;
-    margin-right: 5px;
     color: #fff;
 }
 
@@ -398,7 +388,7 @@ table {
     border-left: 7px solid #ccc;
     padding-left: 10px;
     color: #7c7c7c;
-}
+},
 
 /*スライドの表示用*/
 #presentationView th,
