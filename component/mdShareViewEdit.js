@@ -310,6 +310,7 @@ function newDoc() {
     $$("#new").className = $$("#windowBack").className = "show";
     document.body.style.overflow = "hidden";
     $$("#tools").className = "close";
+    $$("#menuButton").textContent = "× 閉じる";
     $$("#saveLink").value = "";
 }
 
@@ -323,6 +324,7 @@ function editDoc() {
     $$("#saveLink").value = "";
     document.body.style.overflow = "hidden";
     $$("#tools").className = "close";
+    $$("#menuButton").textContent = "× 閉じる";
 }
 //COPIED FROM http://unimakura.jp/javascript/javascript-1.html
 //テキストの選択解除
@@ -373,6 +375,7 @@ var presentation = {
     //プレゼンの開始
     start: function (md) {
         $$("#tools").className = "close";
+        $$("#menuButton").textContent = "× 閉じる";
         //初期化
         flags.presentation = {};
         //改ページ記号(---)ごとに区切る
