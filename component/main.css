@@ -388,7 +388,9 @@ table {
     border-left: 7px solid #ccc;
     padding-left: 10px;
     color: #7c7c7c;
-},
+}
+
+,
 
 /*スライドの表示用*/
 #presentationView th,
@@ -463,8 +465,11 @@ table {
 
     #doc {
         position: absolute;
+        width: calc(100% - 5px);
+        height: calc(100% - 65px);
         top: 0;
         left: 0;
+        overflow: visible;
     }
 
 
