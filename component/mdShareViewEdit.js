@@ -248,6 +248,9 @@ window.onload = function () {
     var printButton = $$(".printButton");
     for (var i = 0; i < printButton.length; i++) {
         printButton[i].addEventListener("click", function () {
+            if(getBrowserName() === "Edge"){
+                if(confirm("このブラウザ(Microsoft Edge)で印刷すると、レイアウトが崩れる可能性がありますが続行しますか？") ==false) return false;
+            }
             window.print();
         })
     }
@@ -283,6 +286,8 @@ mediaQueryList.addListener(function (mql) {
         $$("#preview").className = "show";
     }
 });
+
+//ブラウザ名の取得
 
 function getBrowserName() {
     var userAgent = window.navigator.userAgent.toLowerCase();
