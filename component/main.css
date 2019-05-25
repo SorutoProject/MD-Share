@@ -166,6 +166,29 @@ body {
     color: #4c4c4c;
 }
 
+#message{
+    position:absolute;
+    bottom:20px;
+    left:0;
+    right:0;
+    margin:auto;
+    width:100%;
+    height:2em;
+    max-width:500px;
+    background:rgba(0,0,0,0.8);
+    z-index: 5;
+    border-radius:30px;
+    transition-duration: 0.2s;
+    color:#fff;
+    opacity: 0;
+    pointer-events: none;
+    text-align: center;
+}
+
+#message.show{
+    opacity: 1;
+}
+
 #presentation {
     position: fixed;
     top: 0;

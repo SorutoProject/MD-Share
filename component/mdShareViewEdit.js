@@ -3,7 +3,7 @@
  MD Share
  (c)2019 Soruto Project.
  
- Ver.2019.05.25
+ Ver.2019.05.25.2
  
  MIT Licensed.
  
@@ -12,7 +12,9 @@
  	lz-string(https://github.com/pieroxy/lz-string/)(MIT Licensed)
 	marked.js(https://github.com/markedjs/marked)(MIT Licensed)
 	highlight.js(https://github.com/highlightjs/highlight.js)(3-Clause BSD Licensed)
- 
+    js-yaml(https://github.com/nodeca/js-yaml)(MIT Licensed)
+    screenfull.js(https://github.com/sindresorhus/screenfull.js/)(MIT Licensed)
+    
 */
 //marked.js config
 ;
@@ -523,6 +525,7 @@ function share(url) {
                     document.body.removeChild(tmp);
 
                     $$("#shareWindow").className = "";
+                    sysMessage("生URLをクリップボードにコピーしました");
                 });
                 $$("#copyShortButton").style.display = "block";
                 $$("#copyShortButton").addEventListener("click", function (e) {
@@ -555,6 +558,7 @@ function share(url) {
                     document.body.removeChild(tmp);
 
                     $$("#shareWindow").className = "";
+                    sysMessage("短縮URLをクリップボードにコピーしました");
                 });
 
                 $$("#twitterButton").href = "https://twitter.com/intent/tweet?url=" + urlEncoded;
@@ -607,6 +611,7 @@ function share(url) {
             document.body.removeChild(tmp);
 
             $$("#shareWindow").className = "";
+            sysMessage("生URLをクリップボードにコピーしました");
         });
 
         $$("#copyShortButton").style.display = "none";
@@ -619,6 +624,21 @@ function share(url) {
             $$("#shareWindow").className = "";
         });
     }
+}
+
+//システムメッセージの表示関数
+function sysMessage(s){
+    var messageElem = $$("#message");
+    messageElem.textContent = s;
+    messageElem.className = "show";
+    if(messageElem.dataset.showing === "true"){
+        clearTimeout(messageShower);
+    }
+    
+    messageShower = setTimeout(function(){
+        $$("#message").className = "";
+        $$("#message").dataset.showing = "false";
+    },5000);
 }
 
 function EncodeHTMLForm(data) {
