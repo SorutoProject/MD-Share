@@ -232,6 +232,7 @@ body {
 #shareWindow a {
     display: block;
     width: calc(100% - 10px);
+    max-width:500px;
     padding: 5px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -239,19 +240,25 @@ body {
     text-decoration: none;
     font-weight: bold;
     cursor: pointer;
+    margin:auto;
+    border-radius: 50px;
 }
 
-#copyButton,
+#copyRawButton,
+#copyShortButton,
 #shareCancel {
     background: rgba(100, 100, 100, 0.8);
+    border-top:1px solid rgba(0,0,0,0.1);
 }
 
 #twitterButton {
     background: rgba(100, 200, 255, 0.8);
+    border-top:1px solid #33aaff;
 }
 
 #lineButton {
     background: rgba(0, 200, 0, 0.8);
+    border-top:1px solid #00dd00;
 }
 
 /*端末別設定*/

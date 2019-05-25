@@ -33,9 +33,9 @@
                 text + '</h' + level + '>';
         },*/
 
-        marked.setOptions({
-            renderer: renderer,
-        });
+    marked.setOptions({
+        renderer: renderer,
+    });
 })();
 //flags
 var flags = {};
@@ -170,9 +170,9 @@ window.onload = function () {
         if ($$("#editor").value.indexOf("<!---") === -1 || $$("#editor").value.indexOf("--->") === -1) {
             console.log("input user info");
             var title = prompt("このドキュメントのタイトルを入力してください");
-            if(title===null) return false;
+            if (title === null) return false;
             var author = prompt("このドキュメントの作者名を入力してください");
-            if(author === null) return false;
+            if (author === null) return false;
             var updateMd = '<!---\n{\n\t"title":"' + title + '",\n\t"author":"' + author + '"\n}\n--->\n' + $$("#editor").value;
             $$("#editor").value = updateMd;
             var userMd = LZString.compressToEncodedURIComponent($$("#editor").value);
@@ -248,8 +248,8 @@ window.onload = function () {
     var printButton = $$(".printButton");
     for (var i = 0; i < printButton.length; i++) {
         printButton[i].addEventListener("click", function () {
-            if(getBrowserName() === "Edge"){
-                if(confirm("このブラウザ(Microsoft Edge)で印刷すると、レイアウトが崩れる可能性がありますが続行しますか？") ==false) return false;
+            if (getBrowserName() === "Edge") {
+                if (confirm("このブラウザ(Microsoft Edge)で印刷すると、レイアウトが崩れる可能性がありますが続行しますか？") == false) return false;
             }
             window.print();
         })
@@ -420,45 +420,160 @@ var presentation = {
 
 //共有
 function share(url) {
-    $$("#shareWindow").className = "show";
-    var urlEncoded = encodeURIComponent(url);
-    $$("#copyButton").addEventListener("click", function (e) {
-        e.preventDefault();
-        // 空div 生成
-        var tmp = document.createElement("div");
-        // 選択用のタグ生成
-        var pre = document.createElement('pre');
+    var confShortLink = confirm("短縮URLを生成しますか？\n※「OK」を押して続行した場合は、Google Firebase Dynamic Linksにあなたのドキュメントの情報が保存されることに同意したものとみなされます。");
+    if (confShortLink === true) {
+        var data = {
+            url: url
+        }; // POSTメソッドで送信するデータ
+        var xmlHttpRequest = new XMLHttpRequest();
+        xmlHttpRequest.onreadystatechange = function () {
+            var READYSTATE_COMPLETED = 4;
+            var HTTP_STATUS_OK = 200;
 
-        // 親要素のCSSで user-select: none だとコピーできないので書き換える
-        pre.style.webkitUserSelect = 'auto';
-        pre.style.userSelect = 'auto';
+            if (this.readyState == READYSTATE_COMPLETED &&
+                this.status == HTTP_STATUS_OK) {
+                // レスポンスの表示
+                var shortLink = this.responseText;
+                
+                $$("#shareWindow").className = "show";
+                var urlEncoded = encodeURIComponent(shortLink);
+                $$("#copyRawButton").addEventListener("click", function (e) {
+                    e.preventDefault();
+                    // 空div 生成
+                    var tmp = document.createElement("div");
+                    // 選択用のタグ生成
+                    var pre = document.createElement('pre');
 
-        tmp.appendChild(pre).textContent = url;
+                    // 親要素のCSSで user-select: none だとコピーできないので書き換える
+                    pre.style.webkitUserSelect = 'auto';
+                    pre.style.userSelect = 'auto';
 
-        // 要素を画面外へ
-        var s = tmp.style;
-        s.position = 'fixed';
-        s.right = '200%';
+                    tmp.appendChild(pre).textContent = url;
 
-        // body に追加
-        document.body.appendChild(tmp);
-        // 要素を選択
-        document.getSelection().selectAllChildren(tmp);
+                    // 要素を画面外へ
+                    var s = tmp.style;
+                    s.position = 'fixed';
+                    s.right = '200%';
 
-        // クリップボードにコピー
-        var result = document.execCommand("copy");
+                    // body に追加
+                    document.body.appendChild(tmp);
+                    // 要素を選択
+                    document.getSelection().selectAllChildren(tmp);
 
-        // 要素削除
-        document.body.removeChild(tmp);
+                    // クリップボードにコピー
+                    var result = document.execCommand("copy");
 
-        $$("#shareWindow").className = "";
-    });
+                    // 要素削除
+                    document.body.removeChild(tmp);
 
-    $$("#twitterButton").href = "https://twitter.com/intent/tweet?url=" + urlEncoded;
-    $$("#lineButton").href = "https://social-plugins.line.me/lineit/share?url=" + urlEncoded;
+                    $$("#shareWindow").className = "";
+                });
+                $$("#copyShortButton").style.display = "none";
+                $$("#copyShortButton").addEventListener("click", function (e) {
+                    e.preventDefault();
+                    // 空div 生成
+                    var tmp = document.createElement("div");
+                    // 選択用のタグ生成
+                    var pre = document.createElement('pre');
 
-    $$("#shareCancel").addEventListener("click", function (e) {
-        e.preventDefault();
-        $$("#shareWindow").className = "";
-    });
+                    // 親要素のCSSで user-select: none だとコピーできないので書き換える
+                    pre.style.webkitUserSelect = 'auto';
+                    pre.style.userSelect = 'auto';
+
+                    tmp.appendChild(pre).textContent = shortLink;
+
+                    // 要素を画面外へ
+                    var s = tmp.style;
+                    s.position = 'fixed';
+                    s.right = '200%';
+
+                    // body に追加
+                    document.body.appendChild(tmp);
+                    // 要素を選択
+                    document.getSelection().selectAllChildren(tmp);
+
+                    // クリップボードにコピー
+                    var result = document.execCommand("copy");
+
+                    // 要素削除
+                    document.body.removeChild(tmp);
+
+                    $$("#shareWindow").className = "";
+                });
+
+                $$("#twitterButton").href = "https://twitter.com/intent/tweet?url=" + urlEncoded;
+                $$("#lineButton").href = "https://social-plugins.line.me/lineit/share?url=" + urlEncoded;
+
+                $$("#shareCancel").addEventListener("click", function (e) {
+                    e.preventDefault();
+                    $$("#shareWindow").className = "";
+                });
+            }
+        }
+
+        xmlHttpRequest.open('POST', 'https://mdshr.glitch.me/make');
+
+        // サーバに対して解析方法を指定する
+        xmlHttpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        // データをリクエスト ボディに含めて送信する
+        xmlHttpRequest.send(EncodeHTMLForm(data));
+    } else {
+        $$("#shareWindow").className = "show";
+        var urlEncoded = encodeURIComponent(url);
+        $$("#copyRawButton").addEventListener("click", function (e) {
+            e.preventDefault();
+            // 空div 生成
+            var tmp = document.createElement("div");
+            // 選択用のタグ生成
+            var pre = document.createElement('pre');
+
+            // 親要素のCSSで user-select: none だとコピーできないので書き換える
+            pre.style.webkitUserSelect = 'auto';
+            pre.style.userSelect = 'auto';
+
+            tmp.appendChild(pre).textContent = url;
+
+            // 要素を画面外へ
+            var s = tmp.style;
+            s.position = 'fixed';
+            s.right = '200%';
+
+            // body に追加
+            document.body.appendChild(tmp);
+            // 要素を選択
+            document.getSelection().selectAllChildren(tmp);
+
+            // クリップボードにコピー
+            var result = document.execCommand("copy");
+
+            // 要素削除
+            document.body.removeChild(tmp);
+
+            $$("#shareWindow").className = "";
+        });
+        
+        $$("#copyShortButton").style.display = "none";
+
+        $$("#twitterButton").href = "https://twitter.com/intent/tweet?url=" + urlEncoded;
+        $$("#lineButton").href = "https://social-plugins.line.me/lineit/share?url=" + urlEncoded;
+
+        $$("#shareCancel").addEventListener("click", function (e) {
+            e.preventDefault();
+            $$("#shareWindow").className = "";
+        });
+    }
+}
+
+function EncodeHTMLForm(data) {
+    var params = [];
+
+    for (var name in data) {
+        var value = data[name];
+        var param = encodeURIComponent(name) + '=' + encodeURIComponent(value);
+
+        params.push(param);
+    }
+
+    return params.join('&').replace(/%20/g, '+');
 }
