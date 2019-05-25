@@ -468,7 +468,7 @@ function share(url) {
 
                     $$("#shareWindow").className = "";
                 });
-                $$("#copyShortButton").style.display = "none";
+                $$("#copyShortButton").style.display = "block";
                 $$("#copyShortButton").addEventListener("click", function (e) {
                     e.preventDefault();
                     // 空div 生成
