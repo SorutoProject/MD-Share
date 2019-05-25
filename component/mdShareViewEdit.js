@@ -3,7 +3,7 @@
  MD Share
  (c)2019 Soruto Project.
  
- Ver.2019.04.16
+ Ver.2019.05.25
  
  MIT Licensed.
  
@@ -106,10 +106,10 @@ window.onload = function () {
             var md = "";
             var preMd = mdWithInfo.split("---");
             console.log(preMd.length);
-            for(var i = 2; i < preMd.length; i++){
-                md+= preMd[i] + "\n---";
+            for (var i = 2; i < preMd.length; i++) {
+                md += preMd[i] + "\n---";
             }
-            var md = md.slice(0,-3);
+            var md = md.slice(0, -3);
             var mdInfo = "";
         } else {
             //console.log(mdInfoJson);
@@ -157,7 +157,36 @@ window.onload = function () {
             $$("#preview").style.display = "block";
             $$("#editor").style.display = "none";
             $$("#preview").className = "show";
-            $$("#preview").innerHTML = marked($$("#editor").value);
+            var previewMdWithInfo = $$("#editor").value;
+            console.log(previewMdWithInfo.slice(0, 3));
+            if (previewMdWithInfo.indexOf("<!---") !== -1) {
+                var previewMd = previewMdWithInfo;
+            } else if (previewMdWithInfo.slice(0, 3) == "---") {
+                var mayYaml = previewMdWithInfo.split("---")[1].split("---")[0].trim();
+
+                console.log(mayYaml);
+                try {
+                    var previewMdInfoJson = jsyaml.load(mayYaml);
+                    if (typeof previewMdInfoJson === "object") {
+                        var preMd = previewMdWithInfo.split("---");
+                        console.log(preMd);
+                        var previewMd = "";
+                        for (var i = 2; i < preMd.length; i++) {
+                            previewMd += preMd[i] + "\n---";
+                        }
+                        var previewMd = previewMd.slice(0, -3);
+                        console.log(previewMd);
+                    } else {
+                        var previewMd = previewMdWithInfo;
+                    }
+                } catch (e) {
+                    var previewMd = previewMdWithInfo;
+                }
+            } else {
+                var previewMd = previewMdWithInfo;
+            }
+
+            $$("#preview").innerHTML = marked(previewMd);
 
         } else {
             $$("#preview").style.display = "none";
