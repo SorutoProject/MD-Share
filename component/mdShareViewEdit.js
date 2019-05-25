@@ -307,6 +307,7 @@ window.onload = function () {
         })
     }
 
+    //URLパラメーターによる動作
     if (arg.e === "t") {
         $$("#windowBack").className = "show";
         $$("#windowBack").textContent = "お待ち下さい...";
@@ -315,6 +316,9 @@ window.onload = function () {
             $$("#windowBack").textContent = "";
         }, 1000)
 
+    }
+    else if(arg.new === "t"){
+        newDoc();
     }
 }
 
