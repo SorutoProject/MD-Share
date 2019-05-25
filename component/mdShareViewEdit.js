@@ -66,7 +66,8 @@ window.onload = function () {
         arg[kv[0]] = kv[1];
     }
     if (arg["q"] === undefined || arg["q"] == "") {
-        var pageData = "DwQgtBBQDekJACIAuBLJAbApggXAgsgCIAEAygBYCGATpoB4MgEQyBiDIMoMgugwIA08ClArknIB7argSkRAocQAK1IQCtMAYyQJIAX0gQwAPkgBiA8SJkqtSMADOAW0rp0uwPEMgaQZAUQyAQhkCaDIHkGQKMGgIwagEkMgLjygBIMzIBADMAA9Lb2jpCQAFSpScnEgA2mgOoMgCIMgHsMgD8MgPUMgAMMgGUMgM8MgJMMgLUMgKcMgIcMlYATDEGAOvKACEZegNEMgNYMgPYMgIAMkMRjxBkyAMKAdgyALBqAECrDgDAMmYDxkYCwDEHFgFcMgMMMxdmAfgxekaPjGYCdDPmA2wzzS0PLjYDTDPWFG4BJhKubM4BgGX27A7HU4pYiAR0VAJDmgFUGQAxDIB9BkAcwyFFqAGQZABYRgC5PWGAKwZcothgBVABKABlAIsMgEuGRqFQD9DCjAMbW2R8gFoowBZ2rDAGYMuR6LkAXR6AWKjshyfIADBihuTOGUANOYAdUwACNAEUMgHWGHYzQD+8oAKV0AnaaAVZshhTACUMgG6GSqXQLYwCWDANzmNJrN8Y9AltAYcOQLAOYMgFkGE5ncYTYjXO6Op6vd5fZ1-AH7N2en2nM4pNKg2UKlU7Ab4ACSABViCSUMpMAA7KyYGaAaDk+oAbRUA0amc3K+saQbN5gtF0vlwBBloBAyIGgFO5CszQAWDIApBjcHpBumIAEYAHTEFgzQC9DIBVhha5UA5QyKoKABqiPYAghkAhI6AfEUPUfAGxKgAU0vqARyNAMYMHMA9kES5vTuEi7JDQDqIe1AJRWmKjgwgDODFKgCMUYAf1GYkEa4btuMxeIAngwcjMgDgkYAvxFHHCAyALOJPbYoAFwmAGBKfSABhRgCQ8dk2KAIoMMKAA4M2KAJEMuJnNOABMC7tIAoAFYQMv5-lxwywVuip9IARalCsA8q6MAfC6NigDJDIxgA1MYA33JBIABTFOCxsRybE0mQPo06AKj6mqAMKKgBY-8AlDEOQtAAGYALwIOQSBIAADlYOAxDECiUHOADuKAANYoO5mAACYoP5IgAOYxEFoUxK2AD67YlmWCDEEgNCxZgSDOSl8roJQxbBQguitvmhYZZgxBgMQMohWFkXRbElD6NKcpKqqQRar0LDDn0DBuEMVXpZ2MyAKGKgCd2n0gAwKoA8IawnCB4joA-gzYrCTbEJYNl2ZgTkIHOMTkJg6DuTE6A1Z2c6uTY6BZTl1B5QVCBFSVZUVUaprmgEMyAM5RgAMvgMLCAIYMjEuIxgAqDIA5ZGiuK0QxB1QA";
+        //ホームページ
+        var pageData = "LQhQBcEtwGwUwFwAICyARJBlAFgQwE5yAeDIBEMgYgyDKDILoMouAruNgPb7KYsNNIAK+TAVnADG4UCGCgAxKgw4CcUAB4AzgFtcMGAD5A8QyBpBkBRDIBCGQJoMgeQZAowaBGDUBJDIFx5QBIM5QEAMigPRqN20KABU-n18kQAbTQHUGQBEGQD2GQB+GQHqGQAGGQDKGQGeGQEmGQFqGQFOGQEOGZMAJhhtAHXlABCMTQGiGQGsGQHsGQEAGUCQGpCDuAGFAOwZAFg1ACBVawBgGYMB4yMBYBhtYwCuGQGGGWNDAPwYTZ3rGoMBOhkjAbYZOnpre7MBphkzoocAkwn7htsAwDIrxqdn5vyRAR0VASHNAVQZAGIZAfQZAOYZovMAZBkAFhGALk93oArBnC3VqAFUAEoAGUAiwyAS4ZstFAP0Mf0AxtahMyAWijAFna70AZgzhMp6QBdHoBYqNCRLMgAMGF7hBZBQA05gB1OAAI0ARQyAdYYxm1AP7ygApXQCdpoBVmxqSMAJQyAboZkstrKDAJYMVUWDWa7Uh22sI2u0yJVMA5gyAWQY5gtGk0kKsNtqdvtDiddRcrpMDcazfMFn4Avd2Vy+WMqigAJIAFSQcMgQjgADtlHA2oBoOQqgBtFQDRqcTwuaGqBQxGozH44nAEGWgEDIqqAU7kk21ABYMgCkGAxGu5aJAARgAdEgKG1AL0MgFWGPKJQDlDNybIAGqKNgCCGQCEjoB8RSNM8AbEqABTSKoBHI0AxgxEwD2QUzc62PnTQjVAOohhUAlFbA+skQDODCzAIxRgD+o4E2AdD0dtEyATwYiW1AOCRgC-ETMHxVIAs4llqCgAXCYAYEoVIAGFGAJDxoSgoAigxvIADgygoAkQzggsrYAExdoUgCgASBVTnheJG1O+I7chUgBFqTSiicloih0FooKAMkM2GADUxgDfcjYgAFMToeHuBx7isaAWjSUggCo+sKgDCioAWP+KLgSDYIQABmAC8ABE2DgOAAAOygIG4bj8LgHYAO6QAA1pAxlwAAJpA1ksAA5m4dmOW4+YAPqFnGCZ6Ug4AEJ5cDgPpAWcjAuCxvZelaPmkbRiFcBIMASBsg5Tmue57i4DJrIcjy-I2CK5QULWFQkAYNRpcFxZtIAoYqAJ3aFSADAqgDwhu8HxTnWgD+DKC7w5kgSjqZpcC6XpHZuNgcAwMZbgwBlxYdoZqgwGFEX4FFMV6XFCVJSlMryoqVhtIAzlGAAy+VQUIAhgzYXo2GACoMgDlkfSjKuG4JVAA";
         //グローバル変数
         mdWithInfo = LZString.decompressFromEncodedURIComponent(pageData);
     } else {
@@ -90,11 +91,32 @@ window.onload = function () {
         }
         if (mdInfoJson.author) $$("#author").textContent = "by " + mdInfoJson.author;
     }
-    //normal md
+    //normal md or with yaml
     else {
-        var mdInfo = "";
-        var md = mdWithInfo;
-        $$("#docInfo").style.display = "none";
+        var mayYaml = mdWithInfo.split("---")[1].split("---")[0].trim();
+
+        console.log(mayYaml);
+        var mdInfoJson = jsyaml.load(mayYaml);
+        if (typeof mdInfoJson === "object") {
+            if (mdInfoJson.title) {
+                $$("#docTitle").textContent = mdInfoJson.title;
+                document.title = mdInfoJson.title + " - MD Share";
+            }
+            if (mdInfoJson.author) $$("#author").textContent = "by " + mdInfoJson.author;
+            var md = "";
+            var preMd = mdWithInfo.split("---");
+            console.log(preMd.length);
+            for(var i = 2; i < preMd.length; i++){
+                md+= preMd[i] + "\n---";
+            }
+            var md = md.slice(0,-3);
+            var mdInfo = "";
+        } else {
+            //console.log(mdInfoJson);
+            var mdInfo = "";
+            var md = mdWithInfo;
+            $$("#docInfo").style.display = "none";
+        }
     }
     $$("#doc").innerHTML = marked(md);
 
@@ -167,13 +189,14 @@ window.onload = function () {
     });
 
     $$("#gen").addEventListener("click", function () {
-        if ($$("#editor").value.indexOf("<!---") === -1 || $$("#editor").value.indexOf("--->") === -1) {
+        //Change to yaml
+        if ($$("#editor").value.slice(0, 3) !== "---") {
             console.log("input user info");
             var title = prompt("このドキュメントのタイトルを入力してください");
             if (title === null) return false;
             var author = prompt("このドキュメントの作者名を入力してください");
             if (author === null) return false;
-            var updateMd = '<!---\n{\n\t"title":"' + title + '",\n\t"author":"' + author + '"\n}\n--->\n' + $$("#editor").value;
+            var updateMd = '---\ntitle: ' + title + '\nauthor: ' + author + '\n---\n' + $$("#editor").value;
             $$("#editor").value = updateMd;
             var userMd = LZString.compressToEncodedURIComponent($$("#editor").value);
             var genURL = location.protocol + "//" + location.hostname + location.pathname + "?q=" + userMd;
@@ -434,7 +457,7 @@ function share(url) {
                 this.status == HTTP_STATUS_OK) {
                 // レスポンスの表示
                 var shortLink = this.responseText;
-                
+
                 $$("#shareWindow").className = "show";
                 var urlEncoded = encodeURIComponent(shortLink);
                 $$("#copyRawButton").addEventListener("click", function (e) {
@@ -552,7 +575,7 @@ function share(url) {
 
             $$("#shareWindow").className = "";
         });
-        
+
         $$("#copyShortButton").style.display = "none";
 
         $$("#twitterButton").href = "https://twitter.com/intent/tweet?url=" + urlEncoded;

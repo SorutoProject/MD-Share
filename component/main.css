@@ -397,7 +397,12 @@ table {
     color: #7c7c7c;
 }
 
-,
+#preview hr,
+#doc hr{
+    height:1px;
+    background-color:#6c6c6c;
+    border:none;
+}
 
 /*スライドの表示用*/
 #presentationView th,
