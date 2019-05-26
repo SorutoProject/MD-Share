@@ -20,14 +20,10 @@
 
 //sanitazer(http://note.crohaco.net/2018/markdown-xss/)
 
-//Block access with Internet Explorer.
-    if (getBrowserName() == "IE") {
-        alert("本Webアプリは、Internet Explorerではご利用いただけません。\n他のブラウザをご利用ください。");
-    }
 const deniedTagCondition = /^<\/?(script|style|link|iframe|embed|object|html|head|meta|body|form|input|button)/i
 const deniedAttrCondition = /^(on.+|style|href|action|id|class|data-.*)/i
 
-const escape = function (txt) {
+function escape(txt) {
     if (txt.match(deniedTagCondition) || txt.indexOf('<!') === 0 || txt.indexOf('<?') === 0 || txt.indexOf('<\\') === 0) {
         return ''
     }
@@ -96,7 +92,11 @@ var $$ = function (e) {
 
 //ページの読み込み完了時
 window.onload = function () {
-    
+    //Block access with Internet Explorer.
+    if (getBrowserName() == "IE") {
+        alert("本Webアプリは、Internet Explorerではご利用いただけません。\n他のブラウザをご利用ください。");
+        return false;
+    }
     //mathJax config
     MathJax.Hub.Config({
         tex2jax: {
