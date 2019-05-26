@@ -17,7 +17,30 @@
     
 */
 //marked.js config
-;
+
+//sanitazer(http://note.crohaco.net/2018/markdown-xss/)
+const deniedTagCondition = /^<\/?(script|style|link|iframe|embed|object|html|head|meta|body|form|input|button)/i
+const deniedAttrCondition = /^(on.+|style|href|action|id|class|data-.*)/i
+
+const escape = (txt) => {
+  if (txt.match(deniedTagCondition) || txt.indexOf('<!') === 0 || txt.indexOf('<?') === 0 || txt.indexOf('<\\') === 0) { return '' }
+  if (txt.indexOf('</') === 0) { return txt }
+  let outer = document.createElement('div')
+  outer.innerHTML = txt
+  let el = outer.querySelector('*')
+  if (!el) {return ''}
+
+  let attrs = []
+  el.getAttributeNames().map(attr => {
+    if (attr.match(deniedAttrCondition)) {
+      el.removeAttribute(attr)
+      return
+    }
+    attrs.push(`${attr}="${el.getAttribute(attr)}"`)
+  })
+  return `<${el.tagName} ${attrs.join(' ')}>`
+}
+
 (function () {
     var renderer = new marked.Renderer()
     renderer.code = function (code, language) {
@@ -38,7 +61,8 @@
     marked.setOptions({
         renderer: renderer,
         gfm: true,
-        sanitize: true
+        sanitize:true,
+        sanitizer:escape
     });
 })();
 //flags
