@@ -37,7 +37,7 @@
 
     marked.setOptions({
         renderer: renderer,
-        gfm:true
+        gfm: true
     });
 })();
 //flags
@@ -56,6 +56,13 @@ var $$ = function (e) {
 
 //ページの読み込み完了時
 window.onload = function () {
+    //mathJax config
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['$', '$'], ["\\(", "\\)"]],
+            displayMath: [['$$', '$$'], ["\\[", "\\]"]]
+        }
+    });
     //IEを弾く
     if (getBrowserName() == "IE") {
         alert("本Webアプリは、Internet Explorerではご利用いただけません。");
@@ -133,7 +140,7 @@ window.onload = function () {
     //var html = html.replace(/\[x\]/g, '<input type="checkbox" checked="checked">');
     //var html = html.replace(/\[ \]/g, '<input type="checkbox">');
     $$("#doc").innerHTML = html;
-
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "doc"]);
     //addEventListener
     $$("#newButton").addEventListener("click", function () {
         newDoc();
@@ -204,6 +211,8 @@ window.onload = function () {
             //var previewHtml = previewHtml.replace(/\[x\]/g, '<input type="checkbox" checked="checked">');
             //var previewHtml = previewHtml.replace(/\[ \]/g, '<input type="checkbox">');
             $$("#preview").innerHTML = previewHtml;
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub, "preview"]);
+
 
         } else {
             $$("#preview").style.display = "none";
