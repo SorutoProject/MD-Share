@@ -7,13 +7,11 @@ https://mdshare.cf (以下、「本サイト」) で公開される、MD Share�
 ### 個人情報の収集について
 本サイトでは、個人情報は一切収集しません。
 
-ただし、ここでいう「個人情報の収集」は、本サイトの開発・運営者である、「Soruto Project」による個人情報の収集のことを指し、サーバー運用元である、GitHubによるデータの収集は除くものとします。
+ただし、ここでいう「個人情報の収集」は、本サイトの開発・運営者である、「Soruto Project」による個人情報の収集のことを指し、MD Shareのサービスを提供する上で、依存しているサービスについては、個々のサービスで規定されたポリシーが適用されます。
 
-GitHubによる、個人情報の取扱について、詳しくは、[GitHub Privacy Statement - GitHub Help](https://help.github.com/en/articles/github-privacy-statement)をご覧ください。
+* 本サイトをホスティングしているGitHubによる個人情報の取扱について、詳しくは、[GitHub Privacy Statement - GitHub Help](https://help.github.com/en/articles/github-privacy-statement)をご覧ください。
 
-(追記 2019/05/26)
-
-また、短縮URLの利用にあたっては、[Google プライバシーポリシー](https://policies.google.com/privacy?hl=ja)が適用されます。
+* 短縮URL(MD Share Short URL)の利用にあたっては、[Google プライバシーポリシー](https://policies.google.com/privacy?hl=ja)が適用されます。
 
 ### 本プライバシーポリシーの変更について
 本サイトの開発・運営者である、「Soruto Project」は、いつでも本プライバシーポリシーを変更できるものとします。
