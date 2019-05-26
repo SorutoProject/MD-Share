@@ -8,7 +8,16 @@ body {
 
     font-family: meiryo;
 }
+::selection {
+    background:#009e8f;
+    color: #fff;
+}
 
+/*Firefox*/
+::-moz-selection {
+    background: #009e8f;
+    color: #fff;
+}
 #header {
     position: fixed;
     background: #ddd;
@@ -417,6 +426,7 @@ table {
 #doc blockquote {
     border-left: 7px solid #ccc;
     padding-left: 10px;
+    margin-left: 0px;
     color: #7c7c7c;
 }
 
