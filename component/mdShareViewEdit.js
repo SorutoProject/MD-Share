@@ -19,10 +19,15 @@
 //marked.js config
 
 //sanitazer(http://note.crohaco.net/2018/markdown-xss/)
+
+//Block access with Internet Explorer.
+    if (getBrowserName() == "IE") {
+        alert("本Webアプリは、Internet Explorerではご利用いただけません。\n他のブラウザをご利用ください。");
+    }
 const deniedTagCondition = /^<\/?(script|style|link|iframe|embed|object|html|head|meta|body|form|input|button)/i
 const deniedAttrCondition = /^(on.+|style|href|action|id|class|data-.*)/i
 
-const escape = (txt) => {
+const escape = function (txt) {
     if (txt.match(deniedTagCondition) || txt.indexOf('<!') === 0 || txt.indexOf('<?') === 0 || txt.indexOf('<\\') === 0) {
         return ''
     }
@@ -47,7 +52,7 @@ const escape = (txt) => {
     })
     return `<${el.tagName} ${attrs.join(' ')}>`
     */
-    
+
     return txt;
 }
 
@@ -91,6 +96,7 @@ var $$ = function (e) {
 
 //ページの読み込み完了時
 window.onload = function () {
+    
     //mathJax config
     MathJax.Hub.Config({
         tex2jax: {
@@ -98,11 +104,6 @@ window.onload = function () {
             displayMath: [['$$', '$$'], ["\\[", "\\]"]]
         }
     });
-    //IEを弾く
-    if (getBrowserName() == "IE") {
-        alert("本Webアプリは、Internet Explorerではご利用いただけません。");
-        return false;
-    }
     //Get Url Parameters
     var arg = new Object;
     var pair = location.search.substring(1).split('&');
@@ -557,7 +558,7 @@ function share(url) {
     //セキュリティ制約により、forkした環境での短縮URLの生成を禁止する
     if (location.hostname == "mdshare.cf") {
         var confShortLink = confirm("短縮URLを生成しますか？\n※「OK」を押して続行した場合は、Google Firebase Dynamic Linksにあなたのドキュメントの情報が保存されることに同意したものとみなされます。");
-        if(confShortLink === false) sysMessage("短縮URLの作成をキャンセルしました");
+        if (confShortLink === false) sysMessage("短縮URLの作成をキャンセルしました");
     } else {
         var confShortLink = false;
     }
