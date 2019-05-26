@@ -37,7 +37,8 @@
 
     marked.setOptions({
         renderer: renderer,
-        gfm: true
+        gfm: true,
+        sanitize: true
     });
 })();
 //flags
