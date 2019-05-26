@@ -95,38 +95,43 @@ window.onload = function () {
     }
     //normal md or with yaml
     else {
-        try{
-        var mayYaml = mdWithInfo.split("---")[1].split("---")[0].trim();
+        try {
+            var mayYaml = mdWithInfo.split("---")[1].split("---")[0].trim();
 
-        console.log(mayYaml);
-        var mdInfoJson = jsyaml.load(mayYaml);
-        if (typeof mdInfoJson === "object") {
-            if (mdInfoJson.title) {
-                $$("#docTitle").textContent = mdInfoJson.title;
-                document.title = mdInfoJson.title + " - MD Share";
+            console.log(mayYaml);
+            var mdInfoJson = jsyaml.load(mayYaml);
+            if (typeof mdInfoJson === "object") {
+                if (mdInfoJson.title) {
+                    $$("#docTitle").textContent = mdInfoJson.title;
+                    document.title = mdInfoJson.title + " - MD Share";
+                }
+                if (mdInfoJson.author) $$("#author").textContent = "by " + mdInfoJson.author;
+                var md = "";
+                var preMd = mdWithInfo.split("---");
+                console.log(preMd.length);
+                for (var i = 2; i < preMd.length; i++) {
+                    md += preMd[i] + "\n---";
+                }
+                var md = md.slice(0, -3);
+                var mdInfo = "";
+            } else {
+                //console.log(mdInfoJson);
+                var mdInfo = "";
+                var md = mdWithInfo;
+                $$("#docInfo").style.display = "none";
             }
-            if (mdInfoJson.author) $$("#author").textContent = "by " + mdInfoJson.author;
-            var md = "";
-            var preMd = mdWithInfo.split("---");
-            console.log(preMd.length);
-            for (var i = 2; i < preMd.length; i++) {
-                md += preMd[i] + "\n---";
-            }
-            var md = md.slice(0, -3);
-            var mdInfo = "";
-        } else {
-            //console.log(mdInfoJson);
-            var mdInfo = "";
-            var md = mdWithInfo;
-            $$("#docInfo").style.display = "none";
-        }
-        }catch(e){
+        } catch (e) {
             var mdInfo = "";
             var md = mdWithInfo;
             $$("#docInfo").style.display = "none";
         }
     }
-    $$("#doc").innerHTML = marked(md);
+    //最終処理
+    var html = marked(md);
+    //追加設定
+    var html = html.replace(/\[x\]/g, '<input type="checkbox" checked="checked">');
+    var html = html.replace(/\[ \]/g, '<input type="checkbox">');
+    $$("#doc").innerHTML = html;
 
     //addEventListener
     $$("#newButton").addEventListener("click", function () {
@@ -170,10 +175,10 @@ window.onload = function () {
             if (previewMdWithInfo.indexOf("<!---") !== -1) {
                 var previewMd = previewMdWithInfo;
             } else if (previewMdWithInfo.slice(0, 3) == "---") {
-                var mayYaml = previewMdWithInfo.split("---")[1].split("---")[0].trim();
-
-                console.log(mayYaml);
                 try {
+                    var mayYaml = previewMdWithInfo.split("---")[1].split("---")[0].trim();
+
+                    console.log(mayYaml);
                     var previewMdInfoJson = jsyaml.load(mayYaml);
                     if (typeof previewMdInfoJson === "object") {
                         var preMd = previewMdWithInfo.split("---");
@@ -193,8 +198,11 @@ window.onload = function () {
             } else {
                 var previewMd = previewMdWithInfo;
             }
-
-            $$("#preview").innerHTML = marked(previewMd);
+            var previewHtml = marked(previewMd);
+            //追加設定
+            var previewHtml = previewHtml.replace(/\[x\]/g, '<input type="checkbox" checked="checked">');
+            var previewHtml = previewHtml.replace(/\[ \]/g, '<input type="checkbox">');
+            $$("#preview").innerHTML = previewHtml;
 
         } else {
             $$("#preview").style.display = "none";
