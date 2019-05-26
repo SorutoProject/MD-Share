@@ -11,5 +11,9 @@ https://mdshare.cf (以下、「本サイト」) で公開される、MD Share�
 
 GitHubによる、個人情報の取扱について、詳しくは、[GitHub Privacy Statement - GitHub Help](https://help.github.com/en/articles/github-privacy-statement)をご覧ください。
 
+(追記 2019/05/26)
+
+また、短縮URLの利用にあたっては、[Google プライバシーポリシー](https://policies.google.com/privacy?hl=ja)が適用されます。
+
 ### 本プライバシーポリシーの変更について
 本サイトの開発・運営者である、「Soruto Project」は、いつでも本プライバシーポリシーを変更できるものとします。

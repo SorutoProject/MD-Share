@@ -20,7 +20,7 @@ GET https://mdshr.glitch.io/api/share?q={encodeURIComponent(MarkDown)}
 **URLパラメータの説明**
 
 * q
-  * マークダウンをJavaScriptにおける**encodeURIComponent()関数**、もしくはJavaScript以外の言語で、それに準ずる関数等で生成した、URLエンコード済みマークダウン
+  * JavaScriptにおける**encodeURIComponent()関数**、もしくはJavaScript以外の言語で、それに準ずる関数等で生成した、URLエンコード済みマークダウン
 
 返り値
 
