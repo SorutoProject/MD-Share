@@ -544,7 +544,12 @@ var presentation = {
 
 //共有
 function share(url) {
+    //セキュリティ制約により、forkした環境での短縮URLの生成を禁止する
+    if(location.hostname == "mdshare.cf"){
     var confShortLink = confirm("短縮URLを生成しますか？\n※「OK」を押して続行した場合は、Google Firebase Dynamic Linksにあなたのドキュメントの情報が保存されることに同意したものとみなされます。");
+    }else{
+        var confShortLink = false;
+    }
     if (confShortLink === true) {
         var data = {
             url: url
