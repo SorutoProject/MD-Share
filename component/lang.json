@@ -1,0 +1,70 @@
+{
+    "menuButton":{
+        "ja":"メニュー",
+        "en":"Menu"
+    },
+    "newButton":{
+        "ja":"新規",
+        "en":"New"
+    },
+    "editButton":{
+        "ja":"編集",
+        "en":"Edit"
+    },
+    "presentationButton":{
+        "ja":"プレゼン",
+        "en":"Presentation"
+    },
+    "printButton":{
+        "ja":"印刷",
+        "en":"Print"
+    },
+    "infoButton":{
+        "ja":"情報",
+        "en":"Info"
+    },
+    "previewShowText":{
+        "ja":"プレビュー表示",
+        "en":"Enable preview"
+    },
+    "newWindowCloseButton":{
+        "ja":"× 閉じる",
+        "en":"× Close"
+    },
+    "shareButton":{
+        "ja":"共有",
+        "en":"Share"
+    },
+    "forwardButton":{
+        "ja":"前へ",
+        "en":"Forward"
+    },
+    "nextButton":{
+        "ja":"次へ",
+        "en":"Next"
+    },
+    "endButton":{
+        "ja":"終了",
+        "en":"Close"
+    },
+    "copyRawUrl":{
+        "ja":"生URLをコピー",
+        "en":"Copy raw URL"
+    },
+    "copyShortUrl":{
+        "ja":"短縮URLをコピー",
+        "en":"Copy short URL"
+    },
+    "shareInTwitter":{
+        "ja":"Twitterで共有",
+        "en":"Share with Twitter"
+    },
+    "shareInLine":{
+        "ja":"LINEで共有",
+        "en":"Share with LINE"
+    },
+    "cancelButton":{
+        "ja":"キャンセル",
+        "en":"Cancel"
+    }
+}

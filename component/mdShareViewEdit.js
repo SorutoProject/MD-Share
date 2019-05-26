@@ -10,7 +10,7 @@
  Required:
  
  	lz-string(https://github.com/pieroxy/lz-string/)(MIT Licensed)
-	marked.js(https://github.com/markedjs/marked)(MIT Licensed)
+	marked.js(https://github.com/markedjs/marked)(MIT Licensed)(Load From CDN)
 	highlight.js(https://github.com/highlightjs/highlight.js)(3-Clause BSD Licensed)
     js-yaml(https://github.com/nodeca/js-yaml)(MIT Licensed)
     screenfull.js(https://github.com/sindresorhus/screenfull.js/)(MIT Licensed)
@@ -268,9 +268,9 @@ window.onload = function () {
         window.open("./help/index.html");
     });
 
-    $$("#temButton").addEventListener("click", function () {
+    /*$$("#temButton").addEventListener("click", function () {
         window.open("./template/index.html");
-    });
+    });*/
 
     $$("#presenButton").addEventListener("click", function () {
         presentation.start(mdWithInfo);
@@ -318,10 +318,15 @@ window.onload = function () {
             $$("#windowBack").textContent = "";
         }, 1000)
 
-    }
-    else if(arg.new === "t"){
+    } else if (arg.new === "t") {
         newDoc();
     }
+
+    //for glottologist
+    const glot = new Glottologist();
+    glot.import("component/lang.json").then(function () {
+        glot.render();
+    });
 }
 
 // プリントするとき
@@ -627,18 +632,18 @@ function share(url) {
 }
 
 //システムメッセージの表示関数
-function sysMessage(s){
+function sysMessage(s) {
     var messageElem = $$("#message");
     messageElem.textContent = s;
     messageElem.className = "show";
-    if(messageElem.dataset.showing === "true"){
+    if (messageElem.dataset.showing === "true") {
         clearTimeout(messageShower);
     }
-    
-    messageShower = setTimeout(function(){
+
+    messageShower = setTimeout(function () {
         $$("#message").className = "";
         $$("#message").dataset.showing = "false";
-    },5000);
+    }, 5000);
 }
 
 function EncodeHTMLForm(data) {
