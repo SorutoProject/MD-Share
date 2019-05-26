@@ -35,7 +35,8 @@ const escape = (txt) => {
     if (!el) {
         return ''
     }
-
+    //getAttroniteNamesに非対応のブラウザが多いので一旦保留
+    /*
     let attrs = []
     el.getAttributeNames().map(attr => {
         if (attr.match(deniedAttrCondition)) {
@@ -45,6 +46,9 @@ const escape = (txt) => {
         attrs.push(`${attr}="${el.getAttribute(attr)}"`)
     })
     return `<${el.tagName} ${attrs.join(' ')}>`
+    */
+    
+    return txt;
 }
 
 (function () {
