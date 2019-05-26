@@ -609,6 +609,9 @@ function share(url) {
                     e.preventDefault();
                     $$("#shareWindow").className = "";
                 });
+            }else if(this.readyState == READYSTATE_COMPLETED &&
+                this.status == 404){
+                alert("短縮URL生成サーバーに接続できません。\nしばらく時間をおいてからもう一度お試しください。\nご迷惑おかけし、申し訳ございません。");
             }
         }
 
