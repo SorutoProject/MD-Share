@@ -14,7 +14,7 @@ MarkdownからMD Share 生URLを生成します
 URL:
 
 ```
-GET https://mdshr.glitch.io/api/share?q={encodeURIComponent(MarkDown)}
+GET https://mdshr.glitch.me/api/share?q={encodeURIComponent(MarkDown)}
 ```
 
 **URLパラメータの説明**
