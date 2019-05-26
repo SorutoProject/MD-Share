@@ -473,10 +473,22 @@ var presentation = {
         flags.presentation = {};
         //改ページ記号(---)ごとに区切る
         flags.presentation.slides = md.split("\n---\n");
-        flags.presentation.nowPage = 0;
-        $$("#presentationView").innerHTML = marked(flags.presentation.slides[0]);
-        $$("#presentationBack").style.display = $$("#presentationForward").style.display = "inline";
-        screenfull.request($$("#presentation"));
+        try {
+            //yamlでの仕様
+            if (flags.presentation.slides[0].slice(0, 3) == "---" && typeof jsyaml.load(flags.presentation.slides[0].slice(3)) === "object") {
+                flags.presentation.slides.shift();
+                flags.presentation.nowPage = 0;
+                $$("#presentationView").innerHTML = marked(flags.presentation.slides[0]);
+                $$("#presentationBack").style.display = $$("#presentationForward").style.display = "inline";
+                screenfull.request($$("#presentation"));
+            }
+        } catch (e) {
+            flags.presentation.nowPage = 0;
+            $$("#presentationView").innerHTML = marked(flags.presentation.slides[0]);
+            $$("#presentationBack").style.display = $$("#presentationForward").style.display = "inline";
+            screenfull.request($$("#presentation"));
+        }
+
 
     },
     //戻る
