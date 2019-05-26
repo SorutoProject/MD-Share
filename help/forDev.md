@@ -31,7 +31,7 @@ GET https://mdshr.glitch.io/api/share?q={encodeURIComponent(MarkDown)}
 }
 ```
 
-**注意事項**
+**補足**
 
 * https://mdshare.cf 上のエディタでの共有時と同じく、返り値の`shareUrl`が5000字以上になると、以下のようなエラーが返されます。
 
@@ -42,5 +42,8 @@ GET https://mdshr.glitch.io/api/share?q={encodeURIComponent(MarkDown)}
   }
   ```
 
+### 注意事項
+
 * 現在、特にアクセス制限はかけておりませんが、多重リクエストなどの、**他のユーザーに迷惑となるような行為**は<u>ご遠慮</u>ください。(Glitchでは、転送量は **10GB/月** に設定されています)
 * Glitchの仕様により、一定時間アクセスがないとサーバーがスリープ状態に入ります。そのため、アクセスするタイミングにより、応答が遅い場合があります。
+* MD Share APIのソースコードの公開は行いません。
