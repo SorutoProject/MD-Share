@@ -23,22 +23,28 @@ const deniedTagCondition = /^<\/?(script|style|link|iframe|embed|object|html|hea
 const deniedAttrCondition = /^(on.+|style|href|action|id|class|data-.*)/i
 
 const escape = (txt) => {
-  if (txt.match(deniedTagCondition) || txt.indexOf('<!') === 0 || txt.indexOf('<?') === 0 || txt.indexOf('<\\') === 0) { return '' }
-  if (txt.indexOf('</') === 0) { return txt }
-  let outer = document.createElement('div')
-  outer.innerHTML = txt
-  let el = outer.querySelector('*')
-  if (!el) {return ''}
-
-  let attrs = []
-  el.getAttributeNames().map(attr => {
-    if (attr.match(deniedAttrCondition)) {
-      el.removeAttribute(attr)
-      return
+    if (txt.match(deniedTagCondition) || txt.indexOf('<!') === 0 || txt.indexOf('<?') === 0 || txt.indexOf('<\\') === 0) {
+        return ''
     }
-    attrs.push(`${attr}="${el.getAttribute(attr)}"`)
-  })
-  return `<${el.tagName} ${attrs.join(' ')}>`
+    if (txt.indexOf('</') === 0) {
+        return txt
+    }
+    let outer = document.createElement('div')
+    outer.innerHTML = txt
+    let el = outer.querySelector('*')
+    if (!el) {
+        return ''
+    }
+
+    let attrs = []
+    el.getAttributeNames().map(attr => {
+        if (attr.match(deniedAttrCondition)) {
+            el.removeAttribute(attr)
+            return
+        }
+        attrs.push(`${attr}="${el.getAttribute(attr)}"`)
+    })
+    return `<${el.tagName} ${attrs.join(' ')}>`
 }
 
 (function () {
@@ -61,8 +67,8 @@ const escape = (txt) => {
     marked.setOptions({
         renderer: renderer,
         gfm: true,
-        sanitize:true,
-        sanitizer:escape
+        sanitize: true,
+        sanitizer: escape
     });
 })();
 //flags
@@ -545,9 +551,10 @@ var presentation = {
 //共有
 function share(url) {
     //セキュリティ制約により、forkした環境での短縮URLの生成を禁止する
-    if(location.hostname == "mdshare.cf"){
-    var confShortLink = confirm("短縮URLを生成しますか？\n※「OK」を押して続行した場合は、Google Firebase Dynamic Linksにあなたのドキュメントの情報が保存されることに同意したものとみなされます。");
-    }else{
+    if (location.hostname == "mdshare.cf") {
+        var confShortLink = confirm("短縮URLを生成しますか？\n※「OK」を押して続行した場合は、Google Firebase Dynamic Linksにあなたのドキュメントの情報が保存されることに同意したものとみなされます。");
+        if(confShortLink === false) sysMessage("短縮URLの作成をキャンセルしました");
+    } else {
         var confShortLink = false;
     }
     if (confShortLink === true) {
@@ -639,8 +646,8 @@ function share(url) {
                     e.preventDefault();
                     $$("#shareWindow").className = "";
                 });
-            }else if(this.readyState == READYSTATE_COMPLETED &&
-                this.status == 404){
+            } else if (this.readyState == READYSTATE_COMPLETED &&
+                this.status == 404) {
                 sysMessage("短縮URL生成サーバーに接続できません。\nしばらく時間をおいてからもう一度お試しください。\nご迷惑おかけし、申し訳ございません。");
             }
         }
