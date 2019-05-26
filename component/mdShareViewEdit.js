@@ -95,6 +95,7 @@ window.onload = function () {
     }
     //normal md or with yaml
     else {
+        try{
         var mayYaml = mdWithInfo.split("---")[1].split("---")[0].trim();
 
         console.log(mayYaml);
@@ -115,6 +116,11 @@ window.onload = function () {
             var mdInfo = "";
         } else {
             //console.log(mdInfoJson);
+            var mdInfo = "";
+            var md = mdWithInfo;
+            $$("#docInfo").style.display = "none";
+        }
+        }catch(e){
             var mdInfo = "";
             var md = mdWithInfo;
             $$("#docInfo").style.display = "none";
