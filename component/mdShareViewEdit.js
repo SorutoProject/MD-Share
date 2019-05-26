@@ -37,6 +37,7 @@
 
     marked.setOptions({
         renderer: renderer,
+        gfm:true
     });
 })();
 //flags
@@ -129,8 +130,8 @@ window.onload = function () {
     //最終処理
     var html = marked(md);
     //追加設定
-    var html = html.replace(/\[x\]/g, '<input type="checkbox" checked="checked">');
-    var html = html.replace(/\[ \]/g, '<input type="checkbox">');
+    //var html = html.replace(/\[x\]/g, '<input type="checkbox" checked="checked">');
+    //var html = html.replace(/\[ \]/g, '<input type="checkbox">');
     $$("#doc").innerHTML = html;
 
     //addEventListener
@@ -200,8 +201,8 @@ window.onload = function () {
             }
             var previewHtml = marked(previewMd);
             //追加設定
-            var previewHtml = previewHtml.replace(/\[x\]/g, '<input type="checkbox" checked="checked">');
-            var previewHtml = previewHtml.replace(/\[ \]/g, '<input type="checkbox">');
+            //var previewHtml = previewHtml.replace(/\[x\]/g, '<input type="checkbox" checked="checked">');
+            //var previewHtml = previewHtml.replace(/\[ \]/g, '<input type="checkbox">');
             $$("#preview").innerHTML = previewHtml;
 
         } else {
