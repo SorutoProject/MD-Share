@@ -1,6 +1,6 @@
 # MD Share API(For Developers)
 
-2019年05月26日(日本時間)より、(Glitch)[https://glitch.com]でのMD Share APIの提供を開始しました。  
+2019年05月26日(日本時間)より、[Glitch](https://glitch.com)でのMD Share APIの提供を開始しました。  
 本ページでは利用方法について紹介します。
 
 **※注意※**
