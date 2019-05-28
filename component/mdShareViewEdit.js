@@ -175,6 +175,7 @@ window.onload = function () {
     //for MathJax
     if (html.indexOf("$") !== -1) {
         if (flags.mathjaxLoaded === false) {
+            flags.mathjaxLoaded = true;
             var script = document.createElement('script');
 
             script.type = 'text/javascript';
@@ -192,7 +193,7 @@ window.onload = function () {
                 });
                 MathJax.Hub.Queue(["Typeset", MathJax.Hub, "doc"]);
             }
-            flags.mathjaxLoaded = true;
+           
         } else {
             MathJax.Hub.Queue(["Typeset", MathJax.Hub, "doc"]);
         }
@@ -271,6 +272,7 @@ window.onload = function () {
             //for MathJax
             if (previewHtml.indexOf("$") !== -1) {
                 if (flags.mathjaxLoaded === false) {
+                    flags.mathjaxLoaded = true;
                     var script = document.createElement('script');
 
                     script.type = 'text/javascript';
@@ -288,7 +290,7 @@ window.onload = function () {
                         });
                         MathJax.Hub.Queue(["Typeset", MathJax.Hub, "preview"]);
                     }
-                    flahs.mathjaxLoaded = true;
+                    
                 } else {
                     MathJax.Hub.Queue(["Typeset", MathJax.Hub, "preview"]);
                 }
