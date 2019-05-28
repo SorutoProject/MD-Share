@@ -94,7 +94,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    width: calc(100% - 10px - 50px);
+    width: calc(100% - 10px - 70px);
     height: calc(100% - 10px);
     resize: none;
 }
@@ -103,7 +103,7 @@ body {
     position: absolute;
     top: 0;
     right: 0;
-    width: 50px;
+    width: 70px;
     height: 100%;
     overflow: auto;
 }

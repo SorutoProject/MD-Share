@@ -192,6 +192,7 @@ window.onload = function () {
                 });
                 MathJax.Hub.Queue(["Typeset", MathJax.Hub, "doc"]);
             }
+            flags.mathjaxLoaded = true;
         } else {
             MathJax.Hub.Queue(["Typeset", MathJax.Hub, "doc"]);
         }
@@ -287,6 +288,7 @@ window.onload = function () {
                         });
                         MathJax.Hub.Queue(["Typeset", MathJax.Hub, "preview"]);
                     }
+                    flahs.mathjaxLoaded = true;
                 } else {
                     MathJax.Hub.Queue(["Typeset", MathJax.Hub, "preview"]);
                 }
