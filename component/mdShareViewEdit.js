@@ -30,9 +30,10 @@ function escape(txt) {
     if (txt.indexOf('</') === 0) {
         return txt
     }
-    let outer = document.createElement('div')
+    //letにすると、古いブラウザでバグるのでvarにした。
+    var outer = document.createElement('div')
     outer.innerHTML = txt
-    let el = outer.querySelector('*')
+    var el = outer.querySelector('*')
     if (!el) {
         return ''
     }
