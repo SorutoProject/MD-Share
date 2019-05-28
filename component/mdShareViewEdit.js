@@ -14,6 +14,7 @@
 	highlight.js(https://github.com/highlightjs/highlight.js)(3-Clause BSD Licensed)
     js-yaml(https://github.com/nodeca/js-yaml)(MIT Licensed)
     screenfull.js(https://github.com/sindresorhus/screenfull.js/)(MIT Licensed)
+    MathJax(https://mathjax.org)(MIT Licensed)
     
 */
 //marked.js config
@@ -81,6 +82,7 @@ function escape(txt) {
 var flags = {};
 flags.edited = false;
 flags.presentation = {};
+flags.mathjaxLoaded = false;
 
 var $$ = function (e) {
     var el = document.querySelectorAll(e);
@@ -98,13 +100,6 @@ window.onload = function () {
         alert("本Webアプリは、Internet Explorerではご利用いただけません。\n他のブラウザをご利用ください。");
         return false;
     }
-    //mathJax config
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [['$', '$'], ["\\(", "\\)"]],
-            displayMath: [['$$', '$$'], ["\\[", "\\]"]]
-        }
-    });
     //Get Url Parameters
     var arg = new Object;
     var pair = location.search.substring(1).split('&');
@@ -177,7 +172,31 @@ window.onload = function () {
     //var html = html.replace(/\[x\]/g, '<input type="checkbox" checked="checked">');
     //var html = html.replace(/\[ \]/g, '<input type="checkbox">');
     $$("#doc").innerHTML = html;
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "doc"]);
+    //for MathJax
+    if (html.indexOf("$") !== -1) {
+        if (flags.mathjaxLoaded === false) {
+            var script = document.createElement('script');
+
+            script.type = 'text/javascript';
+            script.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML";
+
+            var firstScript = document.getElementsByTagName('script')[0];
+            firstScript.parentNode.insertBefore(script, firstScript);
+            script.onload = script.onreadystatechange = function () {
+                //mathJax config
+                MathJax.Hub.Config({
+                    tex2jax: {
+                        inlineMath: [['$', '$'], ["\\(", "\\)"]],
+                        displayMath: [['$$', '$$'], ["\\[", "\\]"]]
+                    }
+                });
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub, "doc"]);
+            }
+        } else {
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub, "doc"]);
+        }
+    }
+
     //addEventListener
     $$("#newButton").addEventListener("click", function () {
         newDoc();
@@ -189,7 +208,7 @@ window.onload = function () {
 
     $$("#newWindowClose").addEventListener("click", function () {
         if (flags.edited === true) {
-            var conf = confirm("編集内容が破棄されます。\n生成されたURLも削除されます。\n生成されたURLをメモした上で続行してください。\n続行しますか？");
+            var conf = confirm("編集内容が破棄されます。\n続行しますか？");
         } else {
             var conf = true;
         }
@@ -248,7 +267,30 @@ window.onload = function () {
             //var previewHtml = previewHtml.replace(/\[x\]/g, '<input type="checkbox" checked="checked">');
             //var previewHtml = previewHtml.replace(/\[ \]/g, '<input type="checkbox">');
             $$("#preview").innerHTML = previewHtml;
-            MathJax.Hub.Queue(["Typeset", MathJax.Hub, "preview"]);
+            //for MathJax
+            if (previewHtml.indexOf("$") !== -1) {
+                if (flags.mathjaxLoaded === false) {
+                    var script = document.createElement('script');
+
+                    script.type = 'text/javascript';
+                    script.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML";
+
+                    var firstScript = document.getElementsByTagName('script')[0];
+                    firstScript.parentNode.insertBefore(script, firstScript);
+                    script.onload = script.onreadystatechange = function () {
+                        //mathJax config
+                        MathJax.Hub.Config({
+                            tex2jax: {
+                                inlineMath: [['$', '$'], ["\\(", "\\)"]],
+                                displayMath: [['$$', '$$'], ["\\[", "\\]"]]
+                            }
+                        });
+                        MathJax.Hub.Queue(["Typeset", MathJax.Hub, "preview"]);
+                    }
+                } else {
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "preview"]);
+                }
+            }
 
 
         } else {
@@ -332,7 +374,7 @@ window.onload = function () {
     $$("#presenButton").addEventListener("click", function () {
         presentation.start(mdWithInfo);
     });
-    
+
     $$("#presenPreview").addEventListener("click", function () {
         presentation.start($$("#editor").value);
     });
@@ -383,10 +425,10 @@ window.onload = function () {
     }
 
     //for glottologist
-   /* const glot = new Glottologist();
-    glot.import("component/lang.json").then(function () {
-        glot.render();
-    });*/
+    /* const glot = new Glottologist();
+     glot.import("component/lang.json").then(function () {
+         glot.render();
+     });*/
 }
 
 // プリントするとき
@@ -498,7 +540,6 @@ function addTextToEditor(t, firstSelection) {
         return "編集内容が破棄されます。続行しますか？";
     };
 }
-
 //プレゼン機能の関数群
 var presentation = {
     //プレゼンの開始
@@ -518,11 +559,18 @@ var presentation = {
                 $$("#presentationBack").style.display = $$("#presentationForward").style.display = "inline";
                 screenfull.request($$("#presentation"));
                 $$("#presentation").className = "show";
+            } else {
+                flags.presentation.nowPage = 0;
+                $$("#presentationView").innerHTML = marked(flags.presentation.slides[0]);
+                $$("#presentationBack").style.display = $$("#presentationForward").style.display = "inline";
+                screenfull.request($$("#presentation"));
+                $$("#presentation").className = "show";
             }
         } catch (e) {
             flags.presentation.nowPage = 0;
             $$("#presentationView").innerHTML = marked(flags.presentation.slides[0]);
             $$("#presentationBack").style.display = $$("#presentationForward").style.display = "inline";
+            $$("#presentation").className = "show";
             //screenfull.request($$("#presentation"));
             sysMessage("全画面表示でスライドを表示するにはF11キーを押してください");
         }
@@ -656,7 +704,7 @@ function share(url) {
                 });
             } else if (this.readyState == READYSTATE_COMPLETED &&
                 this.status == 404) {
-                sysMessage("短縮URL生成サーバーに接続できません。\nしばらく時間をおいてからもう一度お試しください。\nご迷惑おかけし、申し訳ございません。");
+                sysMessage("短縮URLの生成に失敗しました");
             }
         }
 
