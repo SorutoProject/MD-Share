@@ -209,7 +209,7 @@ body {
     display: none;
 }
 
-#presentation:fullscreen {
+#presentation.show {
     display: block;
 }
 

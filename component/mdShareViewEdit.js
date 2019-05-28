@@ -310,10 +310,6 @@ window.onload = function () {
         }
     });
 
-    $$("#presenPreview").addEventListener("click", function () {
-        presentation.start($$("#editor").value);
-    });
-
     $$("#menuButton").addEventListener("click", function () {
         var now = $$("#tools").className;
         if (now === "close") {
@@ -336,7 +332,10 @@ window.onload = function () {
     $$("#presenButton").addEventListener("click", function () {
         presentation.start(mdWithInfo);
     });
-
+    
+    $$("#presenPreview").addEventListener("click", function () {
+        presentation.start($$("#editor").value);
+    });
     $$("#presentationBack").addEventListener("click", function () {
         presentation.back();
     });
@@ -384,10 +383,10 @@ window.onload = function () {
     }
 
     //for glottologist
-    const glot = new Glottologist();
+   /* const glot = new Glottologist();
     glot.import("component/lang.json").then(function () {
         glot.render();
-    });
+    });*/
 }
 
 // プリントするとき
@@ -518,12 +517,14 @@ var presentation = {
                 $$("#presentationView").innerHTML = marked(flags.presentation.slides[0]);
                 $$("#presentationBack").style.display = $$("#presentationForward").style.display = "inline";
                 screenfull.request($$("#presentation"));
+                $$("#presentation").className = "show";
             }
         } catch (e) {
             flags.presentation.nowPage = 0;
             $$("#presentationView").innerHTML = marked(flags.presentation.slides[0]);
             $$("#presentationBack").style.display = $$("#presentationForward").style.display = "inline";
-            screenfull.request($$("#presentation"));
+            //screenfull.request($$("#presentation"));
+            sysMessage("全画面表示でスライドを表示するにはF11キーを押してください");
         }
 
 
@@ -551,6 +552,7 @@ var presentation = {
     //プレゼンの終了
     end: function () {
         screenfull.exit();
+        $$("#presentation").className = "";
     }
 }
 
