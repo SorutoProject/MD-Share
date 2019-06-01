@@ -28,12 +28,13 @@
 <body>
 	<div id="header"><span id="docInfo"><span id="docTitle"></span><br><span id="author"></span></span><button id="menuButton" glot-model="menuButton"><i class="fa fa-bars md-menu"></i></button></div>
 	<div id="tools" class="close">
-        <button id="newButton" title="新しいドキュメントを作成します" glot-model="newButton"><i class="far fa-plus-square md-tools"></i> <span class="md-tools-text">新規</span></button>
-        <button id="editButton" title="このドキュメントを編集します" glot-model="editButton"><i class="far fa-edit md-tools"></i> <span class="md-tools-text">編集</span></button>
-        <button id="presenButton" title="このドキュメントをプレゼンテーションのスライドとして使います" glot-model="presentationButton"><i class="fas fa-chalkboard-teacher md-tools"></i> <span class="md-tools-text">プレゼン</span></button>
+        <button id="newButton" title="新しいドキュメントを作成" glot-model="newButton"><i class="far fa-plus-square md-tools"></i> <span class="md-tools-text">新規</span></button>
+        <button id="editButton" title="このドキュメントを編集" glot-model="editButton"><i class="far fa-edit md-tools"></i> <span class="md-tools-text">編集</span></button>
+        <button id="fileOpenButton" title="この端末のマークダウンファイル(*.md)を開く"><i class="far fa-folder-open md-tools"></i> <span class="md-tools-text">ファイルを開く</span></button>
+        <button id="presenButton" title="このドキュメントをプレゼンテーションのスライドとして使う" glot-model="presentationButton"><i class="fas fa-chalkboard-teacher md-tools"></i> <span class="md-tools-text">プレゼン</span></button>
 			<!--<button id="temButton" title="テンプレートから新しいドキュメントを作成します">テンプレ</button>-->
-        <button class="printButton" title="このドキュメントを印刷します" glot-model="printButton"><i class="fas fa-print md-tools"></i> <span class="md-tools-text">印刷</span></button>
-        <button id="infoButton" title="このソフトウェアの情報を表示します" glot-model="infoButton"><i class="fas fa-info-circle md-tools"></i> <span class="md-tools-text">情報</span></button>
+        <button class="printButton" title="このドキュメントを印刷" glot-model="printButton"><i class="fas fa-print md-tools"></i> <span class="md-tools-text">印刷</span></button>
+        <button id="infoButton" title="このソフトウェアの情報を表示" glot-model="infoButton"><i class="fas fa-info-circle md-tools"></i> <span class="md-tools-text">情報</span></button>
 	</div>
 	<div id="doc"></div>
 	<div id="new">
@@ -63,7 +64,7 @@
 		</div>
 		<div id="preview"></div>
 		<div id="save">
-			<button id="presenPreview" glot-model="presentationButton"><i class="fas fa-chalkboard-teacher"></i>  プレゼン</button><button id="gen" glot-model="shareButton"><i class="fas fa-share"></i> 共有</button><button class="printButton" glot-model="printButton"><i class="fas fa-print"></i> 印刷</button>
+			<button id="presenPreview" glot-model="presentationButton" title="プレゼンテーションモードでの表示を確認"><i class="fas fa-chalkboard-teacher"></i></button><button id="gen" glot-model="shareButton" title="編集中のドキュメントをSNSなどで共有"><i class="fas fa-share"></i></button><button id="dlButton" title="編集中のドキュメントをダウンロード"><i class="fas fa-file-download"></i></button><button class="printButton" glot-model="printButton" title="編集中のドキュメントを印刷"><i class="fas fa-print"></i></button>
 		</div>
 	</div>
 	<div id="windowBack"></div>
@@ -84,6 +85,11 @@
 		<a id="shareCancel" glot-model="cancelButton">キャンセル</a>
 	</div>
 	<div id="message"></div>
+	<div id="fileOpenDialog">
+        <div><i class="far fa-folder-open"></i> MDファイルを開く...</div><br>
+	    <input type="file" id="mdFileReader" accept=".md,.markdown,.mmd,.mdown"><br>
+	    <button id="fileOpenDialogClose">キャンセル</button>
+	</div>
 </body>
 
 </html>

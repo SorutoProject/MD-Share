@@ -111,93 +111,14 @@ window.onload = function () {
         //ホームページ
         var pageData = "LQhQBcEtwGwUwFwAICyARJBlAFgQwE5yAeDIBEMgYgyDKDILoMouAruNgPb7KYsNNIAK+TAVnADG4UCGCgAxKgw4CcUAB4AzgFtcMGAD5A8QyBpBkBRDIBCGQJoMgeQZAowaBGDUBJDIFx5QBIM5QEAMigPRqN20KABU-n18kQAbTQHUGQBEGQD2GQB+GQHqGQAGGQDKGQGeGQEmGQFqGQFOGQEOGZMAJhhtAHXlABCMTQGiGQGsGQHsGQEAGUCQGpCDuAGFAOwZAFg1ACBVawBgGYMB4yMBYBhtYwCuGQGGGWNDAPwYTZ3rGoMBOhkjAbYZOnpre7MBphkzoocAkwn7htsAwDIrxqdn5vyRAR0VASHNAVQZAGIZAfQZAOYZovMAZBkAFhGALk93oArBnC3VqAFUAEoAGUAiwyAS4ZstFAP0Mf0AxtahMyAWijAFna70AZgzhMp6QBdHoBYqNCRLMgAMGF7hBZBQA05gB1OAAI0ARQyAdYYxm1AP7ygApXQCdpoBVmxqSMAJQyAboZkstrKDAJYMVUWDWa7Uh22sI2u0yJVMA5gyAWQY5gtGk0kKsNtqdvtDiddRcrpMDcazfMFn4Avd2Vy+WMqigAJIAFSQcMgQjgADtlHA2oBoOQqgBtFQDRqcTwuaGqBQxGozH44nAEGWgEDIqqAU7kk21ABYMgCkGAxGu5aJAARgAdEgKG1AL0MgFWGPKJQDlDNybIAGqKNgCCGQCEjoB8RSNM8AbEqABTSKoBHI0AxgxEwD2QUzc62PnTQjVAOohhUAlFbA+skQDODCzAIxRgD+o4E2AdD0dtEyATwYiW1AOCRgC-ETMHxVIAs4llqCgAXCYAYEoVIAGFGAJDxoSgoAigxvIADgygoAkQzggsrYAExdoUgCgASBVTnheJG1O+I7chUgBFqTSiicloih0FooKAMkM2GADUxgDfcjYgAFMToeHuBx7isaAWjSUggCo+sKgDCioAWP-5pG0ZxgmSDAEgbKQAA1pAAAOcAACaQLgfocjy-I2CK5QULWFQkAYNRqYWmmJoAoYqAJ3aFSADAqgDwhu8HxTnWgD+DKC7w5kgPgABQtAAlARAAMbYAJxYBw4BcLwAjCOAcXuRpxamR2iVAA";
         //グローバル変数
-        mdWithInfo = LZString.decompressFromEncodedURIComponent(pageData);
+        var md = LZString.decompressFromEncodedURIComponent(pageData);
+        loadMd(md);
     } else {
-        mdWithInfo = LZString.decompressFromEncodedURIComponent(arg["q"]);
-        console.log(mdWithInfo);
+        var md = LZString.decompressFromEncodedURIComponent(arg["q"]);
+        loadMd(md);
     }
-    //There is not md data
-    if (mdWithInfo == "" || mdWithInfo == undefined) {
-        var NMDPageData = "DwQgtBBQDekJACIAuBLJAbApggXAgogE6ED2hABGOQLIAi5AygBYCGh2ANPAiwK5JMyuBAwCeAZySYAtgkgBfSBDAA+SAGJyRUoQ2btZcgGMSAE0w5yAFSaZ25FOPIA7EknKmSR3tMzP3pixILAB0kICncoDQcoB2DIAiDIBaDIAxDIDSDNGA+cqAB2qA1gyAEQyAUQyAgAyAWwyAPwyAHQyASQyAFhGAXJ6A5gyAsgyAfgyA2gyAyQyAQAyQkABU5ACqAEoAMoCLDICXDICHDCWA-QzR5AgAjgjkE9MzWYCEjoCdSoBWDIAkCoAyDIDgxoBZ2oCqDImAZgyxgNEMXX2AYwyAtQyAnQyAEwyAowaAjBqHAAyABYZACUM72igEmGZ6AU4ZJoBnhnedUAQgz3XrkQDKDNFAGsM40AZQyANoZDgUhmMprN5ksVmtSfsKoAzxUAYC6NXaxDpAA";
-        mdWithInfo = LZString.decompressFromEncodedURIComponent(NMDPageData);
-        $$("#editButton").style.display = "none";
-    }
-    //md with document info
-    if (mdWithInfo.indexOf("<!---") !== -1) {
-        var mdInfo = mdWithInfo.split("<!---")[1].split("--->")[0];
-        var md = mdWithInfo.split("--->")[1];
-        var mdInfoJson = JSON.parse(mdInfo);
-        if (mdInfoJson.title) {
-            $$("#docTitle").textContent = mdInfoJson.title;
-            document.title = mdInfoJson.title + " - MD Share";
-        }
-        if (mdInfoJson.author) $$("#author").textContent = "by " + mdInfoJson.author;
-    }
-    //normal md or with yaml
-    else {
-        try {
-            var mayYaml = mdWithInfo.split("---")[1].split("---")[0].trim();
 
-            console.log(mayYaml);
-            var mdInfoJson = jsyaml.load(mayYaml);
-            if (typeof mdInfoJson === "object") {
-                if (mdInfoJson.title) {
-                    $$("#docTitle").textContent = mdInfoJson.title;
-                    document.title = mdInfoJson.title + " - MD Share";
-                }
-                if (mdInfoJson.author) $$("#author").textContent = "by " + mdInfoJson.author;
-                var md = "";
-                var preMd = mdWithInfo.split("---");
-                console.log(preMd.length);
-                for (var i = 2; i < preMd.length; i++) {
-                    md += preMd[i] + "\n---";
-                }
-                var md = md.slice(0, -3);
-                var mdInfo = "";
-            } else {
-                //console.log(mdInfoJson);
-                var mdInfo = "";
-                var md = mdWithInfo;
-                $$("#docInfo").style.display = "none";
-            }
-        } catch (e) {
-            var mdInfo = "";
-            var md = mdWithInfo;
-            $$("#docInfo").style.display = "none";
-        }
-    }
-    //最終処理
-    var html = marked(md);
-    //追加設定
-    //var html = html.replace(/\[x\]/g, '<input type="checkbox" checked="checked">');
-    //var html = html.replace(/\[ \]/g, '<input type="checkbox">');
-    $$("#doc").innerHTML = html;
-    //for MathJax
-    if (html.indexOf("$") !== -1) {
-        if (flags.mathjaxLoaded === false) {
-            flags.mathjaxLoaded = true;
-            var script = document.createElement('script');
 
-            script.type = 'text/javascript';
-            script.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML";
-
-            var firstScript = document.getElementsByTagName('script')[0];
-            firstScript.parentNode.insertBefore(script, firstScript);
-            script.onload = script.onreadystatechange = function () {
-                //mathJax config
-                MathJax.Hub.Config({
-                    tex2jax: {
-                        inlineMath: [['$', '$'], ["\\(", "\\)"]],
-                        displayMath: [['$$', '$$'], ["\\[", "\\]"]]
-                    }
-                });
-                MathJax.Hub.Queue(["Typeset", MathJax.Hub, "doc"]);
-            }
-           
-        } else {
-            MathJax.Hub.Queue(["Typeset", MathJax.Hub, "doc"]);
-        }
-    }
 
     //addEventListener
     $$("#newButton").addEventListener("click", function () {
@@ -290,7 +211,7 @@ window.onload = function () {
                         });
                         MathJax.Hub.Queue(["Typeset", MathJax.Hub, "preview"]);
                     }
-                    
+
                 } else {
                     MathJax.Hub.Queue(["Typeset", MathJax.Hub, "preview"]);
                 }
@@ -369,6 +290,36 @@ window.onload = function () {
 
     $$("#infoButton").addEventListener("click", function () {
         window.open("./help/index.html");
+    });
+
+    $$("#fileOpenButton").addEventListener("click", function () {
+        $$("#fileOpenDialog").className = "show";
+        $$("#tools").className = "close";
+        $$("#menuButton").innerHTML = '<i class="fa fa-bars md-menu"></i>';
+    });
+
+    $$("#fileOpenDialogClose").addEventListener("click", function () {
+        $$("#fileOpenDialog").className = "";
+    });
+
+    $$("#mdFileReader").addEventListener("change", function (e) {
+        var file = e.target.files;
+        //FileReader
+        var reader = new FileReader();
+        //Load as text
+        reader.readAsText(file[0]);
+        //onload Event
+        reader.onload = function () {
+            loadMd(reader.result);
+            console.log(reader);
+            $$("#fileOpenDialog").className = "";
+            sysMessage(file[0].name + " を読み込みました");
+        }
+    });
+    
+    $$("#dlButton").addEventListener("click", function(){
+        var text = $$("#editor").value;
+        textDownload(text);
     });
 
     /*$$("#temButton").addEventListener("click", function () {
@@ -486,7 +437,7 @@ function newDoc() {
     $$("#new").className = $$("#windowBack").className = "show";
     document.body.style.overflow = "hidden";
     $$("#tools").className = "close";
-     $$("#menuButton").innerHTML = '<i class="fa fa-bars md-menu"></i>';
+    $$("#menuButton").innerHTML = '<i class="fa fa-bars md-menu"></i>';
     $$("#saveLink").value = "";
 }
 
@@ -499,7 +450,7 @@ function editDoc() {
     $$("#saveLink").value = "";
     document.body.style.overflow = "hidden";
     $$("#tools").className = "close";
-     $$("#menuButton").innerHTML = '<i class="fa fa-bars md-menu"></i>';
+    $$("#menuButton").innerHTML = '<i class="fa fa-bars md-menu"></i>';
 }
 //COPIED FROM http://unimakura.jp/javascript/javascript-1.html
 //テキストの選択解除
@@ -549,7 +500,7 @@ var presentation = {
     //プレゼンの開始
     start: function (md) {
         $$("#tools").className = "close";
-         $$("#menuButton").innerHTML = '<i class="fa fa-bars md-menu"></i>';
+        $$("#menuButton").innerHTML = '<i class="fa fa-bars md-menu"></i>';
         //初期化
         flags.presentation = {};
         //改ページ記号(---)ごとに区切る
@@ -793,4 +744,129 @@ function EncodeHTMLForm(data) {
     }
 
     return params.join('&').replace(/%20/g, '+');
+}
+
+function loadMd(mdData) {
+    mdWithInfo = mdData;
+    //There is not md data
+    if (mdWithInfo == "" || mdWithInfo == undefined) {
+        var NMDPageData = "DwQgtBBQDekJACIAuBLJAbApggXAgogE6ED2hABGOQLIAi5AygBYCGh2ANPAiwK5JMyuBAwCeAZySYAtgkgBfSBDAA+SAGJyRUoQ2btZcgGMSAE0w5yAFSaZ25FOPIA7EknKmSR3tMzP3pixILAB0kICncoDQcoB2DIAiDIBaDIAxDIDSDNGA+cqAB2qA1gyAEQyAUQyAgAyAWwyAPwyAHQyASQyAFhGAXJ6A5gyAsgyAfgyA2gyAyQyAQAyQkABU5ACqAEoAMoCLDICXDICHDCWA-QzR5AgAjgjkE9MzWYCEjoCdSoBWDIAkCoAyDIDgxoBZ2oCqDImAZgyxgNEMXX2AYwyAtQyAnQyAEwyAowaAjBqHAAyABYZACUM72igEmGZ6AU4ZJoBnhnedUAQgz3XrkQDKDNFAGsM40AZQyANoZDgUhmMprN5ksVmtSfsKoAzxUAYC6NXaxDpAA";
+        mdWithInfo = LZString.decompressFromEncodedURIComponent(NMDPageData);
+        $$("#editButton").style.display = "none";
+    }
+    //md with document info
+    if (mdWithInfo.indexOf("<!---") !== -1) {
+        var mdInfo = mdWithInfo.split("<!---")[1].split("--->")[0];
+        var md = mdWithInfo.split("--->")[1];
+        var mdInfoJson = JSON.parse(mdInfo);
+        if (mdInfoJson.title) {
+            $$("#docTitle").textContent = mdInfoJson.title;
+            document.title = mdInfoJson.title + " - MD Share";
+        }
+        if (mdInfoJson.author) $$("#author").textContent = "by " + mdInfoJson.author;
+    }
+    //normal md or with yaml
+    else {
+        try {
+            var mayYaml = mdWithInfo.split("---")[1].split("---")[0].trim();
+
+            console.log(mayYaml);
+            var mdInfoJson = jsyaml.load(mayYaml);
+            if (typeof mdInfoJson === "object") {
+                if (mdInfoJson.title) {
+                    $$("#docTitle").textContent = mdInfoJson.title;
+                    document.title = mdInfoJson.title + " - MD Share";
+                }
+                if (mdInfoJson.author) $$("#author").textContent = "by " + mdInfoJson.author;
+                var md = "";
+                var preMd = mdWithInfo.split("---");
+                console.log(preMd.length);
+                for (var i = 2; i < preMd.length; i++) {
+                    md += preMd[i] + "\n---";
+                }
+                var md = md.slice(0, -3);
+                var mdInfo = "";
+            } else {
+                //console.log(mdInfoJson);
+                var mdInfo = "";
+                var md = mdWithInfo;
+                $$("#docInfo").style.display = "none";
+            }
+        } catch (e) {
+            var mdInfo = "";
+            var md = mdWithInfo;
+            $$("#docInfo").style.display = "none";
+        }
+    }
+    //最終処理
+    var html = marked(md);
+    //追加設定
+    //var html = html.replace(/\[x\]/g, '<input type="checkbox" checked="checked">');
+    //var html = html.replace(/\[ \]/g, '<input type="checkbox">');
+    $$("#doc").innerHTML = html;
+    $$("#doc").scrollTop = 0; //一番上までスクロール
+    //for MathJax
+    if (html.indexOf("$") !== -1) {
+        if (flags.mathjaxLoaded === false) {
+            flags.mathjaxLoaded = true;
+            var script = document.createElement('script');
+
+            script.type = 'text/javascript';
+            script.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML";
+
+            var firstScript = document.getElementsByTagName('script')[0];
+            firstScript.parentNode.insertBefore(script, firstScript);
+            script.onload = script.onreadystatechange = function () {
+                //mathJax config
+                MathJax.Hub.Config({
+                    tex2jax: {
+                        inlineMath: [['$', '$'], ["\\(", "\\)"]],
+                        displayMath: [['$$', '$$'], ["\\[", "\\]"]]
+                    }
+                });
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub, "doc"]);
+            }
+
+        } else {
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub, "doc"]);
+        }
+    }
+}
+
+function textDownload(text) {
+    // ダウンロードしたいコンテンツ、MIMEType、ファイル名
+    var content = text;
+    var mimeType = 'text/markdown';
+    var name = prompt("ダウンロードするファイルのタイトルを指定してください。");
+    if(name === null) return false;
+    else if(name == "") var name = "無題";
+    var name = name + ".md";
+
+    // BOMは文字化け対策
+    var bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
+    var blob = new Blob([bom, content], {
+        type: mimeType
+    });
+
+    var a = document.createElement('a');
+    a.download = name;
+    a.target = '_blank';
+
+    if (window.navigator.msSaveBlob) {
+        // for IE
+        window.navigator.msSaveBlob(blob, name)
+    } else if (window.URL && window.URL.createObjectURL) {
+        // for Firefox
+        a.href = window.URL.createObjectURL(blob);
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    } else if (window.webkitURL && window.webkitURL.createObject) {
+        // for Chrome
+        a.href = window.webkitURL.createObjectURL(blob);
+        a.click();
+    } else {
+        // for Safari
+        window.open('data:' + mimeType + ';base64,' + window.Base64.encode(content), '_blank');
+    }
 }
