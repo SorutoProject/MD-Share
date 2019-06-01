@@ -31,8 +31,7 @@ body {
 #menuButton {
     position: absolute;
     top: 0;
-    right: 0;
-    width: 7em;
+    right: 5px;
     height: 50px;
 }
 
@@ -320,8 +319,12 @@ body {
         width: 100%;
         background: #ddd;
         border: none;
-        border-top: 1px solid #5c5c5c;
-        border-bottom: 1px solid #5c5c5c;
+        border-top: 1px solid #bbb;
+        border-bottom: 1px solid #bbb;
+    }
+    
+    .md-tools{
+        font-size:1.3em;
     }
 
     #tools button:active {
@@ -329,8 +332,11 @@ body {
     }
 
     #menuButton {
-        background: #ddd;
-        border: 2px solid #5c5c5c;
+        background: none;
+        border: none;
+    }
+    .md-menu{
+        font-size:2em;
     }
 }
 
@@ -346,14 +352,19 @@ body {
     #tools button {
         height: 60px;
         width: auto;
-        background: #ddd;
+        background: none;
         border: none;
-        border-left: 1px solid #3c3c3c;
-        border-right: 1px solid #3c3c3c;
-        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5) inset;
+        border-left:1px solid #bbb;
+        border-right:1px solid #bbb;
     }
 
     #menuButton {
+        display: none;
+    }
+    .md-tools{
+        font-size:1.8em;
+    }
+    .md-tools-text{
         display: none;
     }
 }
@@ -372,7 +383,8 @@ body {
 
 /*選択不可の設定*/
 #header,
-#new label {
+#new label,
+#tools{
     -ms-user-select: none;
     /* IE 10+ */
     -moz-user-select: -moz-none;

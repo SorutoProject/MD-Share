@@ -360,10 +360,10 @@ window.onload = function () {
         var now = $$("#tools").className;
         if (now === "close") {
             $$("#tools").className = "";
-            $$("#menuButton").textContent = "× 閉じる"
+            $$("#menuButton").innerHTML = '<i class="fas fa-times md-menu"></i>';
         } else {
             $$("#tools").className = "close";
-            $$("#menuButton").textContent = "メニュー"
+            $$("#menuButton").innerHTML = '<i class="fa fa-bars md-menu"></i>';
         }
     });
 
@@ -486,7 +486,7 @@ function newDoc() {
     $$("#new").className = $$("#windowBack").className = "show";
     document.body.style.overflow = "hidden";
     $$("#tools").className = "close";
-    $$("#menuButton").textContent = "メニュー";
+     $$("#menuButton").innerHTML = '<i class="fa fa-bars md-menu"></i>';
     $$("#saveLink").value = "";
 }
 
@@ -499,7 +499,7 @@ function editDoc() {
     $$("#saveLink").value = "";
     document.body.style.overflow = "hidden";
     $$("#tools").className = "close";
-    $$("#menuButton").textContent = "メニュー";
+     $$("#menuButton").innerHTML = '<i class="fa fa-bars md-menu"></i>';
 }
 //COPIED FROM http://unimakura.jp/javascript/javascript-1.html
 //テキストの選択解除
@@ -549,7 +549,7 @@ var presentation = {
     //プレゼンの開始
     start: function (md) {
         $$("#tools").className = "close";
-        $$("#menuButton").textContent = "メニュー";
+         $$("#menuButton").innerHTML = '<i class="fa fa-bars md-menu"></i>';
         //初期化
         flags.presentation = {};
         //改ページ記号(---)ごとに区切る
