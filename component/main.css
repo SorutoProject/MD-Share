@@ -307,6 +307,7 @@ body {
     color:#fff;
     text-align: center;
     display: none;
+    z-index:4;
 }
 
 #fileOpenDialog.show{
