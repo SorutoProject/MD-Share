@@ -255,7 +255,7 @@ window.onload = function () {
             if (title === null) return false;
             var author = prompt("このドキュメントの作者名を入力してください");
             if (author === null) return false;
-            var updateMd = '---\ntitle: ' + title + '\nauthor: ' + author + '\n---\n' + $$("#editor").value;
+            var updateMd = '---\ntitle: ' + title + '\nauthor: ' + author + '\n---\n\n' + $$("#editor").value;
             $$("#editor").value = updateMd;
             var userMd = LZString.compressToEncodedURIComponent($$("#editor").value);
             var genURL = location.protocol + "//" + location.hostname + location.pathname + "?q=" + userMd;
@@ -296,6 +296,7 @@ window.onload = function () {
         $$("#fileOpenDialog").className = "show";
         $$("#tools").className = "close";
         $$("#menuButton").innerHTML = '<i class="fa fa-bars md-menu"></i>';
+        $$("#mdFileReader").value = "";
     });
 
     $$("#fileOpenDialogClose").addEventListener("click", function () {
