@@ -22,10 +22,13 @@
 	<script src="component/lz-string.min.js"></script>
 	<script src="component/screenfull.js"></script>
 	<script src="component/js-yaml.min.js"></script>
+	<script src="component/html2canvas.min.js"></script>
+	<script src="component/FileSaver.js"></script>
 	<!--<script src="component/glottologist.min.js"></script>-->
 </head>
 
 <body>
+    <a id="getImage"></a>
 	<div id="header"><span id="docInfo"><span id="docTitle"></span><br><span id="author"></span></span><button id="menuButton" glot-model="menuButton"><i class="fa fa-bars md-menu"></i></button></div>
 	<div id="tools" class="close">
         <button id="newButton" title="新しいドキュメントを作成" glot-model="newButton"><i class="far fa-plus-square md-tools"></i> <span class="md-tools-text">新規</span></button>
@@ -71,6 +74,7 @@
 	<div id="presentation">
 		<div id="presentationView"></div>
 		<div id="presentationControl">
+		    <button id="presentationDl" title="現在のスライドを画像としてダウンロード"><i class="fas fa-download"></i></button>
 			<button id="presentationBack" glot-model="forwardButton"><i class="fas fa-backward"></i> 前へ</button>
 			<button id="presentationForward" glot-model="nextButton">次へ <i class="fas fa-forward"></i></button>
 			<button id="presentationEnd" glot-model="endButton"><i class="fas fa-door-open"></i> 終了</button>

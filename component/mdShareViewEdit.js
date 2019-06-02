@@ -83,6 +83,14 @@ var flags = {};
 flags.edited = false;
 flags.presentation = {};
 flags.mathjaxLoaded = false;
+flags.presenImage = {
+    "length": null,
+    "nowLength": 0,
+    "reset": function () {
+        flags.presenImage.length = null;
+        flags.presenImage.nowLength = 0
+    }
+}
 
 var $$ = function (e) {
     var el = document.querySelectorAll(e);
@@ -317,8 +325,8 @@ window.onload = function () {
             sysMessage(file[0].name + " を読み込みました");
         }
     });
-    
-    $$("#dlButton").addEventListener("click", function(){
+
+    $$("#dlButton").addEventListener("click", function () {
         var text = $$("#editor").value;
         textDownload(text);
     });
@@ -342,6 +350,9 @@ window.onload = function () {
     });
     $$("#presentationEnd").addEventListener("click", function () {
         presentation.end();
+    });
+    $$("#presentationDl").addEventListener("click", function (){
+       presentation.printScreen(); 
     });
 
     //エディタのMDでよく使う文字ボタン
@@ -557,6 +568,29 @@ var presentation = {
     end: function () {
         screenfull.exit();
         $$("#presentation").className = "";
+    },
+    //スライドのスクショを撮る
+    printScreen: function () {
+        html2canvas($$("#presentationView")).then(function (canvas) {
+            var data = canvas.toDataURL();
+            var fname = "slide_" + flags.presentation.nowPage;
+            var encdata = atob(data.replace(/^.*,/, ''));
+            var outdata = new Uint8Array(encdata.length);
+            for (var i = 0; i < encdata.length; i++) {
+                outdata[i] = encdata.charCodeAt(i);
+            }
+            var blob = new Blob([outdata], ["image/png"]);
+
+            if (window.navigator.msSaveBlob) {
+                //IE用
+                window.navigator.msSaveOrOpenBlob(blob, fname);
+            } else {
+                //それ以外？
+                document.getElementById("getImage").href = data; //base64そのまま設定
+                document.getElementById("getImage").download = fname; //ダウンロードファイル名設定
+                document.getElementById("getImage").click(); //自動クリック
+            }
+        });
     }
 }
 
@@ -839,8 +873,8 @@ function textDownload(text) {
     var content = text;
     var mimeType = 'text/markdown';
     var name = prompt("ダウンロードするファイルのタイトルを指定してください。");
-    if(name === null) return false;
-    else if(name == "") var name = "無題";
+    if (name === null) return false;
+    else if (name == "") var name = "無題";
     var name = name + ".md";
 
     // BOMは文字化け対策

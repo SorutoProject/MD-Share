@@ -5,6 +5,7 @@
 body {
     background: #fff;
     color: #000;
+    overflow: hidden;
 
     font-family: meiryo;
 }
@@ -17,6 +18,11 @@ body {
 ::-moz-selection {
     background: #009e8f;
     color: #fff;
+}
+
+#presenSave{
+    width:1920px;
+    height:1080px;
 }
 #header {
     position: fixed;
@@ -42,6 +48,7 @@ body {
     width: 100%;
     height: calc(100% - 60px);
     overflow: auto;
+    background: #fff;
 }
 
 #new {
@@ -482,6 +489,10 @@ table {
 }
 
 /*スライドの表示用*/
+#presentationView{
+    width:1920px;
+    height:1080px;
+}
 #presentationView th,
 #presentationView td {
     border: solid 1px;
@@ -503,39 +514,46 @@ table {
     font-size: 16pt;
 }
 
-#presentationView h1 {
+#presentationView h1,
+#presenSave h1{
     border-bottom: 1px solid #aaa;
     padding-left: 5px;
     font-size: 32pt;
 }
 
-#presentationView h2 {
+#presentationView h2,
+#presenSave h2{
     background: #3c3c3c;
     padding: 5px;
     color: #fff;
     font-size: 24pt;
 }
 
-#presentationView h3 {
+#presentationView h3,
+#presenSave h3{
     border-left: 8px solid #aaa;
     border-bottom: 1px solid #aaa;
     padding-left: 5px;
     font-size: 20pt;
 }
 
-#presentationView h4 {
+#presentationView h4,
+#presenSave h4{
     font-size: 18pt;
 }
 
-#presentation h5 {
+#presentation h5,
+#presenSave h5{
     font-size: 14pt;
 }
 
-#presentationView h6 {
+#presentationView h6,
+#presenSave h6{
     font-size: 12pt;
 }
 
-#presentationView blockquote {
+#presentationView blockquote,
+#presenSave blockquote{
     border-left: 7px solid #ccc;
     padding-left: 10px;
     color: #7c7c7c;
