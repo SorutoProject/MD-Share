@@ -571,9 +571,10 @@ var presentation = {
     },
     //スライドのスクショを撮る
     printScreen: function () {
-        html2canvas($$("#presentationView")).then(function (canvas) {
+        document.getElementById("presenScreenShot").innerHTML = $$("#presentationView").innerHTML;
+        html2canvas($$("#presenScreenShot")).then(function (canvas) {
             var data = canvas.toDataURL();
-            var fname = "slide_" + flags.presentation.nowPage;
+            var fname = "slide_" + parseInt(flags.presentation.nowPage + 1);
             var encdata = atob(data.replace(/^.*,/, ''));
             var outdata = new Uint8Array(encdata.length);
             for (var i = 0; i < encdata.length; i++) {

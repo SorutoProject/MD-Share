@@ -230,6 +230,7 @@ body {
     background: rgba(0, 0, 0, 0.6);
     padding: 5px;
     opacity: 0.2;
+    z-index: 2;
 }
 
 #presentation #presentationControl:hover {
@@ -251,6 +252,16 @@ body {
     width: 100%;
     height: 100%;
     overflow: auto;
+    z-index: 1;
+    background: #fff;
+}
+
+#presenScreenShot{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index:0; 
+    background: #fff;
 }
 
 #shareWindow {
@@ -489,10 +500,7 @@ table {
 }
 
 /*スライドの表示用*/
-#presentationView{
-    width:1920px;
-    height:1080px;
-}
+
 #presentationView th,
 #presentationView td {
     border: solid 1px;
@@ -514,46 +522,105 @@ table {
     font-size: 16pt;
 }
 
-#presentationView h1,
-#presenSave h1{
+#presentationView h1{
     border-bottom: 1px solid #aaa;
     padding-left: 5px;
     font-size: 32pt;
 }
 
-#presentationView h2,
-#presenSave h2{
+#presentationView h2{
     background: #3c3c3c;
     padding: 5px;
     color: #fff;
     font-size: 24pt;
 }
 
-#presentationView h3,
-#presenSave h3{
+#presentationView h3{
     border-left: 8px solid #aaa;
     border-bottom: 1px solid #aaa;
     padding-left: 5px;
     font-size: 20pt;
 }
 
-#presentationView h4,
-#presenSave h4{
+#presentationView h4{
     font-size: 18pt;
 }
 
-#presentation h5,
-#presenSave h5{
+#presentation h5{
     font-size: 14pt;
 }
 
-#presentationView h6,
-#presenSave h6{
+#presentationView h6{
     font-size: 12pt;
 }
 
-#presentationView blockquote,
-#presenSave blockquote{
+#presentationView blockquote{
+    border-left: 7px solid #ccc;
+    padding-left: 10px;
+    color: #7c7c7c;
+}
+
+
+/*スクショ領域*/
+#presenScreenShot{
+    width:1920px;
+    height:1080px;
+}
+
+#presenScreenShot th,
+#presenScreenShot td {
+    border: solid 1px;
+    /* 枠線指定 */
+    padding: 10px;
+    /* 余白指定 */
+}
+
+#presenScreenShot table tr:nth-child(even) {
+    background: #ddd;
+}
+
+#presenScreenShot table {
+    border-collapse: collapse;
+    /* セルの線を重ねる */
+}
+
+#presenScreenShot * {
+    font-size: 30pt;
+}
+
+#presenScreenShot h1{
+    border-bottom: 1px solid #aaa;
+    padding-left: 5px;
+    font-size: 60pt;
+}
+
+#presenScreenShot h2{
+    background: #3c3c3c;
+    padding: 5px;
+    color: #fff;
+    font-size: 54pt;
+}
+
+#presenScreenShot h3{
+    border-left: 8px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    padding-left: 5px;
+    font-size: 48pt;
+}
+
+#presenScreenShot h4{
+    font-size: 40pt;
+}
+
+#presenScreenShot h5{
+    font-size: 36pt;
+}
+
+#presenScreenShot h6{
+    font-size: 30pt;
+}
+
+#presenScreenShot blockquote{
     border-left: 7px solid #ccc;
     padding-left: 10px;
     color: #7c7c7c;
