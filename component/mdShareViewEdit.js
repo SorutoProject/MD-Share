@@ -180,7 +180,7 @@ window.onload = function () {
                         console.log(preMd);
                         var previewMd = "";
                         for (var i = 2; i < preMd.length; i++) {
-                            previewMd += preMd[i] + "\n---";
+                            previewMd += preMd[i] + "---";
                         }
                         var previewMd = previewMd.slice(0, -3);
                         console.log(previewMd);
@@ -798,8 +798,12 @@ function loadMd(mdData) {
         if (mdInfoJson.title) {
             $$("#docTitle").textContent = mdInfoJson.title;
             document.title = mdInfoJson.title + " - MD Share";
+            $$("#docInfo").style.display = "block";
         }
-        if (mdInfoJson.author) $$("#author").textContent = "by " + mdInfoJson.author;
+        if (mdInfoJson.author){
+            $$("#author").textContent = "by " + mdInfoJson.author;
+            $$("#docInfo").style.display = "block";
+        }
     }
     //normal md or with yaml
     else {
@@ -812,13 +816,17 @@ function loadMd(mdData) {
                 if (mdInfoJson.title) {
                     $$("#docTitle").textContent = mdInfoJson.title;
                     document.title = mdInfoJson.title + " - MD Share";
+                    $$("#docInfo").style.display = "block";
                 }
-                if (mdInfoJson.author) $$("#author").textContent = "by " + mdInfoJson.author;
+                if (mdInfoJson.author){
+                    $$("#author").textContent = "by " + mdInfoJson.author;
+                    $$("#docInfo").style.display = "block";
+                }
                 var md = "";
                 var preMd = mdWithInfo.split("---");
                 console.log(preMd.length);
                 for (var i = 2; i < preMd.length; i++) {
-                    md += preMd[i] + "\n---";
+                    md += preMd[i] + "---";
                 }
                 var md = md.slice(0, -3);
                 var mdInfo = "";
