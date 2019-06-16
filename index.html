@@ -66,7 +66,12 @@
 		</div>
 		<div id="preview"></div>
 		<div id="save">
-			<button id="presenPreview" glot-model="presentationButton" title="プレゼンテーションモードでの表示を確認"><i class="fas fa-chalkboard-teacher"></i></button><button id="gen" glot-model="shareButton" title="編集中のドキュメントをSNSなどで共有"><i class="fas fa-share"></i></button><button id="dlButton" title="編集中のドキュメントをダウンロード"><i class="fas fa-file-download"></i></button><button class="printButton" glot-model="printButton" title="編集中のドキュメントを印刷"><i class="fas fa-print"></i></button>
+			<button id="presenPreview" glot-model="presentationButton" title="プレゼンテーションモードでの表示を確認"><i class="fas fa-chalkboard-teacher"></i></button><button id="gen" glot-model="shareButton" title="編集中のドキュメントをSNSなどで共有"><i class="fas fa-share"></i></button><button id="dlButton" title="編集中のドキュメントをダウンロード">
+			<span class="fa-stack">
+			<i class="fas fa-file-download fa-stack-1x"></i>
+            <i class="fab fa-markdown fa-stack-half"></i>
+            </span>
+			</button><button class="printButton" glot-model="printButton" title="編集中のドキュメントを印刷"><i class="fas fa-print"></i></button>
 		</div>
 	</div>
 	<div id="windowBack"></div>

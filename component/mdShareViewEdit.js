@@ -59,6 +59,10 @@ function escape(txt) {
     renderer.code = function (code, language) {
         return '<pre><code class="hljs">' + hljs.highlightAuto(code).value + '</code></pre>';
     };
+    
+    renderer.link = function(href, title, text){
+      return '<a href="' + href + '" target="_blank">' + text + "</a>";  
+    };
 
     /*renderer.heading = function (text, level) {
             var escapedText = text.toLowerCase();
