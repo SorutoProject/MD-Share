@@ -61,7 +61,13 @@ function escape(txt) {
     };
     
     renderer.link = function(href, title, text){
-      return '<a href="' + href + '" target="_blank">' + text + "</a>";  
+        console.log("href:" + href + "\ntitle:" + title + "\ntext:" + text);
+        if(href.slice(0,1) === "#"){
+            return '<a href="' + href + '">' + text + "</a>";
+        }
+        else{
+            return '<a href="' + href + '" target="_blank">' + text + "</a>";  
+        }
     };
 
     /*renderer.heading = function (text, level) {
