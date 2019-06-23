@@ -268,11 +268,18 @@ window.onload = function () {
     $$("#gen").addEventListener("click", function () {
         //Change to yaml
         if ($$("#editor").value.slice(0, 3) !== "---") {
-            console.log("input user info");
+            console.log("input user info");        
             var title = prompt("このドキュメントのタイトルを入力してください");
             if (title === null) return false;
-            var author = prompt("このドキュメントの作者名を入力してください");
+            else if(title === "") var title = "無題";
+            
+            if(localStorage.authorName) var authorSuggest = localStorage.authorName;
+            else var authorSuggest = "";
+            
+            var author = prompt("このドキュメントの作者名を入力してください", authorSuggest);
             if (author === null) return false;
+            else if(author === "") var author = "unknown";
+            else localStorage.authorName = author;
             var updateMd = '---\ntitle: ' + title + '\nauthor: ' + author + '\n---\n\n' + $$("#editor").value;
             $$("#editor").value = updateMd;
             var userMd = LZString.compressToEncodedURIComponent($$("#editor").value);
