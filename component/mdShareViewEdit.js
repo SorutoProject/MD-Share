@@ -919,14 +919,13 @@ function loadMd(mdData) {
     }
 }
 
-function textDownload(text) {
+function textDownload(text, mimeType, extension) {
     // ダウンロードしたいコンテンツ、MIMEType、ファイル名
     var content = text;
-    var mimeType = 'text/markdown';
-    var name = prompt("ダウンロードするファイルのタイトルを指定してください。");
+    var name = prompt("ダウンロードするファイルのファイル名(拡張子なし)を入力してください。");
     if (name === null) return false;
     else if (name == "") var name = "無題";
-    var name = name + ".md";
+    var name = name + "." + extension;
 
     // BOMは文字化け対策
     var bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
