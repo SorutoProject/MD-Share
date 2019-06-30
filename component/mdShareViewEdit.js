@@ -346,7 +346,7 @@ window.onload = function () {
 
     $$("#dlButton").addEventListener("click", function () {
         var text = $$("#editor").value;
-        textDownload(text);
+        textDownload(text,"text/markdown","md");
     });
     
     $$("#downloadHTMLEditing").addEventListener("click", function() {
