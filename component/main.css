@@ -155,13 +155,16 @@ body {
 }
 
 #save button {
-    width: calc(100% / 4);
-    max-width: 150px;
-    height: 37px;
-    border: 1px solid #3c3c3c;
-    background: #ddd;
-    font-size:14pt;
+ width:calc(100% / 5);
+ max-width:150px;
+ height:37px;
+ border:none;
+ border-left:1px solid #bbb;
+ border-right:1px solid #bbb;
+ background:#ddd;
+ font-size:14pt;
 }
+
 
 #newWindowClose {
     position: absolute;

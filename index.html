@@ -33,6 +33,7 @@
         <button id="newButton" title="新しいドキュメントを作成" glot-model="newButton"><i class="far fa-plus-square md-tools"></i> <span class="md-tools-text">新規</span></button>
         <button id="editButton" title="このドキュメントを編集" glot-model="editButton"><i class="far fa-edit md-tools"></i> <span class="md-tools-text">編集</span></button>
         <button id="fileOpenButton" title="この端末のマークダウンファイル(*.md)を開く"><i class="far fa-folder-open md-tools"></i> <span class="md-tools-text">ファイルを開く</span></button>
+        <button id="downloadHTMLButton" title="このドキュメントをHTMLとしてダウンロード"><i class="far fa-file-code md-tools"></i><span class="md-tools-text"> HTML形式でダウンロード</span></button>
         <button id="presenButton" title="このドキュメントをプレゼンテーションのスライドとして使う" glot-model="presentationButton"><i class="fas fa-chalkboard-teacher md-tools"></i> <span class="md-tools-text">プレゼン</span></button>
 			<!--<button id="temButton" title="テンプレートから新しいドキュメントを作成します">テンプレ</button>-->
         <button class="printButton" title="このドキュメントを印刷" glot-model="printButton"><i class="fas fa-print md-tools"></i> <span class="md-tools-text">印刷</span></button>
@@ -47,26 +48,26 @@
 		<div id="edit">
 			<textarea id="editor" placeholder="新規マークダウンを入力...(多く書きすぎると保存時にエラーが出ます。ご注意ください。)"></textarea>
 			<div id="mdSymbols">
-				<button data-text="# ">H1</button>
-				<button data-text="## ">H2</button>
-				<button data-text="### ">H3</button>
-				<button data-text="**" data-fs="-1"><i>I</i></button>
-				<button data-text="****" data-fs="-2"><b>B</b></button>
-				<button data-text="$$" data-fs="-1">i Math</button>
-				<button data-text="$$$$" data-fs="-2">b Math</button>
-				<button data-text=" ">Space</button>
+                <button data-text="# " title="見出し1">H1</button>
+				<button data-text="## " title="見出し2">H2</button>
+				<button data-text="### "title="見出し3">H3</button>
+				<button data-text="**" data-fs="-1" title="イタリック"><i>I</i></button>
+				<button data-text="****" data-fs="-2" title="太字"><b>B</b></button>
+				<button data-fs="-3" title="リンク[テキスト](URL)" data-text="[]()">Link</button>
+				<button data-text="$$" data-fs="-1" title="数式(インライン)">i Math</button>
+				<button data-text="$$$$" data-fs="-2" title="数式(ブロック)">b Math</button>
+				<button data-text=" " title="空白">Space</button>
 				<button>|</button>
 				<button>-</button>
-				<button>></button>
+				<button title="引用符" data-text="> ">></button>
 				<button>$</button>
 				<button>`</button>
-				<button>~</button>
-				<button data-fs="-3">[]()</button>
+                <button>~</button>
 			</div>
 		</div>
 		<div id="preview"></div>
 		<div id="save">
-			<button id="presenPreview" glot-model="presentationButton" title="プレゼンテーションモードでの表示を確認"><i class="fas fa-chalkboard-teacher"></i></button><button id="gen" glot-model="shareButton" title="編集中のドキュメントをSNSなどで共有"><i class="fas fa-share"></i></button><button id="dlButton" title="編集中のドキュメントをダウンロード"><i class="fas fa-file-download"></i></button><button class="printButton" glot-model="printButton" title="編集中のドキュメントを印刷"><i class="fas fa-print"></i></button>
+            <button id="presenPreview" glot-model="presentationButton" title="プレゼンテーションモードでの表示を確認"><i class="fas fa-chalkboard-teacher"></i></button><button id="gen" glot-model="shareButton" title="編集中のドキュメントをSNSなどで共有"><i class="fas fa-share"></i></button><button id="dlButton" title="編集中のドキュメントをダウンロード"><i class="fas fa-file-download"></i></button><button id="downloadHTMLEditing" title="編集中のドキュメントをHTMLでダウンロード"><i class="far fa-file-code"></i></button><button class="printButton" glot-model="printButton" title="編集中のドキュメントを印刷"><i class="fas fa-print"></i></button>
 		</div>
 	</div>
 	<div id="windowBack"></div>
