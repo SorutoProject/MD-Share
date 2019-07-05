@@ -563,6 +563,9 @@ table {
     color: #7c7c7c;
 }
 
+#presentationView .mjx-chtml span{
+    font-size:24pt;
+}
 
 /*スクショ領域*/
 #presenScreenShot{

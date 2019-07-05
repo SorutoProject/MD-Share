@@ -3,7 +3,7 @@
  MD Share
  (c)2019 Soruto Project.
  
- Ver.2019.06.30
+ Ver.2019.07.05
  
  MIT Licensed.
  
@@ -59,14 +59,13 @@ function escape(txt) {
     renderer.code = function (code, language) {
         return '<pre><code class="hljs">' + hljs.highlightAuto(code).value + '</code></pre>';
     };
-    
-    renderer.link = function(href, title, text){
+
+    renderer.link = function (href, title, text) {
         console.log("href:" + href + "\ntitle:" + title + "\ntext:" + text);
-        if(href.slice(0,1) === "#"){
+        if (href.slice(0, 1) === "#") {
             return '<a href="' + href + '">' + text + "</a>";
-        }
-        else{
-            return '<a href="' + href + '" target="_blank">' + text + "</a>";  
+        } else {
+            return '<a href="' + href + '" target="_blank">' + text + "</a>";
         }
     };
 
@@ -86,7 +85,7 @@ function escape(txt) {
         gfm: true,
         sanitize: true,
         sanitizer: escape,
-        breaks:true
+        breaks: true
     });
 })();
 //flags
@@ -116,7 +115,11 @@ var $$ = function (e) {
 window.onload = function () {
     //Block access with Internet Explorer.
     if (getBrowserName() == "IE") {
-        alert("本Webアプリは、Internet Explorerではご利用いただけません。\n他のブラウザをご利用ください。");
+        $$("#doc").innerHTML = '<h1>本サイトは、Internet Explorerには非対応です。</h1><p>Internet Explorerでは、本サイトで利用している最新のJavaScript文法に対応していないため、本サイトを利用することができません。</p><p>最新の文法をサポートしている、Google ChromeやMozilla Firefox、Microsoft Edgeなどの他のブラウザからご利用いただけます。</p>';
+        $$("#docTitle").textContent = "It's like garbages...";
+        $$("#author").textContent = "From All Web Enginners";
+        $$("#tools").style.display = "none";
+        $$("#menuButton").style.display = "none";
         return false;
     }
     //Get Url Parameters
@@ -269,18 +272,26 @@ window.onload = function () {
     $$("#gen").addEventListener("click", function () {
         //Change to yaml
         if ($$("#editor").value.slice(0, 3) !== "---") {
-            console.log("input user info");        
+            console.log("input user info");
             var title = prompt("このドキュメントのタイトルを入力してください");
             if (title === null) return false;
-            else if(title === "") var title = "無題";
-            
-            if(localStorage.authorName) var authorSuggest = localStorage.authorName;
-            else var authorSuggest = "";
-            
+            else if (title === "") var title = "無題";
+
+            try {
+                if (localStorage.getItem("authorName") !== null) var authorSuggest = localStorage.authorName;
+                else var authorSuggest = "";
+            } catch (e) {
+                var authorSuggest = "";
+            }
+
             var author = prompt("このドキュメントの作者名を入力してください", authorSuggest);
             if (author === null) return false;
-            else if(author === "") var author = "名無し";
-            else localStorage.authorName = author;
+            else if (author === "") var author = "名無し";
+            else {
+                try {
+                    localStorage.authorName = author;
+                } catch (e) {}
+            }
             var updateMd = '---\ntitle: ' + title + '\nauthor: ' + author + '\n---\n\n' + $$("#editor").value;
             $$("#editor").value = updateMd;
             var userMd = LZString.compressToEncodedURIComponent($$("#editor").value);
@@ -346,14 +357,14 @@ window.onload = function () {
 
     $$("#dlButton").addEventListener("click", function () {
         var text = $$("#editor").value;
-        textDownload(text,"text/markdown","md");
+        textDownload(text, "text/markdown", "md");
     });
-    
-    $$("#downloadHTMLEditing").addEventListener("click", function() {
-       exportHTML($$("#editor").value); 
+
+    $$("#downloadHTMLEditing").addEventListener("click", function () {
+        exportHTML($$("#editor").value);
     });
-    
-    
+
+
 
     /*$$("#temButton").addEventListener("click", function () {
         window.open("./template/index.html");
@@ -375,11 +386,11 @@ window.onload = function () {
     $$("#presentationEnd").addEventListener("click", function () {
         presentation.end();
     });
-    $$("#presentationDl").addEventListener("click", function (){
-       presentation.printScreen(); 
+    $$("#presentationDl").addEventListener("click", function () {
+        presentation.printScreen();
     });
-    
-    $$("#downloadHTMLButton").addEventListener("click", function() {
+
+    $$("#downloadHTMLButton").addEventListener("click", function () {
         exportHTML(mdWithInfo);
     });
 
@@ -482,7 +493,7 @@ function newDoc() {
 }
 
 function editDoc() {
-    if(mdWithInfo !== undefined){
+    if (mdWithInfo !== undefined) {
         $$("#previewCheck").checked = false;
         $$("#preview").style.display = "none";
         $$("#editor").style.display = "block";
@@ -492,7 +503,7 @@ function editDoc() {
         document.body.style.overflow = "hidden";
         $$("#tools").className = "close";
         $$("#menuButton").innerHTML = '<i class="fa fa-bars md-menu"></i>';
-    }else{
+    } else {
         alert("編集画面を表示するのに必要な変数が見つかりません。");
     }
 }
@@ -554,40 +565,121 @@ var presentation = {
             if (flags.presentation.slides[0].slice(0, 3) == "---" && typeof jsyaml.load(flags.presentation.slides[0].slice(3)) === "object") {
                 flags.presentation.slides.shift();
                 flags.presentation.nowPage = 0;
-                $$("#presentationView").innerHTML = marked(flags.presentation.slides[0]);
+                var html = marked(flags.presentation.slides[0]);
+                $$("#presentationView").innerHTML = html
                 $$("#presentationBack").style.display = $$("#presentationForward").style.display = "inline";
                 screenfull.request($$("#presentation"));
                 $$("#presentation").className = "show";
             } else {
                 flags.presentation.nowPage = 0;
-                $$("#presentationView").innerHTML = marked(flags.presentation.slides[0]);
+                var html = marked(flags.presentation.slides[0]);
+                $$("#presentationView").innerHTML = html;
                 $$("#presentationBack").style.display = $$("#presentationForward").style.display = "inline";
                 screenfull.request($$("#presentation"));
                 $$("#presentation").className = "show";
             }
         } catch (e) {
             flags.presentation.nowPage = 0;
-            $$("#presentationView").innerHTML = marked(flags.presentation.slides[0]);
+            var html = marked(flags.presentation.slides[0]);
+            $$("#presentationView").innerHTML = html;
             $$("#presentationBack").style.display = $$("#presentationForward").style.display = "inline";
             $$("#presentation").className = "show";
             //screenfull.request($$("#presentation"));
             sysMessage("全画面表示でスライドを表示するにはF11キーを押してください");
         }
+        if (html.indexOf("$") !== -1) {
+            if (flags.mathjaxLoaded === false) {
+                flags.mathjaxLoaded = true;
+                var script = document.createElement('script');
 
+                script.type = 'text/javascript';
+                script.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML";
+
+                var firstScript = document.getElementsByTagName('script')[0];
+                firstScript.parentNode.insertBefore(script, firstScript);
+                script.onload = script.onreadystatechange = function () {
+                    //mathJax config
+                    MathJax.Hub.Config({
+                        tex2jax: {
+                            inlineMath: [['$', '$'], ["\\(", "\\)"]],
+                            displayMath: [['$$', '$$'], ["\\[", "\\]"]]
+                        }
+                    });
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "presentationView"]);
+                }
+
+            } else {
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub, "presentationView"]);
+            }
+        }
 
     },
     //戻る
     back: function () {
         if (flags.presentation.nowPage > 0) {
-            $$("#presentationView").innerHTML = marked(flags.presentation.slides[flags.presentation.nowPage - 1]);
+            var html = marked(flags.presentation.slides[flags.presentation.nowPage - 1]);
+            $$("#presentationView").innerHTML = html;
             flags.presentation.nowPage = flags.presentation.nowPage - 1;
+            if (html.indexOf("$") !== -1) {
+                if (flags.mathjaxLoaded === false) {
+                    flags.mathjaxLoaded = true;
+                    var script = document.createElement('script');
+
+                    script.type = 'text/javascript';
+                    script.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML";
+
+                    var firstScript = document.getElementsByTagName('script')[0];
+                    firstScript.parentNode.insertBefore(script, firstScript);
+                    script.onload = script.onreadystatechange = function () {
+                        //mathJax config
+                        MathJax.Hub.Config({
+                            tex2jax: {
+                                inlineMath: [['$', '$'], ["\\(", "\\)"]],
+                                displayMath: [['$$', '$$'], ["\\[", "\\]"]]
+                            }
+                        });
+                        MathJax.Hub.Queue(["Typeset", MathJax.Hub, "presentationView"]);
+                    }
+
+                } else {
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "presentationView"]);
+                }
+            }
+        } else {
+            sysMessage("表示中のスライドが最初のスライドです");
         }
     },
     //進む
     forward: function () {
         if (flags.presentation.nowPage + 1 < flags.presentation.slides.length) {
-            $$("#presentationView").innerHTML = marked(flags.presentation.slides[flags.presentation.nowPage + 1]);
+            var html = marked(flags.presentation.slides[flags.presentation.nowPage + 1]);
+            $$("#presentationView").innerHTML = html
             flags.presentation.nowPage = flags.presentation.nowPage + 1;
+            if (html.indexOf("$") !== -1) {
+                if (flags.mathjaxLoaded === false) {
+                    flags.mathjaxLoaded = true;
+                    var script = document.createElement('script');
+
+                    script.type = 'text/javascript';
+                    script.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML";
+
+                    var firstScript = document.getElementsByTagName('script')[0];
+                    firstScript.parentNode.insertBefore(script, firstScript);
+                    script.onload = script.onreadystatechange = function () {
+                        //mathJax config
+                        MathJax.Hub.Config({
+                            tex2jax: {
+                                inlineMath: [['$', '$'], ["\\(", "\\)"]],
+                                displayMath: [['$$', '$$'], ["\\[", "\\]"]]
+                            }
+                        });
+                        MathJax.Hub.Queue(["Typeset", MathJax.Hub, "presentationView"]);
+                    }
+
+                } else {
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "presentationView"]);
+                }
+            }
         } else {
             $$("#presentationView").textContent = "最後のスライドまで表示しました";
             $$("#presentationBack").style.display = $$("#presentationForward").style.display = "none";
@@ -832,7 +924,7 @@ function loadMd(mdData) {
             document.title = mdInfoJson.title + " - MD Share";
             $$("#docInfo").style.display = "block";
         }
-        if (mdInfoJson.author){
+        if (mdInfoJson.author) {
             $$("#author").textContent = "by " + mdInfoJson.author;
             $$("#docInfo").style.display = "block";
         }
@@ -850,14 +942,14 @@ function loadMd(mdData) {
                     document.title = mdInfoJson.title + " - MD Share";
                     $$("#docInfo").style.display = "block";
                 }
-                if (mdInfoJson.author){
+                if (mdInfoJson.author) {
                     $$("#author").textContent = "by " + mdInfoJson.author;
                     $$("#docInfo").style.display = "block";
                 }
-                if(mdInfoJson.editable === false){
+                if (mdInfoJson.editable === false) {
                     $$("#editButton").style.display = "none";
                     var deleteData = true;
-                }else{
+                } else {
                     $$("#editButton").style.displat = "block";
                     var deleteData = false;
                 }
@@ -885,7 +977,7 @@ function loadMd(mdData) {
     var html = marked(md);
     //マークダウンのデータをグローバル変数に保存
     exportMdWithInfo(mdWithInfo);
-    
+
     //追加設定
     //var html = html.replace(/\[x\]/g, '<input type="checkbox" checked="checked">');
     //var html = html.replace(/\[ \]/g, '<input type="checkbox">');
@@ -957,7 +1049,7 @@ function textDownload(text, mimeType, extension) {
 }
 
 
-function exportMdWithInfo(mdwithinfo){
+function exportMdWithInfo(mdwithinfo) {
     mdWithInfo = mdwithinfo;
 }
 
@@ -968,7 +1060,7 @@ function exportHTML(mdData) {
         var md = mdData.split("--->")[1];
         var mdInfo = mdData.split("<!---")[1].split("--->")[0];
         var mdInfoJson = JSON.parse(mdInfo);
-        if(mdInfoJson.title) var title = mdInfoJson.title;
+        if (mdInfoJson.title) var title = mdInfoJson.title;
         else var title = prompt("ダウンロードするドキュメントのタイトルを入力してください。");
     }
     //normal md or with yaml
@@ -979,7 +1071,7 @@ function exportHTML(mdData) {
             //console.log(mayYaml);
             var mdInfoJson = jsyaml.load(mayYaml);
             if (typeof mdInfoJson === "object") {
-                if(mdInfoJson.title) var title = mdInfoJson.title;
+                if (mdInfoJson.title) var title = mdInfoJson.title;
                 else var title = prompt("ダウンロードするドキュメントのタイトルを入力してください。");
                 var md = "";
                 var preMd = mdData.split("---");
