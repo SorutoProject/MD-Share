@@ -273,7 +273,17 @@ window.onload = function () {
         //Change to yaml
         if ($$("#editor").value.slice(0, 3) !== "---") {
             console.log("input user info");
-            var title = prompt("このドキュメントのタイトルを入力してください");
+
+            try {
+                var elem = document.createElement("div");
+                elem.innerHTML = marked($$("#editor").value);
+                var firstElem = elem.querySelector("*");
+                var preTitle = firstElem.textContent;
+            } catch (e) {
+                var preTitle = "";
+            }
+
+            var title = prompt("このドキュメントのタイトルを入力してください", preTitle);
             if (title === null) return false;
             else if (title === "") var title = "無題";
 
