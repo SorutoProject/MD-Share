@@ -129,7 +129,25 @@ window.onload = function () {
         var kv = pair[i].split('=');
         arg[kv[0]] = kv[1];
     }
-    if (arg["q"] === undefined || arg["q"] == "") {
+    if (typeof arg["article"] !== "undefined" && arg["article"] !== "") {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "./articles/" + arg["article"] + "." + "md", true);
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                loadMd(xhr.responseText);
+            }
+            if (xhr.readyState === 4 && xhr.status === 0) {
+                loadMd(xhr.responseText);
+            }
+            if (xhr.readyState === 4 && xhr.status === 404) {
+                loadMd("---\ntitle: ファイルが見つかりません\nauthor: Soruto Project\n---\n# 404 Not Found\n### ファイルが見つかりませんでした\n* URLが間違っていないか確認してください。");
+            }
+        }
+        
+        xhr.send(null);
+        
+    } else if (arg["q"] === undefined || arg["q"] == "") {
         //ホームページ
         var pageData = "LQhQBcEtwGwUwFwAICyARJBlAFgQwE5yAeDIBEMgYgyDKDILoMouAruNgPb7KYsNNIAK+TAVnADG4UCGCgAxKgw4CcUAB4AzgFtcMGAD5A8QyBpBkBRDIBCGQJoMgeQZAowaBGDUBJDIFx5QBIM5QEAMigPRqN20KABU-n18kQAbTQHUGQBEGQD2GQB+GQHqGQAGGQDKGQGeGQEmGQFqGQFOGQEOGZMAJhhtAHXlABCMTQGiGQGsGQHsGQEAGUCQGpCDuAGFAOwZAFg1ACBVawBgGYMB4yMBYBhtYwCuGQGGGWNDAPwYTZ3rGoMBOhkjAbYZOnpre7MBphkzoocAkwn7htsAwDIrxqdn5vyRAR0VASHNAVQZAGIZAfQZAOYZovMAZBkAFhGALk93oArBnC3VqAFUAEoAGUAiwyAS4ZstFAP0Mf0AxtahMyAWijAFna70AZgzhMp6QBdHoBYqNCRLMgAMGF7hBZBQA05gB1OAAI0ARQyAdYYxm1AP7ygApXQCdpoBVmxqSMAJQyAboZkstrKDAJYMVUWDWa7Uh22sI2u0yJVMA5gyAWQY5gtGk0kKsNtqdvtDiddRcrpMDcazfMFn4Avd2Vy+WMqigAJIAFSQcMgQjgADtlHA2oBoOQqgBtFQDRqcTwuaGqBQxGozH44nAEGWgEDIqqAU7kk21ABYMgCkGAxGu5aJAARgAdEgKG1AL0MgFWGPKJQDlDNybIAGqKNgCCGQCEjoB8RSNM8AbEqABTSKoBHI0AxgxEwD2QUzc62PnTQjVAOohhUAlFbA+skQDODCzAIxRgD+o4E2AdD0dtEyATwYiW1AOCRgC-ETMHxVIAs4llqCgAXCYAYEoVIAGFGAJDxoSgoAigxvIADgygoAkQzggsrYAExdoUgCgASBVTnheJG1O+I7chUgBFqTSiicloih0FooKAMkM2GADUxgDfcjYgAFMToeHuBx7isaAWjSUggCo+sKgDCioAWP-5pG0ZxgmSDAEgbKQAA1pAAAOcAACaQLgfocjy-I2CK5QULWFQkAYNRqYWmmJoAoYqAJ3aFSADAqgDwhu8HxTnWgD+DKC7w5kgPgABQtAAlARAAMbYAJxYBw4BcLwAjCOAcXuRpxamR2iVAA";
         //グローバル変数
@@ -336,7 +354,7 @@ window.onload = function () {
     });
 
     $$("#infoButton").addEventListener("click", function () {
-        window.open("./help/index.html");
+        window.open("?article=helpTop");
     });
 
     $$("#fileOpenButton").addEventListener("click", function () {
@@ -938,6 +956,8 @@ function loadMd(mdData) {
             $$("#author").textContent = "by " + mdInfoJson.author;
             $$("#docInfo").style.display = "block";
         }
+        $$("#editButton").style.display = "inline";
+        var deleteData = false;
     }
     //normal md or with yaml
     else {
@@ -960,7 +980,7 @@ function loadMd(mdData) {
                     $$("#editButton").style.display = "none";
                     var deleteData = true;
                 } else {
-                    $$("#editButton").style.displat = "block";
+                    $$("#editButton").style.display = "inline";
                     var deleteData = false;
                 }
                 var md = "";
@@ -976,11 +996,15 @@ function loadMd(mdData) {
                 var mdInfo = "";
                 var md = mdWithInfo;
                 $$("#docInfo").style.display = "none";
+                $$("#editButton").style.display = "inline";
+                var deleteData = false;
             }
         } catch (e) {
             var mdInfo = "";
             var md = mdWithInfo;
             $$("#docInfo").style.display = "none";
+            $$("#editButton").style.display = "inline";
+            var deleteData = false;
         }
     }
     //最終処理

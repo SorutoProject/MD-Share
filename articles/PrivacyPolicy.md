@@ -1,3 +1,9 @@
+---
+title: プライバシーポリシー
+author: Soruto Project
+editable: false
+---
+
 # プライバシーポリシー
 https://mdshare.cf (以下、「本サイト」) で公開される、MD Shareでの個人情報の取り扱いは、以下のプライバシーポリシー(以下、「本プライバシーポリシー」)のもとに行います。
 

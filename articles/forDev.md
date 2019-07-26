@@ -1,3 +1,9 @@
+---
+title: MD Share API
+author: Soruto Project
+editable: false
+---
+
 # MD Share API(For Developers)
 
 2019年05月26日(日本時間)より、[Glitch](https://glitch.com)でのMD Share APIの提供を開始しました。  

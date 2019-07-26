@@ -345,6 +345,9 @@ body {
     border:none;
 }
 
+#tools #editButton{
+    display: none;
+}
 /*端末別設定*/
 /*スマホ用*/
 @media (max-width:600px) {
@@ -500,6 +503,13 @@ table {
     height:1px;
     background-color:#6c6c6c;
     border:none;
+}
+
+/*他サイトで表示するコメントを非表示にする*/
+#preview span.showOnOther,
+#doc span.showOnOther,
+#presentationView span.showOnOther{
+    display: none;
 }
 
 /*スライドの表示用*/
