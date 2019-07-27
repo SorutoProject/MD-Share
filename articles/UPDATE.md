@@ -9,7 +9,10 @@ editable: false
 # MD Share 更新情報
 
 ## Ver.2019.07.27
-* [MD Share Deco Element](?article=decoElement)を実装しました
+* [MD Share Deco Element](?article=decoElement)を実装しました。
+* ドキュメント内に`(toc)`と書くと、自動的に目次が挿入されるようになりました。
+    * こんな感じ
+    (toc)
 * 一部デザインを変更しました。
 
 ## Ver.2019.07.26

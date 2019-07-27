@@ -68,17 +68,24 @@ function escape(txt) {
             return '<a href="' + href + '" target="_blank">' + text + "</a>";
         }
     };
+    
+    renderer.text = function(text){
+        console.log(text);
+        if(text == "(toc)"){
+            return "<md-toc></md-toc>";
+        }else{
+            return text;
+        }
+    }
 
     /*renderer.heading = function (text, level) {
             var escapedText = text.toLowerCase();
 
-            return '<h' + level + '><a name="' +
+            return '<h' + level + ' id="' + escapedText + '"><a class="anchor" data-anchor="' + escapedText + '" title="#' + escapedText + '" href="#' +
                 escapedText +
-                '" class="anchor" href="#' +
-                escapedText +
-                '"><span class="header-link"></span></a>' +
+                '"><span class="header-link"><i class="fas fa-link"></i></span></a>' +
                 text + '</h' + level + '>';
-        },*/
+        }*/
 
     marked.setOptions({
         renderer: renderer,
@@ -225,7 +232,7 @@ window.onload = function () {
             } else {
                 var previewMd = previewMdWithInfo;
             }
-            var previewHtml = marked(previewMd);
+            var previewHtml = marked(previewMd).split("<md-toc></md-toc>").join(generateHeadingList(previewMd));
             //追加設定
             //var previewHtml = previewHtml.replace(/\[x\]/g, '<input type="checkbox" checked="checked">');
             //var previewHtml = previewHtml.replace(/\[ \]/g, '<input type="checkbox">');
@@ -1008,7 +1015,8 @@ function loadMd(mdData) {
         }
     }
     //最終処理
-    var html = marked(md);
+    //目次記号[toc]を置き換え
+    var html = marked(md).split("<md-toc></md-toc>").join(generateHeadingList(md));
     //マークダウンのデータをグローバル変数に保存
     exportMdWithInfo(mdWithInfo);
 
@@ -1130,3 +1138,19 @@ function exportHTML(mdData) {
     var html = '<html><head><title>' + title + '</title><meta charset="utf-8"><style>body{background:#fff;color:#000;overflow:hidden;font-family:meiryo}::selection{background:#009e8f;color:#fff}::-moz-selection{background:#009e8f;color:#fff}#presenSave{width:1920px;height:1080px}#header{position:fixed;background:#ddd;width:100%;bottom:0;left:0;height:60px;z-index:1}#menuButton{position:absolute;top:0;right:5px;height:50px}#doc{position:absolute;top:0;left:0;width:100%;height:calc(100% - 60px);overflow:auto;background:#fff}#new{position:fixed;top:0;left:0;width:100%;height:100%;background:#eee;display:none}#new.show{display:block;z-index:3;animation:zoomIn .2s ease 0s 1 alternate none running}#new.show+#doc{overflow:hidden}#windowBack{position:fixed;background:rgba(0,0,0,.8);top:0;left:0;width:100%;height:100%;z-index:2;display:none;color:#fff}#windowBack.show{display:block}#edit{position:absolute;top:2em;left:0;width:100%;height:calc(100% - 3em - 40px);border:1px solid #3c3c3c}#editor{position:absolute;top:0;left:0;width:calc(100% - 10px - 70px);height:calc(100% - 10px);resize:none}#mdSymbols{position:absolute;top:0;right:0;width:70px;height:100%;overflow:auto}#mdSymbols button{width:100%;height:40px;background:#ddd;border:1px solid #ccc;font-size:9pt}#preview{position:absolute;top:2em;right:0;width:100%;height:calc(100% - 3em - 40px);background:#fff;border:1px solid #3c3c3c;overflow:auto;display:none}#save{position:absolute;bottom:0;left:0;background:#ddd;width:100%;height:40px;text-align:center}#saveLink{position:absolute;top:0;left:14em;width:calc(100% - 15em);height:30px;background:#ddd;border:3px solid #aaa}#save button{width:calc(100% / 4);max-width:150px;height:37px;border:1px solid #3c3c3c;background:#ddd;font-size:10pt}#newWindowClose{position:absolute;top:0;right:0;width:7em;height:2em;background:#a00;border:3px solid red;color:#fff}#docTitle{font-size:14pt;font-weight:700}#author{font-size:10pt;color:#4c4c4c}#message{position:absolute;bottom:20px;left:0;right:0;margin:auto;width:calc(100% - 10px);min-height:2em;max-width:500px;padding:5px;background:rgba(0,0,0,.8);z-index:5;border-radius:10px;transition-duration:.2s;color:#fff;opacity:0;pointer-events:none;text-align:center}#message.show{opacity:1}#presentation{position:fixed;top:0;left:0;width:100%;height:100%;background:#fff;z-index:3;display:none}#presentation.show{display:block}#presentation #presentationControl{position:absolute;bottom:5px;right:5px;background:rgba(0,0,0,.6);padding:5px;opacity:.2;z-index:2}#presentation #presentationControl:hover{opacity:1}#presentation #presentationControl button{background:#3c3c3c;color:#fff;border:#8c8c8c 1px solid;height:35px;width:5em}#presentationView{position:absolute;top:0;left:0;width:100%;height:100%;overflow:auto;z-index:1;background:#fff}#presenScreenShot{position:absolute;top:0;left:0;z-index:0;background:#fff}#shareWindow{position:fixed;top:0;left:0;color:#fff;background:rgba(0,0,0,.8);z-index:4;text-align:center;width:100%;height:100%;overflow:auto;display:none}#shareWindow.show{display:block}#shareWindow a{display:block;width:calc(100% - 10px);max-width:500px;padding:5px;padding-top:10px;padding-bottom:10px;color:#fff;text-decoration:none;font-weight:700;cursor:pointer;margin:auto;border-radius:50px}#copyRawButton,#copyShortButton,#shareCancel{background:rgba(100,100,100,.8);border-top:1px solid rgba(0,0,0,.1)}#twitterButton{background:rgba(100,200,255,.8);border-top:1px solid #3af}#lineButton{background:rgba(0,200,0,.8);border-top:1px solid #0d0}#fileOpenDialog{position:absolute;top:0;left:0;margin:auto;width:100%;height:100%;background:rgba(20,20,20,.9);color:#fff;text-align:center;display:none;z-index:4}#fileOpenDialog.show{display:block}#fileOpenDialogClose{width:100%;max-width:500px;height:50px;background:#a00;color:#fff;margin-top:50px;border:none}@media (max-width:600px){#tools{position:fixed;top:0;right:0;height:calc(100% - 60px);width:100%;background:rgba(200,200,200,.8);z-index:2;transition-duration:.2s;overflow:auto}#tools.close{opacity:0;pointer-events:none}#tools button{color:#000;height:50px;width:100%;background:#ddd;border:none;border-top:1px solid #bbb;border-bottom:1px solid #bbb}.md-tools{font-size:1.3em}#tools button:active{box-shadow:0 0 10px rgba(0,0,0,.6) inset}#menuButton{background:0 0;border:#9c9c9c 1px solid}.md-menu{font-size:2em}}@media (min-width:601px){#tools{position:fixed;bottom:0;right:0;z-index:2}#tools button{height:60px;width:auto;background:0 0;border:none;border-left:1px solid #bbb;border-right:1px solid #bbb}#menuButton{display:none}.md-tools{font-size:1.8em}.md-tools-text{font-size:9pt}}@media (max-height:160px){#save{display:none}#edit,#preview{height:calc(100% - 3em)}}#header,#new label,#tools{-ms-user-select:none;-moz-user-select:-moz-none;-khtml-user-select:none;-webkit-user-select:none;user-select:none}#doc td,#doc th,#preview td,#preview th{border:solid 1px;padding:10px}table tr:nth-child(even){background:#ddd}table{border-collapse:collapse}#doc h1,#preview h1{border-bottom:1px solid #aaa;padding-left:5px}#doc h2,#preview h2{background:#3c3c3c;padding:5px;color:#fff}#doc h3,#preview h3{border-left:8px solid #aaa;border-bottom:1px solid #aaa;padding-left:5px}#doc blockquote,#preview blockquote{border-left:7px solid #ccc;padding-left:10px;margin-left:0;color:#7c7c7c}#doc hr,#preview hr{height:1px;background-color:#6c6c6c;border:none}#presentationView td,#presentationView th{border:solid 1px;padding:10px}#presentationView table tr:nth-child(even){background:#ddd}#presentationView table{border-collapse:collapse}#presentationView *{font-size:16pt}#presentationView h1{border-bottom:1px solid #aaa;padding-left:5px;font-size:32pt}#presentationView h2{background:#3c3c3c;padding:5px;color:#fff;font-size:24pt}#presentationView h3{border-left:8px solid #aaa;border-bottom:1px solid #aaa;padding-left:5px;font-size:20pt}#presentationView h4{font-size:18pt}#presentation h5{font-size:14pt}#presentationView h6{font-size:12pt}#presentationView blockquote{border-left:7px solid #ccc;padding-left:10px;color:#7c7c7c}#presenScreenShot{width:1920px;height:1080px}#presenScreenShot td,#presenScreenShot th{border:solid 1px;padding:10px}#presenScreenShot table tr:nth-child(even){background:#ddd}#presenScreenShot table{border-collapse:collapse}#presenScreenShot *{font-size:30pt}#presenScreenShot h1{border-bottom:1px solid #aaa;padding-left:5px;font-size:60pt}#presenScreenShot h2{background:#3c3c3c;padding:5px;color:#fff;font-size:54pt}#presenScreenShot h3{border-left:8px solid #aaa;border-bottom:1px solid #aaa;padding-left:5px;font-size:48pt}#presenScreenShot h4{font-size:40pt}#presenScreenShot h5{font-size:36pt}#presenScreenShot h6{font-size:30pt}#presenScreenShot blockquote{border-left:7px solid #ccc;padding-left:10px;color:#7c7c7c}@media print{#header,#newWindowClose,#save,#tools,.printDelete{display:none}#doc{position:absolute;width:calc(100% - 5px);height:calc(100% - 65px);top:0;left:0;overflow:visible}#preview.show{position:fixed;top:0;left:0;width:100%;min-height:100%;z-index:3;border:none}}@keyframes zoomIn{0%{display:block;-webkit-transform:scale(.8);-moz-transform:scale(.8);-o-transform:scale(.8);-ms-transform:scale(.8);transform:scale(.8);opacity:0}100%{-webkit-transform:scale(1);-moz-transform:scale(1);-o-transform:scale(1);-ms-transform:scale(1);transform:scale(1);opacity:1}}</style></head><body><div id="doc" style="width:100%;height:100%;">' + marked(md) + "</div></body></html>"
     textDownload(html, "text/html", "html");
 }
+
+function generateHeadingList(md){
+    var div = document.createElement("div");
+    div.innerHTML = marked(md);
+    var headings = div.querySelectorAll("h1,h2,h3,h4,h5,h6");
+    var returnHTML = '<div class="docIndex"><b>目次</b><br><br>';
+    for(var i = 0; i < headings.length; i++){
+        var returnHTML = returnHTML + '<a href="#' + headings[i].id + '">' + headings[i].textContent + '</a><br>';
+    }
+    if(headings.length === 0){
+        var returnHTML = returnHTML + "ドキュメントに項目がありません。"
+    }
+    var returnHTML = returnHTML + "</div>";
+    return returnHTML;
+}
+
