@@ -1,0 +1,58 @@
+/*スタイル系*/
+ms-deco[style]{
+    border-radius:5px;
+}
+ms-deco[style][info]{
+    display: inline-block;
+    background:#aaaaff;
+    border-left:10px #0000ff solid;
+    padding:10px;
+    color:#141469;
+}
+
+ms-deco[style][warning]{
+    display: inline-block;
+    background:#ffffaa;    
+    border-left:10px #ffff00 solid;
+    padding:10px;
+    color:#404018;
+}
+
+ms-deco[style][alert]{
+    display: inline-block;
+    background:#ffaaaa;
+    border-left:10px #f00 solid;
+    padding:10px;
+    color:#6f2929;
+}
+
+/*蛍光ペン系*/
+ms-deco[marker][yellow]{
+    display:inline;
+    background: linear-gradient(transparent 60%, #ffff66 60%);
+}
+
+ms-deco[marker][lime]{
+    display:inline;
+    background: linear-gradient(transparent 60%, #66ffcc 60%);
+}
+
+ms-deco[marker][water]{
+    display:inline;
+    background: linear-gradient(transparent 60%, #66ccff 60%);
+}
+
+ms-deco[marker][pink]{
+    display:inline;
+    background: linear-gradient(transparent 60%, #ff66ff 60%);
+}
+
+/*枠系*/
+ms-deco[border][black]{
+    display:inline;
+    padding-top:1px;
+    padding-bottom:1px;
+    padding-left:10px;
+    padding-right:10px;
+    border:1px solid #000;
+}

@@ -11,6 +11,7 @@ editable: false
 ## 項目を選んでください
 
 * [使用方法・概要](?article=howto)
+* [Deco Element について](?article=decoElement)
 * [Open Source Licenses](?article=license)
 * [プライバシーポリシー](?article=PrivacyPolicy)
 * [MD Share APIの利用方法](?article=forDev)

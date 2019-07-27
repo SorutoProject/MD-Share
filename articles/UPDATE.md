@@ -8,6 +8,10 @@ editable: false
 
 # MD Share 更新情報
 
+## Ver.2019.07.27
+* [MD Share Deco Element](?article=decoElement)を実装しました
+* 一部デザインを変更しました。
+
 ## Ver.2019.07.26
 * 共有ウィザードで、文書から推測されるタイトルを最初に表示するようになりました。
 * 公式ドキュメントも、MD Shareのメインサイト上で見られるように変更しました。
