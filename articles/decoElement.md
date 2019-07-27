@@ -9,12 +9,14 @@ editable: false
 Ver.2019.07.27より、MD Share 独自仕様の装飾用要素(MD Share Deco Element)が使用できるようになりました。
 
 ## 使い方
+**記述例**
 ```
 <ms-deco style info>**情 報**
 このサイトはMD Shareです</ms-deco>
 ```
 ↑をドキュメントに書くと...
 
+**表示例**
 <ms-deco style info>情 報
 このサイトはMD Shareです</ms-deco>
 
@@ -30,6 +32,7 @@ Ver.2019.07.27より、MD Share 独自仕様の装飾用要素(MD Share Deco Ele
 ### 目次
 
 ### style系
+**記述例**
 ```
 <ms-deco style info>**情 報**
 このサイトはMD Shareです。</ms-deco>
@@ -40,6 +43,7 @@ Ver.2019.07.27より、MD Share 独自仕様の装飾用要素(MD Share Deco Ele
 <ms-deco style alert>**禁 止**
 著作権侵害となるような行為を禁止します。</ms-deco>
 ```
+**表示例**
 <ms-deco style info>**情 報**
 このサイトはMD Shareです。</ms-deco>
 
@@ -50,34 +54,38 @@ Ver.2019.07.27より、MD Share 独自仕様の装飾用要素(MD Share Deco Ele
 著作権侵害となるような行為を禁止します。</ms-deco>
 
 ### marker系
+**記述例**
 ```
 <ms-deco marker yellow>ココ大事！</ms-deco>
 <ms-deco marker lime>ココ大事！</ms-deco>
 <ms-deco marker water>ココ大事！</ms-deco>
 <ms-deco marker pink>ココ大事！</ms-deco>
 ```
+**表示例**
 <ms-deco marker yellow>ココ大事！</ms-deco>
 <ms-deco marker lime>ココ大事！</ms-deco>
 <ms-deco marker water>ココ大事！</ms-deco>
 <ms-deco marker pink>ココ大事！</ms-deco>
 
 ### border系
+**記述例**
 ```
 <ms-deco border black>お知らせ</ms-deco>
 この度、MD Shareに独自タグを追加しました！！
 ```
-
+**表示例**
 <ms-deco border black>お知らせ</ms-deco>
 この度、MD Shareに独自タグを追加しました！！
 
 ### 組み合わせ例
+**記述例**
 ```
 <ms-deco style info><ms-deco border black>お知らせ</ms-deco>
 この度、MD Shareに独自タグを追加しました！！
 <ms-deco style warning>使い方は、公式ページをご覧ください</ms-deco>
 </ms-deco>
 ```
-
+**表示例**
 <ms-deco style info><ms-deco border black>お知らせ</ms-deco>
 この度、MD Shareに独自タグを追加しました！！
 <ms-deco style warning>使い方は、公式ページをご覧ください</ms-deco>
