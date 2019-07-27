@@ -8,6 +8,8 @@ editable: false
 # MD Share Deco Element について
 Ver.2019.07.27より、MD Share 独自仕様の装飾用要素(MD Share Deco Element)が使用できるようになりました。
 
+(toc)
+
 ## 使い方
 **記述例**
 ```
@@ -28,8 +30,6 @@ Ver.2019.07.27より、MD Share 独自仕様の装飾用要素(MD Share Deco Ele
 * 今後、機能を追加していく予定です。
 
 ## サンプル集
-
-### 目次
 
 ### style系
 **記述例**

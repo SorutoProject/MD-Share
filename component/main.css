@@ -534,6 +534,43 @@ table {
     font-size:12pt;
 }
 
+#preview div.docIndex a.h1,
+#doc div.docIndex a.h1{
+    padding-left:10px;
+    font-weight: bold;
+    background:#fafafa;
+}
+
+#preview div.docIndex a.h2,
+#doc div.docIndex a.h2{
+    padding-left:20px;
+    background:#eaeaea;
+}
+
+#preview div.docIndex a.h3,
+#doc div.docIndex a.h3{
+    padding-left:30px;
+    background:#dadada;
+}
+
+#preview div.docIndex a.h4,
+#doc div.docIndex a.h4{
+    padding-left:40px;
+    background:#cacaca;
+}
+
+#preview div.docIndex a.h5,
+#doc div.docIndex a.h5{
+    padding-left:50px;
+    background:#bababa;
+}
+
+#preview div.docIndex a.h6,
+#doc div.docIndex a.h6{
+    padding-left:60px;
+    background:#aaa;
+}
+
 #preview blockquote,
 #doc blockquote {
     border-left: 7px solid #ccc;

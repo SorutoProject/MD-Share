@@ -1145,7 +1145,7 @@ function generateHeadingList(md){
     var headings = div.querySelectorAll("h1,h2,h3,h4,h5,h6");
     var returnHTML = '<div class="docIndex"><b>目次</b><br><br>';
     for(var i = 0; i < headings.length; i++){
-        var returnHTML = returnHTML + '<a href="#' + headings[i].id + '">' + headings[i].textContent + '</a>';
+        var returnHTML = returnHTML + '<a href="#' + headings[i].id + '" class="docIndexContent ' + headings[i].tagName.toLowerCase() + '">' + headings[i].textContent + '</a>';
     }
     if(headings.length === 0){
         var returnHTML = returnHTML + "ドキュメントに項目がありません。"
