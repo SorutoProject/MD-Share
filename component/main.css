@@ -519,6 +519,18 @@ table {
 
 #preview div.docIndex b,
 #doc div.docIndex b{
+    font-size:16pt;
+}
+
+#preview div.docIndex a,
+#doc div.docIndex a{
+    display:block;
+    background:#ddd;
+    border-top:1px solid #aaa;
+    text-decoration: none;
+    color:#000;
+    padding-left:10px;
+    padding-right:10px;
     font-size:14pt;
 }
 
