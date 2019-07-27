@@ -3,7 +3,7 @@ title: 使用方法・概要
 author: Soruto Project
 editable: false
 ---
-<span class="showOnOther">* This markdown is optimized for viewing on MD Share.<br>Some links in this document does not work well on other sites.</span>
+<span class="showOnOther">* This markdown is optimized for viewing on MD Share.<br>Some elements in this document does not work well on other sites.</span>
 
 # 使用方法・概要
 

@@ -4,6 +4,8 @@ author: Soruto Project
 editable: false
 ---
 
+<span class="showOnOther">* This markdown is optimized for viewing on MD Share.<br>Some elements in this document does not work well on other sites.</span>
+
 # プライバシーポリシー
 https://mdshare.cf (以下、「本サイト」) で公開される、MD Shareでの個人情報の取り扱いは、以下のプライバシーポリシー(以下、「本プライバシーポリシー」)のもとに行います。
 

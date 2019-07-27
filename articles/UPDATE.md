@@ -4,6 +4,8 @@ author: Soruto Project
 editable: false
 ---
 
+<span class="showOnOther">* This markdown is optimized for viewing on MD Share.<br>Some elements in this document does not work well on other sites.</span>
+
 # MD Share 更新情報
 
 ## Ver.2019.07.26
