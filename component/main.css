@@ -53,6 +53,24 @@ body {
     background: #fff;
 }
 
+#scrollToTop{
+    position: absolute;
+    bottom:80px;
+    right:40px;
+    width:40px;
+    height:40px;
+    font-size:30px;
+    background:rgba(0,0,0,0.5);
+    color:#fff;
+    border-radius: 5px;
+    text-align: center;
+    display: none;
+}
+
+#scrollToTop.neverShow{
+    display: none !important;
+}
+
 #new {
     position: fixed;
     top: 0px;

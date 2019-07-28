@@ -8,6 +8,10 @@ editable: false
 
 # MD Share 更新情報
 
+## Ver.2019.07.28
+* ある程度スクロールしたら一番上まで戻るボタンが表示されるようになりました。
+    * YAMLに`showScrollTop:false`を指定すると、いつでも非表示になります。
+
 ## Ver.2019.07.27
 * [MD Share Deco Element](?article=decoElement)を実装しました。
 * ドキュメント内に`(toc)`と書くと、書いたところに目次が挿入されるようになりました。

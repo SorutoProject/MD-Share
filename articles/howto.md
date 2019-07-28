@@ -46,6 +46,7 @@ MD Shareでは、ドキュメントに、以下のようにYAMLを設定でき�
 title: タイトル
 author: 作者名
 editable: true|false
+showScrollToTop: true|false
 ---
 ```
 
@@ -55,9 +56,13 @@ editable: true|false
     * ドキュメントの作者名を設定します
 * editable(オプション)
     * ドキュメントを表示時に、「<i class="far fa-edit"></i> 編集」を表示するかしないか設定できます。
-    * デフォルト値: `editable:true`
+    * デフォルト値: `editable: true`
     * `true`にすると表示、`false`にすると非表示になります。
     * 注意:この機能は、「<i class="far fa-edit"></i> 編集」ボタンを隠すだけの機能です。ドキュメントのソースが外部にもれないようにするセキュリティ的な概念ではございませんのでご注意ください。
+* showScrollToTop(オプション)
+    * ある程度スクロールしたときに、ページの先頭に戻るボタンを表示するかどうか設定します。
+    * デフォルト値: `showScrollToTop: true`
+    * `true`にすると表示、`false`にすると表示になります。
     
 #### 注意
 * YAMLは必ずドキュメントの先頭に書いてください。途中にある場合は認識されません。
