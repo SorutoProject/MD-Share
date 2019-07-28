@@ -61,7 +61,7 @@ function escape(txt) {
     };
 
     renderer.link = function (href, title, text) {
-        console.log("href:" + href + "\ntitle:" + title + "\ntext:" + text);
+        //console.log("href:" + href + "\ntitle:" + title + "\ntext:" + text);
         if (href.slice(0, 1) === "#") {
             return '<a href="' + href + '">' + text + "</a>";
         } else {
@@ -70,7 +70,7 @@ function escape(txt) {
     };
 
     renderer.text = function (text) {
-        console.log(text);
+        //console.log(text);
         if (text == "(toc)") {
             return "<md-toc></md-toc>";
         } else {
@@ -216,24 +216,24 @@ window.onload = function () {
             $$("#editor").style.display = "none";
             $$("#preview").className = "show";
             var previewMdWithInfo = $$("#editor").value;
-            console.log(previewMdWithInfo.slice(0, 3));
+            //console.log(previewMdWithInfo.slice(0, 3));
             if (previewMdWithInfo.indexOf("<!---") !== -1) {
                 var previewMd = previewMdWithInfo;
             } else if (previewMdWithInfo.slice(0, 3) == "---") {
                 try {
                     var mayYaml = previewMdWithInfo.split("---")[1].split("---")[0].trim();
 
-                    console.log(mayYaml);
+                    //console.log(mayYaml);
                     var previewMdInfoJson = jsyaml.load(mayYaml);
                     if (typeof previewMdInfoJson === "object") {
                         var preMd = previewMdWithInfo.split("---");
-                        console.log(preMd);
+                        //console.log(preMd);
                         var previewMd = "";
                         for (var i = 2; i < preMd.length; i++) {
                             previewMd += preMd[i] + "---";
                         }
                         var previewMd = previewMd.slice(0, -3);
-                        console.log(previewMd);
+                        //console.log(previewMd);
                     } else {
                         var previewMd = previewMdWithInfo;
                     }
@@ -308,7 +308,7 @@ window.onload = function () {
     $$("#gen").addEventListener(clickEv, function () {
         //Change to yaml
         if ($$("#editor").value.slice(0, 3) !== "---") {
-            console.log("input user info");
+            //console.log("input user info");
 
             try {
                 var elem = document.createElement("div");
@@ -363,7 +363,7 @@ window.onload = function () {
                         });
                     } else {
                         share(genURL);
-                        console.log(userMd);
+                        //console.log(userMd);
                     }
                 }
             });
@@ -377,7 +377,7 @@ window.onload = function () {
                 });
             } else {
                 share(genURL);
-                console.log(userMd);
+                //console.log(userMd);
             }
         }
     });
@@ -417,7 +417,7 @@ window.onload = function () {
         //onload Event
         reader.onload = function () {
             loadMd(reader.result);
-            console.log(reader);
+            //console.log(reader);
             $$("#fileOpenDialog").className = "";
             sysMessage(file[0].name + " を読み込みました");
         }
@@ -1071,7 +1071,7 @@ function loadMd(mdData) {
         try {
             var mayYaml = mdWithInfo.split("---")[1].split("---")[0].trim();
 
-            console.log(mayYaml);
+            //console.log(mayYaml);
             var mdInfoJson = jsyaml.load(mayYaml);
             if (typeof mdInfoJson === "object") {
                 if (mdInfoJson.title) {
@@ -1097,7 +1097,7 @@ function loadMd(mdData) {
                 }
                 var md = "";
                 var preMd = mdWithInfo.split("---");
-                console.log(preMd.length);
+                //console.log(preMd.length);
                 for (var i = 2; i < preMd.length; i++) {
                     md += preMd[i] + "---";
                 }
