@@ -119,7 +119,7 @@ var $$ = function (e) {
 }
 
 //クリックイベント(タップできるならtouchstart,だめならclickを持つ)
-var clickEv = window.ontouchstart === null ? "touchstart" : "click";
+var clickEv = window.ontouchend === null ? "touchend" : "click";
 
 //ページの読み込み完了時
 window.onload = function () {
