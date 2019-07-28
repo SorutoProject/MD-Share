@@ -68,12 +68,12 @@ function escape(txt) {
             return '<a href="' + href + '" target="_blank">' + text + "</a>";
         }
     };
-    
-    renderer.text = function(text){
+
+    renderer.text = function (text) {
         console.log(text);
-        if(text == "(toc)"){
+        if (text == "(toc)") {
             return "<md-toc></md-toc>";
-        }else{
+        } else {
             return text;
         }
     }
@@ -119,18 +119,26 @@ var $$ = function (e) {
 }
 
 //クリックイベント(タップできるならtouchstart,だめならclickを持つ)
-var clickEv = window.ontouchstart===null?"touchstart":"click";
+var clickEv = window.ontouchstart === null ? "touchstart" : "click";
 
 //ページの読み込み完了時
 window.onload = function () {
     //Block access with Internet Explorer.
     if (getBrowserName() == "IE") {
+        /*
         $$("#doc").innerHTML = '<h1>本サイトは、Internet Explorerには非対応です。</h1><p>Internet Explorerでは、本サイトで利用している最新のJavaScript文法に対応していないため、本サイトを利用することができません。</p><p>最新の文法をサポートしている、Google ChromeやMozilla Firefox、Microsoft Edgeなどの他のブラウザからご利用いただけます。</p>';
         $$("#docTitle").textContent = "It's like garbages...";
         $$("#author").textContent = "From All Web Enginners";
         $$("#tools").style.display = "none";
         $$("#menuButton").style.display = "none";
-        return false;
+        return false;*/
+        //新規作成などのボタンを消す
+        $$("#newButton").style.display = "none";
+        $$("#editButton").style.display = "none";
+        $$("#downloadHTMLButton").style.display = "none";
+        $$("#presenButton").style.display = "none";
+        $$(".printButton")[0].style.display = "none";
+        sysMessage('<u>Internet Explorerでは、ドキュメントの閲覧のみ可能です。</u><br><span style="font-size:11pt">すべての機能を使用したい場合は、<br>ChromeやFirefoxなどの他のブラウザからアクセスしてください。</a></span>',10000);
     }
     //Get Url Parameters
     var arg = new Object;
@@ -154,9 +162,9 @@ window.onload = function () {
                 loadMd("---\ntitle: ファイルが見つかりません\nauthor: Soruto Project\n---\n# 404 Not Found\n### ファイルが見つかりませんでした\n* URLが間違っていないか確認してください。");
             }
         }
-        
+
         xhr.send(null);
-        
+
     } else if (arg["q"] === undefined || arg["q"] == "") {
         //ホームページ
         var pageData = "LQhQBcEtwGwUwFwAICyARJBlAFgQwE5yAeDIBEMgYgyDKDILoMouAruNgPb7KYsNNIAK+TAVnADG4UCGCgAxKgw4CcUAB4AzgFtcMGAD5A8QyBpBkBRDIBCGQJoMgeQZAowaBGDUBJDIFx5QBIM5QEAMigPRqN20KABU-n18kQAbTQHUGQBEGQD2GQB+GQHqGQAGGQDKGQGeGQEmGQFqGQFOGQEOGZMAJhhtAHXlABCMTQGiGQGsGQHsGQEAGUCQGpCDuAGFAOwZAFg1ACBVawBgGYMB4yMBYBhtYwCuGQGGGWNDAPwYTZ3rGoMBOhkjAbYZOnpre7MBphkzoocAkwn7htsAwDIrxqdn5vyRAR0VASHNAVQZAGIZAfQZAOYZovMAZBkAFhGALk93oArBnC3VqAFUAEoAGUAiwyAS4ZstFAP0Mf0AxtahMyAWijAFna70AZgzhMp6QBdHoBYqNCRLMgAMGF7hBZBQA05gB1OAAI0ARQyAdYYxm1AP7ygApXQCdpoBVmxqSMAJQyAboZkstrKDAJYMVUWDWa7Uh22sI2u0yJVMA5gyAWQY5gtGk0kKsNtqdvtDiddRcrpMDcazfMFn4Avd2Vy+WMqigAJIAFSQcMgQjgADtlHA2oBoOQqgBtFQDRqcTwuaGqBQxGozH44nAEGWgEDIqqAU7kk21ABYMgCkGAxGu5aJAARgAdEgKG1AL0MgFWGPKJQDlDNybIAGqKNgCCGQCEjoB8RSNM8AbEqABTSKoBHI0AxgxEwD2QUzc62PnTQjVAOohhUAlFbA+skQDODCzAIxRgD+o4E2AdD0dtEyATwYiW1AOCRgC-ETMHxVIAs4llqCgAXCYAYEoVIAGFGAJDxoSgoAigxvIADgygoAkQzggsrYAExdoUgCgASBVTnheJG1O+I7chUgBFqTSiicloih0FooKAMkM2GADUxgDfcjYgAFMToeHuBx7isaAWjSUggCo+sKgDCioAWP-5pG0ZxgmSDAEgbKQAA1pAAAOcAACaQLgfocjy-I2CK5QULWFQkAYNRqYWmmJoAoYqAJ3aFSADAqgDwhu8HxTnWgD+DKC7w5kgPgABQtAAlARAAMbYAJxYBw4BcLwAjCOAcXuRpxamR2iVAA";
@@ -310,41 +318,63 @@ window.onload = function () {
             } catch (e) {
                 var preTitle = "";
             }
-
-            var title = prompt("このドキュメントのタイトルを入力してください", preTitle);
-            if (title === null) return false;
-            else if (title === "") var title = "無題";
-
             try {
                 if (localStorage.getItem("authorName") !== null) var authorSuggest = localStorage.authorName;
                 else var authorSuggest = "";
             } catch (e) {
                 var authorSuggest = "";
             }
-
-            var author = prompt("このドキュメントの作者名を入力してください", authorSuggest);
-            if (author === null) return false;
-            else if (author === "") var author = "名無し";
-            else {
-                try {
-                    localStorage.authorName = author;
-                } catch (e) {}
-            }
-            var updateMd = '---\ntitle: ' + title + '\nauthor: ' + author + '\n---\n\n' + $$("#editor").value;
-            $$("#editor").value = updateMd;
-            var userMd = LZString.compressToEncodedURIComponent($$("#editor").value);
-            var genURL = location.protocol + "//" + location.hostname + location.pathname + "?q=" + userMd;
-            if (genURL.length > 5000) {
-                alert("マークダウンに記述された文字数が多すぎるため、URLの生成をキャンセルしました。\nマークダウンの文字数を減らしたり、内容を2つのマークダウンに記述したりしてください。");
-            } else {
-                share(genURL);
-                console.log(userMd);
-            }
+            Swal.mixin({
+                input: 'text',
+                confirmButtonText: "次へ",
+                showCancelButton: true,
+                cancelButtonText: "キャンセル",
+                progressSteps: ["1", "2"]
+            }).queue([
+                {
+                    title: "ドキュメントのタイトル",
+                    text: "このドキュメントのタイトルを入力してください",
+                    inputValue: preTitle
+                },
+                {
+                    title: "ドキュメントの作者名",
+                    text: "このドキュメントの作者名を入力してください",
+                    inputValue: authorSuggest
+                }
+            ]).then(function (result) {
+                if (result.value) {
+                    var title = result.value[0];
+                    if (title === "") var title = "無題";
+                    var author = result.value[1];
+                    if (author === "") var author = "名無し";
+                    else {
+                        try {
+                            localStorage.authorName = author;
+                        } catch (e) {}
+                    }
+                    var updateMd = '---\ntitle: ' + title + '\nauthor: ' + author + '\n---\n\n' + $$("#editor").value;
+                    $$("#editor").value = updateMd;
+                    var userMd = LZString.compressToEncodedURIComponent($$("#editor").value);
+                    var genURL = location.protocol + "//" + location.hostname + location.pathname + "?q=" + userMd;
+                    if (genURL.length > 5000) {
+                        Swal.fire({
+                            title: "Oops...",
+                            html: "マークダウンに記述された文字数が多すぎるため、URLの生成をキャンセルしました。\nマークダウンの文字数を減らしたり、内容を2つのマークダウンに記述したりしてください。"
+                        });
+                    } else {
+                        share(genURL);
+                        console.log(userMd);
+                    }
+                }
+            });
         } else {
             var userMd = LZString.compressToEncodedURIComponent($$("#editor").value);
             var genURL = location.protocol + "//" + location.hostname + location.pathname + "?q=" + userMd;
             if (genURL.length > 5000) {
-                alert("マークダウンに記述された文字数が多すぎるため、URLの生成をキャンセルしました。\nマークダウンの文字数を減らしたり、内容を2つのマークダウンに記述したりしてください。");
+                Swal.fire({
+                    title: "Oops...",
+                    html: "マークダウンに記述された文字数が多すぎるため、URLの生成をキャンセルしました。\nマークダウンの文字数を減らしたり、内容を2つのマークダウンに記述したりしてください。"
+                });
             } else {
                 share(genURL);
                 console.log(userMd);
@@ -431,18 +461,18 @@ window.onload = function () {
     $$("#downloadHTMLButton").addEventListener(clickEv, function () {
         exportHTML(mdWithInfo);
     });
-    
+
     //#doc 一番上に戻るボタンを表示・非表示
-    $$("#doc").addEventListener("scroll", function(e){
+    $$("#doc").addEventListener("scroll", function (e) {
         var scrollTop = e.target.scrollTop;
-        if(scrollTop < 200){
+        if (scrollTop < 200) {
             $$("#scrollToTop").style.display = "none";
-        }else{
+        } else {
             $$("#scrollToTop").style.display = "block";
         }
     });
-    
-    $$("#scrollToTop").addEventListener(clickEv, function(){
+
+    $$("#scrollToTop").addEventListener(clickEv, function () {
         $$("#doc").scrollTop = 0;
     })
 
@@ -775,27 +805,121 @@ var presentation = {
 function share(url) {
     //セキュリティ制約により、forkした環境での短縮URLの生成を禁止する
     if (location.hostname == "mdshare.cf") {
-        var confShortLink = confirm("短縮URLを生成しますか？\n※「OK」を押して続行した場合は、Google Firebase Dynamic Linksにあなたのドキュメントの情報が保存されることに同意したものとみなされます。");
+        /*var confShortLink = confirm("短縮URLを生成しますか？\n※「OK」を押して続行した場合は、Google Firebase Dynamic Linksにあなたのドキュメントの情報が保存されることに同意したものとみなされます。");
         if (confShortLink === false) sysMessage("短縮URLの作成をキャンセルしました");
-    } else {
-        var confShortLink = false;
-    }
-    if (confShortLink === true) {
-        var data = {
-            url: url
-        }; // POSTメソッドで送信するデータ
-        var xmlHttpRequest = new XMLHttpRequest();
-        xmlHttpRequest.onreadystatechange = function () {
-            var READYSTATE_COMPLETED = 4;
-            var HTTP_STATUS_OK = 200;
+        */
+        Swal.fire({
+            title: "短縮URLの生成",
+            html: "短縮URLを生成しますか？<br>「はい」を押して続行して場合は、Google Firebase Dynamic Linksにあなたのドキュメントの情報が保存されることに同意したものとみなされます。",
+            confirmButtonText: "はい",
+            showCancelButton: true,
+            cancelButtonText: "いいえ"
+        }).then(function (result) {
+            if (result.value) {
+                var data = {
+                    url: url
+                }; // POSTメソッドで送信するデータ
+                var xmlHttpRequest = new XMLHttpRequest();
+                xmlHttpRequest.onreadystatechange = function () {
+                    var READYSTATE_COMPLETED = 4;
+                    var HTTP_STATUS_OK = 200;
 
-            if (this.readyState == READYSTATE_COMPLETED &&
-                this.status == HTTP_STATUS_OK) {
-                // レスポンスの表示
-                var shortLink = this.responseText;
+                    if (this.readyState == READYSTATE_COMPLETED &&
+                        this.status == HTTP_STATUS_OK) {
+                        // レスポンスの表示
+                        var shortLink = this.responseText;
 
+                        $$("#shareWindow").className = "show";
+                        var urlEncoded = encodeURIComponent(shortLink);
+                        $$("#copyRawButton").addEventListener(clickEv, function (e) {
+                            e.preventDefault();
+                            // 空div 生成
+                            var tmp = document.createElement("div");
+                            // 選択用のタグ生成
+                            var pre = document.createElement('pre');
+
+                            // 親要素のCSSで user-select: none だとコピーできないので書き換える
+                            pre.style.webkitUserSelect = 'auto';
+                            pre.style.userSelect = 'auto';
+
+                            tmp.appendChild(pre).textContent = url;
+
+                            // 要素を画面外へ
+                            var s = tmp.style;
+                            s.position = 'fixed';
+                            s.right = '200%';
+
+                            // body に追加
+                            document.body.appendChild(tmp);
+                            // 要素を選択
+                            document.getSelection().selectAllChildren(tmp);
+
+                            // クリップボードにコピー
+                            var result = document.execCommand("copy");
+
+                            // 要素削除
+                            document.body.removeChild(tmp);
+
+                            $$("#shareWindow").className = "";
+                            sysMessage("生URLをクリップボードにコピーしました");
+                        });
+                        $$("#copyShortButton").style.display = "block";
+                        $$("#copyShortButton").addEventListener(clickEv, function (e) {
+                            e.preventDefault();
+                            // 空div 生成
+                            var tmp = document.createElement("div");
+                            // 選択用のタグ生成
+                            var pre = document.createElement('pre');
+
+                            // 親要素のCSSで user-select: none だとコピーできないので書き換える
+                            pre.style.webkitUserSelect = 'auto';
+                            pre.style.userSelect = 'auto';
+
+                            tmp.appendChild(pre).textContent = shortLink;
+
+                            // 要素を画面外へ
+                            var s = tmp.style;
+                            s.position = 'fixed';
+                            s.right = '200%';
+
+                            // body に追加
+                            document.body.appendChild(tmp);
+                            // 要素を選択
+                            document.getSelection().selectAllChildren(tmp);
+
+                            // クリップボードにコピー
+                            var result = document.execCommand("copy");
+
+                            // 要素削除
+                            document.body.removeChild(tmp);
+
+                            $$("#shareWindow").className = "";
+                            sysMessage("短縮URLをクリップボードにコピーしました");
+                        });
+
+                        $$("#twitterButton").href = "https://twitter.com/intent/tweet?url=" + urlEncoded;
+                        $$("#lineButton").href = "https://social-plugins.line.me/lineit/share?url=" + urlEncoded;
+
+                        $$("#shareCancel").addEventListener(clickEv, function (e) {
+                            e.preventDefault();
+                            $$("#shareWindow").className = "";
+                        });
+                    } else if (this.readyState == READYSTATE_COMPLETED &&
+                        this.status == 404) {
+                        sysMessage("短縮URLの生成に失敗しました");
+                    }
+                }
+
+                xmlHttpRequest.open('POST', 'https://mdshr.glitch.me/make');
+
+                // サーバに対して解析方法を指定する
+                xmlHttpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+                // データをリクエスト ボディに含めて送信する
+                xmlHttpRequest.send(EncodeHTMLForm(data));
+            } else {
                 $$("#shareWindow").className = "show";
-                var urlEncoded = encodeURIComponent(shortLink);
+                var urlEncoded = encodeURIComponent(url);
                 $$("#copyRawButton").addEventListener(clickEv, function (e) {
                     e.preventDefault();
                     // 空div 生成
@@ -828,39 +952,8 @@ function share(url) {
                     $$("#shareWindow").className = "";
                     sysMessage("生URLをクリップボードにコピーしました");
                 });
-                $$("#copyShortButton").style.display = "block";
-                $$("#copyShortButton").addEventListener(clickEv, function (e) {
-                    e.preventDefault();
-                    // 空div 生成
-                    var tmp = document.createElement("div");
-                    // 選択用のタグ生成
-                    var pre = document.createElement('pre');
 
-                    // 親要素のCSSで user-select: none だとコピーできないので書き換える
-                    pre.style.webkitUserSelect = 'auto';
-                    pre.style.userSelect = 'auto';
-
-                    tmp.appendChild(pre).textContent = shortLink;
-
-                    // 要素を画面外へ
-                    var s = tmp.style;
-                    s.position = 'fixed';
-                    s.right = '200%';
-
-                    // body に追加
-                    document.body.appendChild(tmp);
-                    // 要素を選択
-                    document.getSelection().selectAllChildren(tmp);
-
-                    // クリップボードにコピー
-                    var result = document.execCommand("copy");
-
-                    // 要素削除
-                    document.body.removeChild(tmp);
-
-                    $$("#shareWindow").className = "";
-                    sysMessage("短縮URLをクリップボードにコピーしました");
-                });
+                $$("#copyShortButton").style.display = "none";
 
                 $$("#twitterButton").href = "https://twitter.com/intent/tweet?url=" + urlEncoded;
                 $$("#lineButton").href = "https://social-plugins.line.me/lineit/share?url=" + urlEncoded;
@@ -869,19 +962,8 @@ function share(url) {
                     e.preventDefault();
                     $$("#shareWindow").className = "";
                 });
-            } else if (this.readyState == READYSTATE_COMPLETED &&
-                this.status == 404) {
-                sysMessage("短縮URLの生成に失敗しました");
             }
-        }
-
-        xmlHttpRequest.open('POST', 'https://mdshr.glitch.me/make');
-
-        // サーバに対して解析方法を指定する
-        xmlHttpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-        // データをリクエスト ボディに含めて送信する
-        xmlHttpRequest.send(EncodeHTMLForm(data));
+        });
     } else {
         $$("#shareWindow").className = "show";
         var urlEncoded = encodeURIComponent(url);
@@ -931,18 +1013,19 @@ function share(url) {
 }
 
 //システムメッセージの表示関数
-function sysMessage(s) {
+function sysMessage(s,time) {
     var messageElem = $$("#message");
-    messageElem.textContent = s;
+    messageElem.innerHTML = s;
     messageElem.className = "show";
     if (messageElem.dataset.showing === "true") {
         clearTimeout(messageShower);
     }
-
+    
+    if(!time) var time = 5000;
     messageShower = setTimeout(function () {
         $$("#message").className = "";
         $$("#message").dataset.showing = "false";
-    }, 5000);
+    }, time);
 }
 
 function EncodeHTMLForm(data) {
@@ -1004,12 +1087,12 @@ function loadMd(mdData) {
                     $$("#editButton").style.display = "none";
                     var deleteData = true;
                 } else {
-                    $$("#editButton").style.display = "inline";
+                    if(getBrowserName() !== "IE") $$("#editButton").style.display = "inline";
                     var deleteData = false;
                 }
-                if(mdInfoJson.showScrollToTop === false){
+                if (mdInfoJson.showScrollToTop === false) {
                     $$("#scrollToTop").className = "neverShow";
-                }else{
+                } else {
                     $$("#scrollToTop").className = "";
                 }
                 var md = "";
@@ -1025,14 +1108,14 @@ function loadMd(mdData) {
                 var mdInfo = "";
                 var md = mdWithInfo;
                 $$("#docInfo").style.display = "none";
-                $$("#editButton").style.display = "inline";
+                if(getBrowserName() !== "IE") $$("#editButton").style.display = "inline";
                 var deleteData = false;
             }
         } catch (e) {
             var mdInfo = "";
             var md = mdWithInfo;
             $$("#docInfo").style.display = "none";
-            $$("#editButton").style.display = "inline";
+            if(getBrowserName() !== "IE") $$("#editButton").style.display = "inline";
             var deleteData = false;
         }
     }
@@ -1076,40 +1159,52 @@ function loadMd(mdData) {
 }
 
 function textDownload(text, mimeType, extension) {
-    // ダウンロードしたいコンテンツ、MIMEType、ファイル名
-    var content = text;
-    var name = prompt("ダウンロードするファイルのファイル名(拡張子なし)を入力してください。");
-    if (name === null) return false;
-    else if (name == "") var name = "無題";
-    var name = name + "." + extension;
 
-    // BOMは文字化け対策
-    var bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
-    var blob = new Blob([bom, content], {
-        type: mimeType
+    //var name = prompt("ダウンロードするファイルのファイル名(拡張子なし)を入力してください。");
+    Swal.fire({
+        title: "ファイルダウンロード",
+        html: "<small>ダウンロードするファイルの名前(拡張子なし)を入力してください</small>",
+        input: "text",
+        confirmButtonText: "ダウンロードする",
+        showCancelButton: true,
+        cancelButtonText: "キャンセル"
+    }).then(function (result) {
+        if (result.value) {
+            // ダウンロードしたいコンテンツ、MIMEType、ファイル名
+            var content = text;
+            var name = result.value;
+            if (name == "") var name = "無題";
+            var name = name + "." + extension;
+
+            // BOMは文字化け対策
+            var bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
+            var blob = new Blob([bom, content], {
+                type: mimeType
+            });
+
+            var a = document.createElement('a');
+            a.download = name;
+            a.target = '_blank';
+
+            if (window.navigator.msSaveBlob) {
+                // for IE
+                window.navigator.msSaveBlob(blob, name)
+            } else if (window.URL && window.URL.createObjectURL) {
+                // for Firefox
+                a.href = window.URL.createObjectURL(blob);
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            } else if (window.webkitURL && window.webkitURL.createObject) {
+                // for Chrome
+                a.href = window.webkitURL.createObjectURL(blob);
+                a.click();
+            } else {
+                // for Safari
+                window.open('data:' + mimeType + ';base64,' + window.Base64.encode(content), '_blank');
+            }
+        }
     });
-
-    var a = document.createElement('a');
-    a.download = name;
-    a.target = '_blank';
-
-    if (window.navigator.msSaveBlob) {
-        // for IE
-        window.navigator.msSaveBlob(blob, name)
-    } else if (window.URL && window.URL.createObjectURL) {
-        // for Firefox
-        a.href = window.URL.createObjectURL(blob);
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-    } else if (window.webkitURL && window.webkitURL.createObject) {
-        // for Chrome
-        a.href = window.webkitURL.createObjectURL(blob);
-        a.click();
-    } else {
-        // for Safari
-        window.open('data:' + mimeType + ';base64,' + window.Base64.encode(content), '_blank');
-    }
 }
 
 
@@ -1162,18 +1257,17 @@ function exportHTML(mdData) {
     textDownload(html, "text/html", "html");
 }
 
-function generateHeadingList(md){
+function generateHeadingList(md) {
     var div = document.createElement("div");
     div.innerHTML = marked(md);
     var headings = div.querySelectorAll("h1,h2,h3,h4,h5,h6");
     var returnHTML = '<div class="docIndex"><b>もくじ</b><br><br>';
-    for(var i = 0; i < headings.length; i++){
+    for (var i = 0; i < headings.length; i++) {
         var returnHTML = returnHTML + '<a href="#' + headings[i].id + '" class="docIndexContent ' + headings[i].tagName.toLowerCase() + '">' + headings[i].textContent + '</a>';
     }
-    if(headings.length === 0){
+    if (headings.length === 0) {
         var returnHTML = returnHTML + "ドキュメントに項目がありません。"
     }
     var returnHTML = returnHTML + "</div>";
     return returnHTML;
 }
-
