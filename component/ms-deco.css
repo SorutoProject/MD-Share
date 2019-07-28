@@ -1,8 +1,8 @@
 /*スタイル系*/
-ms-deco[style]{
+ms-deco[design]{
     border-radius:5px;
 }
-ms-deco[style][info]{
+ms-deco[design][info]{
     display: inline-block;
     background:#aaaaff;
     border-left:10px #0000ff solid;
@@ -10,7 +10,7 @@ ms-deco[style][info]{
     color:#141469;
 }
 
-ms-deco[style][warning]{
+ms-deco[design][warning]{
     display: inline-block;
     background:#ffffaa;    
     border-left:10px #ffff00 solid;
@@ -18,7 +18,7 @@ ms-deco[style][warning]{
     color:#404018;
 }
 
-ms-deco[style][alert]{
+ms-deco[design][alert]{
     display: inline-block;
     background:#ffaaaa;
     border-left:10px #f00 solid;

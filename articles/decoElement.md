@@ -31,26 +31,26 @@ Ver.2019.07.27より、MD Share 独自仕様の装飾用要素(MD Share Deco Ele
 
 ## サンプル集
 
-### style系
+### design系
 **記述例**
 ```
-<ms-deco style info>**情 報**
+<ms-deco design info>**情 報**
 このサイトはMD Shareです。</ms-deco>
 
-<ms-deco style warning>**警 告**
+<ms-deco design warning>**警 告**
 この操作は、自己責任でお願いします。</ms-deco>
 
-<ms-deco style alert>**禁 止**
+<ms-deco design alert>**禁 止**
 著作権侵害となるような行為を禁止します。</ms-deco>
 ```
 **表示例**
-<ms-deco style info>**情 報**
+<ms-deco design info>**情 報**
 このサイトはMD Shareです。</ms-deco>
 
-<ms-deco style warning>**警 告**
+<ms-deco design warning>**警 告**
 この操作は、自己責任でお願いします。</ms-deco>
 
-<ms-deco style alert>**禁 止**
+<ms-deco design alert>**禁 止**
 著作権侵害となるような行為を禁止します。</ms-deco>
 
 ### marker系
