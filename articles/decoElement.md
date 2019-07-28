@@ -13,13 +13,13 @@ Ver.2019.07.27より、MD Share 独自仕様の装飾用要素(MD Share Deco Ele
 ## 使い方
 **記述例**
 ```
-<ms-deco style info>**情 報**
+<ms-deco design info>**情 報**
 このサイトはMD Shareです</ms-deco>
 ```
 ↑をドキュメントに書くと...
 
 **表示例**
-<ms-deco style info>情 報
+<ms-deco design info>情 報
 このサイトはMD Shareです</ms-deco>
 
 と、こんな感じに表示されます。
