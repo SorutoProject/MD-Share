@@ -86,7 +86,7 @@ Ver.2019.07.27より、MD Share 独自仕様の装飾用要素(MD Share Deco Ele
 </ms-deco>
 ```
 **表示例**
-<ms-deco style info><ms-deco border black>お知らせ</ms-deco>
+<ms-deco design info><ms-deco border black>お知らせ</ms-deco>
 この度、MD Shareに独自タグを追加しました！！
-<ms-deco style warning>使い方は、公式ページをご覧ください</ms-deco>
+<ms-deco design warning>使い方は、公式ページをご覧ください</ms-deco>
 </ms-deco>
