@@ -399,8 +399,10 @@ window.onload = function () {
     });
 
     //#doc 一番上に戻るボタンを表示・非表示
-    $$("#doc").addEventListener("scroll", function (e) {
-        var scrollTop = e.target.scrollTop;
+    window.addEventListener("scroll", function (e) {
+        var tgt = (getBrowserName() !== "Chrome" && getBrowserName() !== "Safari") ? document.body : document.documentElement;
+        var scrollTop = tgt.scrollTop;
+        console.log(scrollTop);
         if (scrollTop < 200) {
             $$("#scrollToTop").style.display = "none";
         } else {
@@ -409,7 +411,8 @@ window.onload = function () {
     });
 
     $$("#scrollToTop").addEventListener(clickEv, function () {
-        $$("#doc").scrollTop = 0;
+        var tgt = (getBrowserName() !== "Chrome" && getBrowserName() !== "Safari") ? document.body : document.documentElement;
+        tgt.scrollTop = 0;
     })
 
     //エディタのMDでよく使う文字ボタン
@@ -1075,7 +1078,8 @@ function loadMd(mdData) {
     //var html = html.replace(/\[x\]/g, '<input type="checkbox" checked="checked">');
     //var html = html.replace(/\[ \]/g, '<input type="checkbox">');
     $$("#doc").innerHTML = html;
-    $$("#doc").scrollTop = 0; //一番上までスクロール
+    var tgt = (getBrowserName()==="Chrome" || getBrowserName()=== "Safari") ? document.body : document.documentElement;
+    tgt.scrollTop = 0;//一番上までスクロール
     //for MathJax
     if (html.indexOf("$") !== -1) {
         if (flags.mathjaxLoaded === false) {

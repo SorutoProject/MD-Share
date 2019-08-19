@@ -57,7 +57,7 @@ body {
 }
 
 #scrollToTop{
-    position: absolute;
+    position: fixed;
     bottom:80px;
     right:20px;
     width:40px;
