@@ -207,78 +207,9 @@ window.onload = function () {
         }
     });
 
-    $$("#previewCheck").addEventListener("change", function (e) {
+    $$("#previewCheck").addEventListener("click", function (e) {
         if (e.target.checked === true) {
-            $$("#preview").style.display = "block";
-            $$("#editor").style.display = "none";
-            $$("#preview").className = "show";
-            var previewMdWithInfo = $$("#editor").value;
-            //console.log(previewMdWithInfo.slice(0, 3));
-            if (previewMdWithInfo.indexOf("<!---") !== -1) {
-                var previewMd = previewMdWithInfo;
-            } else if (previewMdWithInfo.slice(0, 3) == "---") {
-                try {
-                    var mayYaml = previewMdWithInfo.split("---")[1].split("---")[0].trim();
-
-                    //console.log(mayYaml);
-                    var previewMdInfoJson = jsyaml.load(mayYaml);
-                    if (typeof previewMdInfoJson === "object") {
-                        //styleオプションを適用
-                        if (previewMdInfoJson.style) {
-                            $$("#preview").className = previewMdInfoJson.style;
-                        } else {
-                            $$("#preview").className = "";
-                        }
-                        var preMd = previewMdWithInfo.split("---");
-                        //console.log(preMd);
-                        var previewMd = "";
-                        for (var i = 2; i < preMd.length; i++) {
-                            previewMd += preMd[i] + "---";
-                        }
-                        var previewMd = previewMd.slice(0, -3);
-                        //console.log(previewMd);
-                    } else {
-                        var previewMd = previewMdWithInfo;
-                    }
-                } catch (e) {
-                    var previewMd = previewMdWithInfo;
-                }
-            } else {
-                var previewMd = previewMdWithInfo;
-            }
-            var previewHtml = marked(previewMd).split("<md-toc></md-toc>").join(generateHeadingList(previewMd));
-            //追加設定
-            //var previewHtml = previewHtml.replace(/\[x\]/g, '<input type="checkbox" checked="checked">');
-            //var previewHtml = previewHtml.replace(/\[ \]/g, '<input type="checkbox">');
-            $$("#preview").innerHTML = previewHtml;
-            //for MathJax
-            if (previewHtml.indexOf("$") !== -1) {
-                if (flags.mathjaxLoaded === false) {
-                    flags.mathjaxLoaded = true;
-                    var script = document.createElement('script');
-
-                    script.type = 'text/javascript';
-                    script.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML";
-
-                    var firstScript = document.getElementsByTagName('script')[0];
-                    firstScript.parentNode.insertBefore(script, firstScript);
-                    script.onload = script.onreadystatechange = function () {
-                        //mathJax config
-                        MathJax.Hub.Config({
-                            tex2jax: {
-                                inlineMath: [['$', '$'], ["\\(", "\\)"]],
-                                displayMath: [['$$', '$$'], ["\\[", "\\]"]]
-                            }
-                        });
-                        MathJax.Hub.Queue(["Typeset", MathJax.Hub, "preview"]);
-                    }
-
-                } else {
-                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "preview"]);
-                }
-            }
-
-
+            preview();
         } else {
             $$("#preview").style.display = "none";
             $$("#editor").style.display = "block";
@@ -527,9 +458,7 @@ window.onload = function () {
 // プリントするとき
 window.onbeforeprint = function () {
     //新規作成・編集ウィンドウ表示時にプリントが開始されたら、プレビューを表示する
-    if ($$("#previewCheck").checked === false) {
-        $$("#previewCheck").click();
-    }
+    preview();
     $$("#preview").style.display = "block";
     $$("#editor").style.display = "none";
     $$("#preview").className = "show";
@@ -540,9 +469,7 @@ mediaQueryList.addListener(function (mql) {
     if (mql.matches) {
         //ここに書く
         //新規作成・編集ウィンドウ表示時にプリントが開始されたら、プレビューを表示する
-        if ($$("#previewCheck").checked === false) {
-            $$("#previewCheck").click();
-        }
+        preview();
         $$("#preview").style.display = "block";
         $$("#editor").style.display = "none";
         $$("#preview").className = "show";
@@ -1289,4 +1216,76 @@ function generateHeadingList(md) {
     }
     var returnHTML = returnHTML + "</div>";
     return returnHTML;
+}
+
+function preview() {
+    $$("#previewCheck").checked = true;
+    $$("#preview").style.display = "block";
+    $$("#editor").style.display = "none";
+    $$("#preview").className = "show";
+    var previewMdWithInfo = $$("#editor").value;
+    //console.log(previewMdWithInfo.slice(0, 3));
+    if (previewMdWithInfo.indexOf("<!---") !== -1) {
+        var previewMd = previewMdWithInfo;
+    } else if (previewMdWithInfo.slice(0, 3) == "---") {
+        try {
+            var mayYaml = previewMdWithInfo.split("---")[1].split("---")[0].trim();
+
+            //console.log(mayYaml);
+            var previewMdInfoJson = jsyaml.load(mayYaml);
+            if (typeof previewMdInfoJson === "object") {
+                //styleオプションを適用
+                if (previewMdInfoJson.style) {
+                    $$("#preview").className = previewMdInfoJson.style;
+                } else {
+                    $$("#preview").className = "";
+                }
+                var preMd = previewMdWithInfo.split("---");
+                //console.log(preMd);
+                var previewMd = "";
+                for (var i = 2; i < preMd.length; i++) {
+                    previewMd += preMd[i] + "---";
+                }
+                var previewMd = previewMd.slice(0, -3);
+                //console.log(previewMd);
+            } else {
+                var previewMd = previewMdWithInfo;
+            }
+        } catch (e) {
+            var previewMd = previewMdWithInfo;
+        }
+    } else {
+        var previewMd = previewMdWithInfo;
+    }
+    var previewHtml = marked(previewMd).split("<md-toc></md-toc>").join(generateHeadingList(previewMd));
+    //追加設定
+    //var previewHtml = previewHtml.replace(/\[x\]/g, '<input type="checkbox" checked="checked">');
+    //var previewHtml = previewHtml.replace(/\[ \]/g, '<input type="checkbox">');
+    $$("#preview").innerHTML = previewHtml;
+    //for MathJax
+    if (previewHtml.indexOf("$") !== -1) {
+        if (flags.mathjaxLoaded === false) {
+            flags.mathjaxLoaded = true;
+            var script = document.createElement('script');
+
+            script.type = 'text/javascript';
+            script.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML";
+
+            var firstScript = document.getElementsByTagName('script')[0];
+            firstScript.parentNode.insertBefore(script, firstScript);
+            script.onload = script.onreadystatechange = function () {
+                //mathJax config
+                MathJax.Hub.Config({
+                    tex2jax: {
+                        inlineMath: [['$', '$'], ["\\(", "\\)"]],
+                        displayMath: [['$$', '$$'], ["\\[", "\\]"]]
+                    }
+                });
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub, "preview"]);
+            }
+
+        } else {
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub, "preview"]);
+        }
+    }
 }
