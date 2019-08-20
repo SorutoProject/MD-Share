@@ -773,8 +773,9 @@ function share(url, queryUrl) {
             cancelButtonText: "いいえ"
         }).then(function (result) {
             if (result.value) {
+                sysMessage("短縮URLの生成をリクエストしています<br>少々お待ち下さい...");
                 var data = {
-                    url: querUrl
+                    url: queryUrl
                 }; // POSTメソッドで送信するデータ
                 var xmlHttpRequest = new XMLHttpRequest();
                 xmlHttpRequest.onreadystatechange = function () {
