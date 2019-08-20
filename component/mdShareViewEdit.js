@@ -1230,7 +1230,7 @@ function generateHeadingList(md, docOrPreview) {
     var div = document.createElement("div");
     div.innerHTML = marked(md);
     var headings = div.querySelectorAll("h1,h2,h3,h4,h5,h6");
-    var returnHTML = '<div class="docIndex"><b>もくじ</b><br><br>';
+    var returnHTML = '<div class="docIndex"><b>もくじ</b><br><small>項目をクリックorタップで移動</small><br>';
     for (var i = 0; i < headings.length; i++) {
         var returnHTML = returnHTML + '<span data-href="' + headings[i].querySelector("a.anchor").name + '" data-docorpreview="' + docOrPreview + '" class="docIndexContent ' + headings[i].tagName.toLowerCase() + '">' + headings[i].textContent + '</span>';
     }
