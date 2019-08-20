@@ -236,7 +236,7 @@ window.onload = function () {
             preview();
         } else {
             $$("#preview").style.display = "none";
-            $$("#editor").style.display = "block";
+            $$("#edit").style.display = "block";
             $$("#preview").className = "";
         }
     });
@@ -487,7 +487,7 @@ window.onbeforeprint = function () {
     //新規作成・編集ウィンドウ表示時にプリントが開始されたら、プレビューを表示する
     preview();
     $$("#preview").style.display = "block";
-    $$("#editor").style.display = "none";
+    $$("#edit").style.display = "none";
     $$("#preview").className = "show";
 }
 //for safari
@@ -498,7 +498,7 @@ mediaQueryList.addListener(function (mql) {
         //新規作成・編集ウィンドウ表示時にプリントが開始されたら、プレビューを表示する
         preview();
         $$("#preview").style.display = "block";
-        $$("#editor").style.display = "none";
+        $$("#edit").style.display = "none";
         $$("#preview").className = "show";
     }
 });
@@ -1272,7 +1272,7 @@ function goToAnchor(e){
 function preview() {
     $$("#previewCheck").checked = true;
     $$("#preview").style.display = "block";
-    $$("#editor").style.display = "none";
+    $$("#edit").style.display = "none";
     $$("#preview").className = "show";
     var previewMdWithInfo = $$("#editor").value;
     //console.log(previewMdWithInfo.slice(0, 3));
