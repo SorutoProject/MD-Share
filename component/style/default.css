@@ -761,6 +761,7 @@ table {
         width: calc(100% - 5px);
         max-width: 100%;
         height: calc(100% - 65px);
+        overflow:auto;
         top: 0;
         left: 0;
         overflow: visible;

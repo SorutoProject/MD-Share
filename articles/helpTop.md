@@ -16,3 +16,4 @@ editable: false
 * [プライバシーポリシー](?article=PrivacyPolicy)
 * [MD Share APIの利用方法](?article=forDev)
 * [更新情報](?article=UPDATE)
+* [MD Share Project Page(GitHub)](https://github.com/SorutoProject/MD-Share)
