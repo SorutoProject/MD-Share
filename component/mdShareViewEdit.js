@@ -774,7 +774,7 @@ function share(url, queryUrl) {
         }).then(function (result) {
             if (result.value) {
                 var data = {
-                    url: url
+                    url: querUrl
                 }; // POSTメソッドで送信するデータ
                 var xmlHttpRequest = new XMLHttpRequest();
                 xmlHttpRequest.onreadystatechange = function () {
