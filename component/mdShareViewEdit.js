@@ -307,6 +307,7 @@ window.onload = function () {
                     $$("#editor").value = updateMd;
                     var userMd = LZString.compressToEncodedURIComponent($$("#editor").value);
                     var genURL = location.protocol + "//" + location.host + location.pathname + "#q=" + userMd;
+                    var genQueryURL = location.protocol + "//" + location.host + location.pathname + "?q=" + userMd;
                     /*if (genURL.length > 5000) {
                         Swal.fire({
                             title: "Oops...",
@@ -316,12 +317,14 @@ window.onload = function () {
                         share(genURL);
                         //console.log(userMd);
                     }*/
-                    share(genURL);
+                    share(genURL, genQueryURL);
                 }
             });
         } else {
             var userMd = LZString.compressToEncodedURIComponent($$("#editor").value);
             var genURL = location.protocol + "//" + location.host + location.pathname + "#q=" + userMd;
+            var genQueryURL = location.protocol + "//" + location.host + location.pathname + "?q=" + userMd;
+            
             /*if (genURL.length > 5000) {
                 Swal.fire({
                     title: "Oops...",
@@ -331,7 +334,7 @@ window.onload = function () {
                 share(genURL);
                 //console.log(userMd);
             }*/
-            share(genURL);
+            share(genURL,genQueryURL);
         }
     });
 
@@ -755,9 +758,10 @@ var presentation = {
 }
 
 //共有
-function share(url) {
+function share(url, queryUrl) {
+    if(queryUrl.length > 5000 && location.hostname == "mdshare.cf") alert("マークダウンの記述内容が多いため、短縮URLは生成できません。\nご了承ください。");
     //セキュリティ制約により、forkした環境での短縮URLの生成を禁止する
-    if (location.hostname == "mdshare.cf") {
+    if (location.hostname == "mdshare.cf" && queryUrl.length <= 5000) {
         /*var confShortLink = confirm("短縮URLを生成しますか？\n※「OK」を押して続行した場合は、Google Firebase Dynamic Linksにあなたのドキュメントの情報が保存されることに同意したものとみなされます。");
         if (confShortLink === false) sysMessage("短縮URLの作成をキャンセルしました");
         */
