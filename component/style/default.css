@@ -2,11 +2,13 @@
 	MD Share
 	White Style
 */
+
+*{
+    font-family: 'Noto Sans JP', sans-serif;
+}
 body {
     background: #eee;
     color: #000;
-
-    font-family: meiryo;
 }
 ::selection {
     background:#009e8f;
@@ -126,6 +128,7 @@ body {
     width: calc(100% - 10px - 70px);
     height: calc(100% - 10px);
     resize: none;
+    font-family: inherit;
 }
 
 #mdSymbols {
@@ -188,7 +191,7 @@ body {
 }
 
 #save button {
- width:calc(100% / 6);
+ width:calc(100% / 5);
  max-width:150px;
  height:37px;
  border:none;

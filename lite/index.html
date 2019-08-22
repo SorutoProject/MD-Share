@@ -13,7 +13,6 @@
 	
 	<title>MD Share</title>
 	<!--doc styles-->
-	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="component/style/default.css">
 	<!--<link rel="stylesheet" href="component/style/dark.css">-->
 	<link rel="stylesheet" href="component/ms-deco.css">
@@ -27,6 +26,7 @@
 	<script src="component/lz-string.min.js"></script>
 	<script src="component/screenfull.js"></script>
 	<script src="component/js-yaml.min.js"></script>
+	<script src="component/html2canvas.min.js"></script>
 	<!--<script src="component/glottologist.min.js"></script>-->
 </head>
 
@@ -58,8 +58,8 @@
                 <button data-text="# " title="見出し1">H1</button>
 				<button data-text="## " title="見出し2">H2</button>
 				<button data-text="### "title="見出し3">H3</button>
-				<button data-text="**" data-fs="-1" title="イタリック"><i class="fas fa-italic"></i></button>
-				<button data-text="****" data-fs="-2" title="太字"><i class="fas fa-bold"></i></button>
+				<button data-text="**" data-fs="-1" title="イタリック"><i>I</i></button>
+				<button data-text="****" data-fs="-2" title="太字"><b>B</b></button>
 				<button data-fs="-3" title="リンク[テキスト](URL)" data-text="[]()">Link</button>
 				<button data-fs="-11" title="MD Share Deco Element" data-text="<ms-deco ></ms-deco>">Deco</button>
 				<button title="目次を追加" data-text="(toc)">目次</button>
@@ -76,7 +76,7 @@
 		</div>
 		<div id="preview"></div>
 		<div id="save">
-            <button id="presenPreview" glot-model="presentationButton" title="プレゼンテーションモードでの表示を確認"><i class="fas fa-chalkboard-teacher"></i></button><button id="gen" glot-model="shareButton" title="編集中のドキュメントをSNSなどで共有"><i class="fas fa-share"></i></button><button id="dlButton" title="編集中のドキュメントをダウンロード"><i class="fas fa-file-download"></i></button><button id="downloadHTMLEditing" title="編集中のドキュメントをHTMLでダウンロード"><i class="far fa-file-code"></i></button><button class="printButton" glot-model="printButton" title="編集中のドキュメントを印刷"><i class="fas fa-print"></i></button>
+            <button id="presenPreview" glot-model="presentationButton" title="プレゼンテーションモードでの表示を確認"><i class="fas fa-chalkboard-teacher"></i></button><button id="gen" glot-model="shareButton" title="編集中のドキュメントをSNSなどで共有"><i class="fas fa-share"></i></button><button id="dlButton" title="編集中のドキュメントをダウンロード"><i class="fas fa-file-download"></i></button><button id="downloadHTMLEditing" title="編集中のドキュメントをHTMLでダウンロード"><i class="far fa-file-code"></i></button><button id="downloadImageEditing" title="編集中のドキュメントを画像でダウンロード"><i class="fas fa-image"></i></button><button class="printButton" glot-model="printButton" title="編集中のドキュメントを印刷"><i class="fas fa-print"></i></button>
 		</div>
 	</div>
 	<div id="windowBack"></div>
@@ -84,7 +84,8 @@
 	    <div id="presenScreenShot"></div>
 		<div id="presentationView"></div>
 		<div id="presentationControl">
-		    <button id="presentationBack" glot-model="forwardButton"><i class="fas fa-backward"></i> 前へ</button>
+		    <button id="presentationDl" title="現在のスライドを画像としてダウンロード"><i class="fas fa-download"></i></button>
+			<button id="presentationBack" glot-model="forwardButton"><i class="fas fa-backward"></i> 前へ</button>
 			<button id="presentationForward" glot-model="nextButton">次へ <i class="fas fa-forward"></i></button>
 			<button id="presentationEnd" glot-model="endButton"><i class="fas fa-door-open"></i> 終了</button>
 		</div>

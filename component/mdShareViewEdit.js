@@ -265,7 +265,9 @@ window.onload = function () {
 
     $$("#gen").addEventListener(clickEv, function () {
         //Change to yaml
-        if ($$("#editor").value.slice(0, 3) !== "---") {
+        var mayYaml = $$("#editor").value.split("---")[1].split("---")[0].trim();
+        var mdInfoJson = jsyaml.load(mayYaml);
+        if (typeof mdInfoJson !== "object") {
             //console.log("input user info");
 
             try {
@@ -324,13 +326,17 @@ window.onload = function () {
                         share(genURL);
                         //console.log(userMd);
                     }*/
-                    share(genURL, genQueryURL);
+                    share(genURL, genQueryURL, title, author);
                 }
             });
         } else {
             var userMd = LZString.compressToEncodedURIComponent($$("#editor").value);
             var genURL = location.protocol + "//" + location.host + location.pathname + "#q=" + userMd;
             var genQueryURL = location.protocol + "//" + location.host + location.pathname + "?q=" + userMd;
+            if(mdInfoJson.title) var title = mdInfoJson.title;
+            else var title = "";
+            if(mdInfoJson.author) var author = mdInfoJson.author;
+            else var author = "";
 
             /*if (genURL.length > 5000) {
                 Swal.fire({
@@ -341,7 +347,7 @@ window.onload = function () {
                 share(genURL);
                 //console.log(userMd);
             }*/
-            share(genURL, genQueryURL);
+            share(genURL, genQueryURL, title, author);
         }
     });
 
@@ -395,16 +401,6 @@ window.onload = function () {
         exportHTML($$("#editor").value);
     });
 
-    $$("#downloadImageEditing").addEventListener(clickEv, function () {
-        var title = preview();
-        if(title == "") var title = "MDShare_Shot";
-        var previewClass = $$("#preview").className;
-        $$("#preview").className = previewClass + "shot";//スクショではみ出した部分も取れるようにする
-        html2canvas($$("#preview")).then(function (canvas) {
-            downloadImage(title, canvas.toDataURL());
-            $$("#preview").className = previewClass;
-        });
-    });
 
 
     /*$$("#temButton").addEventListener(clickEv, function () {
@@ -426,9 +422,6 @@ window.onload = function () {
     });
     $$("#presentationEnd").addEventListener(clickEv, function () {
         presentation.end();
-    });
-    $$("#presentationDl").addEventListener(clickEv, function () {
-        presentation.printScreen();
     });
 
     $$("#downloadHTMLButton").addEventListener(clickEv, function () {
@@ -747,35 +740,14 @@ var presentation = {
     end: function () {
         screenfull.exit();
         $$("#presentation").className = "";
-    },
-    //スライドのスクショを撮る
-    printScreen: function () {
-        document.getElementById("presenScreenShot").innerHTML = $$("#presentationView").innerHTML;
-        html2canvas($$("#presenScreenShot")).then(function (canvas) {
-            var data = canvas.toDataURL();
-            var fname = "slide_" + parseInt(flags.presentation.nowPage + 1);
-            var encdata = atob(data.replace(/^.*,/, ''));
-            var outdata = new Uint8Array(encdata.length);
-            for (var i = 0; i < encdata.length; i++) {
-                outdata[i] = encdata.charCodeAt(i);
-            }
-            var blob = new Blob([outdata], ["image/png"]);
-
-            if (window.navigator.msSaveBlob) {
-                //IE用
-                window.navigator.msSaveOrOpenBlob(blob, fname);
-            } else {
-                //それ以外？
-                document.getElementById("getImage").href = data; //base64そのまま設定
-                document.getElementById("getImage").download = fname; //ダウンロードファイル名設定
-                document.getElementById("getImage").click(); //自動クリック
-            }
-        });
     }
 }
 
 //共有
-function share(url, queryUrl) {
+function share(url, queryUrl, title, author) {
+    var introText = "[MD Share]\n" + author + "さんが、MD Shareで「" + title + "」というドキュメントを共有しています。\nドキュメントを開くには、下のURLをタップしてください。";
+    var encodedIntroText = encodeURIComponent(introText);
+    
     if (url.length > 10000) {
         Swal.fire({
             title: "Oops...",
@@ -879,7 +851,7 @@ function share(url, queryUrl) {
                         });
 
                         $$("#twitterButton").href = "https://twitter.com/intent/tweet?url=" + urlEncoded;
-                        $$("#lineButton").href = "https://social-plugins.line.me/lineit/share?url=" + urlEncoded;
+                        $$("#lineButton").href = "https://social-plugins.line.me/lineit/share?url=" + urlEncoded + "&text=" + encodedIntroText;
 
                         $$("#shareCancel").addEventListener(clickEv, function (e) {
                             e.preventDefault();
@@ -935,9 +907,8 @@ function share(url, queryUrl) {
                 });
 
                 $$("#copyShortButton").style.display = "none";
-
                 $$("#twitterButton").href = "https://twitter.com/intent/tweet?url=" + urlEncoded;
-                $$("#lineButton").href = "https://social-plugins.line.me/lineit/share?url=" + urlEncoded;
+                $$("#lineButton").href = "https://social-plugins.line.me/lineit/share?url=" + urlEncoded + "&text=" + encodedIntroText;
 
                 $$("#shareCancel").addEventListener(clickEv, function (e) {
                     e.preventDefault();
@@ -984,8 +955,7 @@ function share(url, queryUrl) {
         $$("#copyShortButton").style.display = "none";
 
         $$("#twitterButton").href = "https://twitter.com/intent/tweet?url=" + urlEncoded;
-        $$("#lineButton").href = "https://social-plugins.line.me/lineit/share?url=" + urlEncoded;
-
+        $$("#lineButton").href = "https://social-plugins.line.me/lineit/share?url=" + urlEncoded + "&text=" + encodedIntroText;
         $$("#shareCancel").addEventListener(clickEv, function (e) {
             e.preventDefault();
             $$("#shareWindow").className = "";
@@ -1369,24 +1339,4 @@ function preview() {
     }
 
     return docTitle;
-}
-
-function downloadImage(title, data) {
-    var fname = title + ".png";
-    var encdata = atob(data.replace(/^.*,/, ''));
-    var outdata = new Uint8Array(encdata.length);
-    for (var i = 0; i < encdata.length; i++) {
-        outdata[i] = encdata.charCodeAt(i);
-    }
-    var blob = new Blob([outdata], ["image/png"]);
-
-    if (window.navigator.msSaveBlob) {
-        //IE用
-        window.navigator.msSaveOrOpenBlob(blob, fname);
-    } else {
-        //それ以外？
-        document.getElementById("getImage").href = data; //base64そのまま設定
-        document.getElementById("getImage").download = fname; //ダウンロードファイル名設定
-        document.getElementById("getImage").click(); //自動クリック
-    }
 }
