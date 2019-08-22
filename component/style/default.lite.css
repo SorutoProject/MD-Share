@@ -6,10 +6,7 @@
 body {
     background: #eee;
     color: #000;
-    font-family: 'Noto Sans JP', sans-serif;
-}
-button{
-    font-family: 'Noto Sans JP', sans-serif;
+    font-family: 'メイリオ', Meiryo,'ヒラギノ角ゴシック','Hiragino Sans',sans-serif;
 }
 ::selection {
     background:#009e8f;
@@ -32,7 +29,7 @@ button{
     width: 100%;
     bottom: 0;
     left: 0;
-    height: 60px;
+    height: 70px;
     z-index: 1;
 }
 
@@ -63,9 +60,8 @@ button{
     position: fixed;
     bottom:80px;
     right:20px;
-    width:40px;
-    height:40px;
-    font-size:30px;
+    width:80px;
+    min-height:30px;
     background:rgba(0,0,0,0.5);
     color:#fff;
     border-radius: 5px;
@@ -77,142 +73,6 @@ button{
     display: none !important;
 }
 
-#new {
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    background: #eee;
-    display: none;
-}
-
-#new.show {
-    display: block;
-    z-index: 3;
-    animation: zoomIn 0.2s ease 0s 1 alternate none running;
-}
-
-#new.show + #doc {
-    overflow: hidden;
-}
-
-#windowBack {
-    position: fixed;
-    background: rgba(0, 0, 0, 0.8);
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    display: none;
-    color: #fff;
-}
-
-#windowBack.show {
-    display: block;
-}
-
-#edit {
-    position: absolute;
-    top: 2em;
-    left: 0;
-    width: 100%;
-    height: calc(100% - 3em - 40px);
-    border: none;
-}
-
-#editor {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: calc(100% - 10px - 70px);
-    height: calc(100% - 10px);
-    resize: none;
-    font-family: inherit;
-}
-
-#mdSymbols {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 70px;
-    height: 100%;
-    overflow: auto;
-}
-
-#mdSymbols button {
-    width: 100%;
-    height: 40px;
-    background: #ddd;
-    border:none;
-    border-bottom: 1px solid #aaa;
-    font-size: 9pt;
-}
-
-#preview {
-    position: absolute;
-    top: 2em;
-    left:0;
-    right: 0;
-    margin:auto;
-    width: 100%;
-    max-width: 750px;
-    height: calc(100% - 3em - 40px);
-    padding-left:5px;
-    padding-right:5px;
-    background: #fff;
-    border: none;
-    overflow: auto;
-    display: none;
-}
-
-#preview.shot{
-    height:auto;
-}
-
-#save {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background: #ddd;
-    width: 100%;
-    height: 40px;
-    text-align: center;
-}
-
-#saveLink {
-    position: absolute;
-    top: 0;
-    left: 14em;
-    width: calc(100% - 15em);
-    height: 30px;
-    background: #ddd;
-    border: 3px solid #aaa;
-}
-
-#save button {
- width:calc(100% / 5);
- max-width:150px;
- height:37px;
- border:none;
- border-left:1px solid #bbb;
- border-right:1px solid #bbb;
- background:#ddd;
- font-size:14pt;
-}
-
-
-#newWindowClose {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 7em;
-    height: 2em;
-    background: #aa0000;
-    border: 3px solid #ff0000;
-    color: #fff;
-}
 
 #docTitle {
     font-size: 14pt;
@@ -224,168 +84,19 @@ button{
     color: #4c4c4c;
 }
 
-#message{
-    position:fixed;
-    bottom:20px;
-    left:0;
+#liteDescription{
+    font-size: 10pt;
+    display: inline-block;
+    position: absolute;
+    bottom:0;
     right:0;
-    margin:auto;
-    width:calc(100% - 10px);
-    min-height:2em;
-    max-width:500px;
-    padding:5px;
-    background:rgba(0,0,0,0.8);
-    z-index: 5;
-    border-radius:10px;
-    transition-duration: 0.2s;
-    color:#fff;
-    opacity: 0;
-    pointer-events: none;
-    text-align: center;
-    z-index: 5;
+    text-align: right;
+    color:#4c4c4c;
+}
+#liteDescription a{
+    color:#4c4c4c;
 }
 
-#message.show{
-    opacity: 1;
-}
-
-#presentation {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    z-index: 3;
-    display: none;
-}
-
-#presentation.show {
-    display: block;
-}
-
-#presentation #presentationControl {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 5px;
-    opacity: 0.2;
-    z-index: 2;
-}
-
-#presentation #presentationControl:hover {
-    opacity: 1;
-}
-
-#presentation #presentationControl button {
-    background: #3c3c3c;
-    color: #fff;
-    border: #8c8c8c 1px solid;
-    height: 35px;
-    width: 5em;
-}
-
-#presentationView {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    z-index: 1;
-    background: #fff;
-}
-
-#presenScreenShot{
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index:0; 
-    background: #fff;
-}
-
-#shareWindow {
-    position: fixed;
-    top: 0;
-    left: 0;
-    color: #fff;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 4;
-    text-align: center;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    display: none;
-}
-
-#shareWindow.show {
-    display: block;
-}
-
-#shareWindow a {
-    display: block;
-    width: calc(100% - 10px);
-    max-width:500px;
-    padding: 5px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    cursor: pointer;
-    margin:auto;
-    border-radius: 50px;
-}
-
-#copyRawButton,
-#copyShortButton,
-#shareCancel {
-    background: rgba(100, 100, 100, 0.8);
-    border-top:1px solid rgba(0,0,0,0.1);
-}
-
-#twitterButton {
-    background: rgba(100, 200, 255, 0.8);
-    border-top:1px solid #33aaff;
-}
-
-#lineButton {
-    background: rgba(0, 200, 0, 0.8);
-    border-top:1px solid #00dd00;
-}
-
-#fileOpenDialog{
-    position: fixed;
-    top:0;
-    left:0;
-    margin:auto;
-    width:100%;
-    height:100%;
-    background:rgba(20,20,20,0.9);
-    color:#fff;
-    text-align: center;
-    display: none;
-    z-index:4;
-}
-
-#fileOpenDialog.show{
-    display: block;
-}
-
-#fileOpenDialogClose{
-    width:100%;
-    max-width: 500px;
-    height:50px;
-    background:#a00;
-    color:#fff;
-    margin-top:50px;
-    border:none;
-}
-
-#tools #editButton{
-    display: none;
-}
 /*端末別設定*/
 /*スマホ用*/
 @media (max-width:600px) {

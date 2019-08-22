@@ -2,107 +2,125 @@
 <html lang="ja">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<link rel="shortcut icon" href="favicon.ico"> 
-	<meta name="description" content="わかりやすく情報を伝えよう。">
-	<!--SNS用設定-->
-	<meta property="og:title" content="MD Share" />
-	<meta property="og:image" content="https://mdshare.cf/mdshareIcon.png">
-	<meta property="og:description" content="わかりやすく情報を伝えよう。"/>
-	
-	<title>MD Share</title>
-	<!--doc styles-->
-	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="component/style/default.css">
-	<!--<link rel="stylesheet" href="component/style/dark.css">-->
-	<link rel="stylesheet" href="component/ms-deco.css">
-	<link rel="stylesheet" href="component/github.highlight.css">
-	<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-	
-	<script src="component/highlight.min.js"></script>
-	<script src="component/marked.min.js"></script>
-	<script src="component/sweetalert2.min.js"></script>
-	<script src="component/mdShareViewEdit.js"></script>
-	<script src="component/lz-string.min.js"></script>
-	<script src="component/screenfull.js"></script>
-	<script src="component/js-yaml.min.js"></script>
-	<!--<script src="component/glottologist.min.js"></script>-->
+    <meta charset="UTF-8">
+    <script>
+        //スマホでアクセスされたときにLite版に移動させる
+        var getDevice = (function() {
+            var ua = navigator.userAgent;
+            if (ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('Android') > 0 && ua.indexOf('Mobile') > 0) {
+                return 'sp';
+            } else if (ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0) {
+                return 'tab';
+            } else {
+                return 'other';
+            }
+        })();
+        if(getDevice === "sp"){
+            window.stop();
+            location.replace("./lite/" + location.search + location.hash);
+        }
+
+    </script>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="description" content="わかりやすく情報を伝えよう。">
+    <!--SNS用設定-->
+    <meta property="og:title" content="MD Share" />
+    <meta property="og:image" content="https://mdshare.cf/mdshareIcon.png">
+    <meta property="og:description" content="わかりやすく情報を伝えよう。" />
+
+    <title>MD Share</title>
+    <!--doc styles-->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="component/style/default.css">
+    <!--<link rel="stylesheet" href="component/style/dark.css">-->
+    <link rel="stylesheet" href="component/ms-deco.css">
+    <link rel="stylesheet" href="component/github.highlight.css">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+
+    <script src="component/highlight.min.js"></script>
+    <script src="component/marked.min.js"></script>
+    <script src="component/sweetalert2.min.js"></script>
+    <script src="component/mdShareViewEdit.js"></script>
+    <script src="component/lz-string.min.js"></script>
+    <script src="component/screenfull.js"></script>
+    <script src="component/js-yaml.min.js"></script>
+    <!--<script src="component/glottologist.min.js"></script>-->
 </head>
 
 <body>
     <a id="getImage"></a>
-	<div id="header"><span id="docInfo"><span id="docTitle"></span><br><span id="author"></span></span><button id="menuButton" glot-model="menuButton"><i class="fa fa-bars md-menu"></i></button></div>
-	<div id="tools" class="close">
+    <div id="header"><span id="docInfo"><span id="docTitle"></span><br><span id="author"></span></span><button id="menuButton" glot-model="menuButton"><i class="fa fa-bars md-menu"></i></button></div>
+    <div id="tools" class="close">
         <button id="newButton" title="新しいドキュメントを作成" glot-model="newButton"><i class="far fa-plus-square md-tools"></i> <span class="md-tools-text">新規</span></button>
         <button id="editButton" title="このドキュメントを編集" glot-model="editButton"><i class="far fa-edit md-tools"></i> <span class="md-tools-text">編集</span></button>
         <button id="fileOpenButton" title="この端末のマークダウンファイル(*.md)を開く"><i class="far fa-folder-open md-tools"></i> <span class="md-tools-text">ファイルを開く</span></button>
         <button id="downloadHTMLButton" title="このドキュメントをHTMLとしてダウンロード"><i class="far fa-file-code md-tools"></i><span class="md-tools-text"> HTML形式でダウンロード</span></button>
         <button id="presenButton" title="このドキュメントをプレゼンテーションのスライドとして使う" glot-model="presentationButton"><i class="fas fa-chalkboard-teacher md-tools"></i> <span class="md-tools-text">プレゼン</span></button>
-			<!--<button id="temButton" title="テンプレートから新しいドキュメントを作成します">テンプレ</button>-->
+        <!--<button id="temButton" title="テンプレートから新しいドキュメントを作成します">テンプレ</button>-->
         <button class="printButton" title="このドキュメントを印刷" glot-model="printButton"><i class="fas fa-print md-tools"></i> <span class="md-tools-text">印刷</span></button>
         <button id="infoButton" title="ヘルプを表示" glot-model="infoButton"><i class="fas fa-question-circle md-tools"></i> <span class="md-tools-text">ヘルプ</span></button>
-	</div>
-	<div id="doc">Now Loading...</div>
-	<div id="scrollToTop">
+    </div>
+    <div id="doc">Now Loading...</div>
+    <div id="scrollToTop">
         <i class="fas fa-arrow-up"></i>
     </div>
-	<div id="new">
-		<label class="printDelete">
+    <div id="new">
+        <label class="printDelete">
             <input type="checkbox" id="previewCheck"><span glot-model="previewShowText">プレビュー表示</span>
-		</label>
-		<button id="newWindowClose" glot-model="newWindowCloseButton"><i class="far fa-window-close"></i> 閉じる</button><br>
-		<div id="edit">
-			<textarea id="editor" placeholder="新規マークダウンを入力...(多く書きすぎると保存時にエラーが出ます。ご注意ください。)"></textarea>
-			<div id="mdSymbols">
+        </label>
+        <button id="newWindowClose" glot-model="newWindowCloseButton"><i class="far fa-window-close"></i> 閉じる</button><br>
+        <div id="edit">
+            <textarea id="editor" placeholder="新規マークダウンを入力...(多く書きすぎると保存時にエラーが出ます。ご注意ください。)"></textarea>
+            <div id="mdSymbols">
                 <button data-text="# " title="見出し1">H1</button>
-				<button data-text="## " title="見出し2">H2</button>
-				<button data-text="### "title="見出し3">H3</button>
-				<button data-text="**" data-fs="-1" title="イタリック"><i class="fas fa-italic"></i></button>
-				<button data-text="****" data-fs="-2" title="太字"><i class="fas fa-bold"></i></button>
-				<button data-fs="-3" title="リンク[テキスト](URL)" data-text="[]()">Link</button>
-				<button data-fs="-11" title="MD Share Deco Element" data-text="<ms-deco ></ms-deco>">Deco</button>
-				<button title="目次を追加" data-text="(toc)">目次</button>
-				<button data-text="$$" data-fs="-1" title="数式(インライン)">i Math</button>
-				<button data-text="$$$$" data-fs="-2" title="数式(ブロック)">b Math</button>
-				<button data-text=" " title="空白">Space</button>
-				<button>|</button>
-				<button>-</button>
-				<button title="引用符" data-text="> ">></button>
-				<button>$</button>
-				<button>`</button>
+                <button data-text="## " title="見出し2">H2</button>
+                <button data-text="### " title="見出し3">H3</button>
+                <button data-text="**" data-fs="-1" title="イタリック"><i class="fas fa-italic"></i></button>
+                <button data-text="****" data-fs="-2" title="太字"><i class="fas fa-bold"></i></button>
+                <button data-fs="-3" title="リンク[テキスト](URL)" data-text="[]()">Link</button>
+                <button data-fs="-11" title="MD Share Deco Element" data-text="<ms-deco ></ms-deco>">Deco</button>
+                <button title="目次を追加" data-text="(toc)">目次</button>
+                <button data-text="$$" data-fs="-1" title="数式(インライン)">i Math</button>
+                <button data-text="$$$$" data-fs="-2" title="数式(ブロック)">b Math</button>
+                <button data-text=" " title="空白">Space</button>
+                <button>|</button>
+                <button>-</button>
+                <button title="引用符" data-text="> ">></button>
+                <button>$</button>
+                <button>`</button>
                 <button>~</button>
-			</div>
-		</div>
-		<div id="preview"></div>
-		<div id="save">
+            </div>
+        </div>
+        <div id="preview"></div>
+        <div id="save">
             <button id="presenPreview" glot-model="presentationButton" title="プレゼンテーションモードでの表示を確認"><i class="fas fa-chalkboard-teacher"></i></button><button id="gen" glot-model="shareButton" title="編集中のドキュメントをSNSなどで共有"><i class="fas fa-share"></i></button><button id="dlButton" title="編集中のドキュメントをダウンロード"><i class="fas fa-file-download"></i></button><button id="downloadHTMLEditing" title="編集中のドキュメントをHTMLでダウンロード"><i class="far fa-file-code"></i></button><button class="printButton" glot-model="printButton" title="編集中のドキュメントを印刷"><i class="fas fa-print"></i></button>
-		</div>
-	</div>
-	<div id="windowBack"></div>
-	<div id="presentation">
-	    <div id="presenScreenShot"></div>
-		<div id="presentationView"></div>
-		<div id="presentationControl">
-		    <button id="presentationBack" glot-model="forwardButton"><i class="fas fa-backward"></i> 前へ</button>
-			<button id="presentationForward" glot-model="nextButton">次へ <i class="fas fa-forward"></i></button>
-			<button id="presentationEnd" glot-model="endButton"><i class="fas fa-door-open"></i> 終了</button>
-		</div>
-	</div>
-	<div id="shareWindow">
-		<h2>共有</h2>
-		<a id="copyRawButton" glot-model="copyRawUrl">生URLをコピー</a>
-		<a id="copyShortButton" glot-model="copyShortUrl">短縮URLをコピー</a>
-		<a id="twitterButton" target="_blank" glot-model="shareInTwitter"><i class="fab fa-twitter fa-lg"></i> Twitterで共有</a>
-		<a id="lineButton" target="_blank" glot-model="shareInLine"><i class="fab fa-line fa-lg"></i> LINEで共有</a>
-		<a id="shareCancel" glot-model="cancelButton">キャンセル</a>
-	</div>
-	<div id="message" class="printDelete"></div>
-	<div id="fileOpenDialog">
+        </div>
+    </div>
+    <div id="windowBack"></div>
+    <div id="presentation">
+        <div id="presenScreenShot"></div>
+        <div id="presentationView"></div>
+        <div id="presentationControl">
+            <button id="presentationBack" glot-model="forwardButton"><i class="fas fa-backward"></i> 前へ</button>
+            <button id="presentationForward" glot-model="nextButton">次へ <i class="fas fa-forward"></i></button>
+            <button id="presentationEnd" glot-model="endButton"><i class="fas fa-door-open"></i> 終了</button>
+        </div>
+    </div>
+    <div id="shareWindow">
+        <h2>共有</h2>
+        <a id="copyRawButton" glot-model="copyRawUrl">生URLをコピー</a>
+        <a id="copyShortButton" glot-model="copyShortUrl">短縮URLをコピー</a>
+        <a id="twitterButton" target="_blank" glot-model="shareInTwitter"><i class="fab fa-twitter fa-lg"></i> Twitterで共有</a>
+        <a id="lineButton" target="_blank" glot-model="shareInLine"><i class="fab fa-line fa-lg"></i> LINEで共有</a>
+        <a id="shareCancel" glot-model="cancelButton">キャンセル</a>
+    </div>
+    <div id="message" class="printDelete"></div>
+    <div id="fileOpenDialog">
         <div><i class="far fa-folder-open"></i> MDファイルを開く...</div><br>
-	    <input type="file" id="mdFileReader" accept=".md,.markdown,.mmd,.mdown"><br>
-	    <button id="fileOpenDialogClose">キャンセル</button>
-	</div>
+        <input type="file" id="mdFileReader" accept=".md,.markdown,.mmd,.mdown"><br>
+        <button id="fileOpenDialogClose">キャンセル</button>
+    </div>
 </body>
 
 </html>
