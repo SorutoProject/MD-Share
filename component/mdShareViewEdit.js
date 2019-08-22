@@ -265,11 +265,92 @@ window.onload = function () {
 
     $$("#gen").addEventListener(clickEv, function () {
         //Change to yaml
-        var mayYaml = $$("#editor").value.split("---")[1].split("---")[0].trim();
-        var mdInfoJson = jsyaml.load(mayYaml);
-        if (typeof mdInfoJson !== "object") {
-            //console.log("input user info");
+        try {
+            var mayYaml = $$("#editor").value.split("---")[1].split("---")[0].trim();
+            var mdInfoJson = jsyaml.load(mayYaml);
+            if (typeof mdInfoJson !== "object") {
+                //console.log("input user info");
 
+                try {
+                    var elem = document.createElement("div");
+                    elem.innerHTML = marked($$("#editor").value);
+                    var firstElem = elem.querySelector("*");
+                    var preTitle = firstElem.textContent;
+                } catch (e) {
+                    var preTitle = "";
+                }
+                try {
+                    if (localStorage.getItem("authorName") !== null) var authorSuggest = localStorage.authorName;
+                    else var authorSuggest = "";
+                } catch (e) {
+                    var authorSuggest = "";
+                }
+                Swal.mixin({
+                    input: 'text',
+                    confirmButtonText: "次へ",
+                    showCancelButton: true,
+                    cancelButtonText: "キャンセル",
+                    progressSteps: ["1", "2"]
+                }).queue([
+                    {
+                        title: "ドキュメントのタイトル",
+                        text: "このドキュメントのタイトルを入力してください",
+                        inputValue: preTitle
+                },
+                    {
+                        title: "ドキュメントの作者名",
+                        text: "このドキュメントの作者名を入力してください",
+                        inputValue: authorSuggest
+                }
+            ]).then(function (result) {
+                    if (result.value) {
+                        var title = result.value[0];
+                        if (title === "") var title = "無題";
+                        var author = result.value[1];
+                        if (author === "") var author = "名無し";
+                        else {
+                            try {
+                                localStorage.authorName = author;
+                            } catch (e) {}
+                        }
+                        var updateMd = '---\ntitle: ' + title + '\nauthor: ' + author + '\n---\n\n' + $$("#editor").value;
+                        $$("#editor").value = updateMd;
+                        var userMd = LZString.compressToEncodedURIComponent($$("#editor").value);
+                        var genURL = location.protocol + "//" + location.host + location.pathname + "#q=" + userMd;
+                        var genQueryURL = location.protocol + "//" + location.host + location.pathname + "?q=" + userMd;
+                        /*if (genURL.length > 5000) {
+                            Swal.fire({
+                                title: "Oops...",
+                                html: "マークダウンに記述された文字数が多すぎるため、URLの生成をキャンセルしました。\nマークダウンの文字数を減らしたり、内容を2つのマークダウンに記述したりしてください。"
+                            });
+                        } else {
+                            share(genURL);
+                            //console.log(userMd);
+                        }*/
+                        share(genURL, genQueryURL, title, author);
+                    }
+                });
+            } else {
+                var userMd = LZString.compressToEncodedURIComponent($$("#editor").value);
+                var genURL = location.protocol + "//" + location.host + location.pathname + "#q=" + userMd;
+                var genQueryURL = location.protocol + "//" + location.host + location.pathname + "?q=" + userMd;
+                if (mdInfoJson.title) var title = mdInfoJson.title;
+                else var title = "";
+                if (mdInfoJson.author) var author = mdInfoJson.author;
+                else var author = "";
+
+                /*if (genURL.length > 5000) {
+                    Swal.fire({
+                        title: "Oops...",
+                        html: "マークダウンに記述された文字数が多すぎるため、URLの生成をキャンセルしました。\nマークダウンの文字数を減らしたり、内容を2つのマークダウンに記述したりしてください。"
+                    });
+                } else {
+                    share(genURL);
+                    //console.log(userMd);
+                }*/
+                share(genURL, genQueryURL, title, author);
+            }
+        } catch (e) {
             try {
                 var elem = document.createElement("div");
                 elem.innerHTML = marked($$("#editor").value);
@@ -329,25 +410,6 @@ window.onload = function () {
                     share(genURL, genQueryURL, title, author);
                 }
             });
-        } else {
-            var userMd = LZString.compressToEncodedURIComponent($$("#editor").value);
-            var genURL = location.protocol + "//" + location.host + location.pathname + "#q=" + userMd;
-            var genQueryURL = location.protocol + "//" + location.host + location.pathname + "?q=" + userMd;
-            if(mdInfoJson.title) var title = mdInfoJson.title;
-            else var title = "";
-            if(mdInfoJson.author) var author = mdInfoJson.author;
-            else var author = "";
-
-            /*if (genURL.length > 5000) {
-                Swal.fire({
-                    title: "Oops...",
-                    html: "マークダウンに記述された文字数が多すぎるため、URLの生成をキャンセルしました。\nマークダウンの文字数を減らしたり、内容を2つのマークダウンに記述したりしてください。"
-                });
-            } else {
-                share(genURL);
-                //console.log(userMd);
-            }*/
-            share(genURL, genQueryURL, title, author);
         }
     });
 
@@ -747,7 +809,7 @@ var presentation = {
 function share(url, queryUrl, title, author) {
     var introText = "[MD Share]\n" + author + "さんが、MD Shareで「" + title + "」というドキュメントを共有しています。\nドキュメントを開くには、下のURLをタップしてください。";
     var encodedIntroText = encodeURIComponent(introText);
-    
+
     if (url.length > 10000) {
         Swal.fire({
             title: "Oops...",
