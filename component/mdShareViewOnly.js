@@ -119,6 +119,10 @@ window.onhashchange = function () {
 
 //ページの読み込み完了時
 window.onload = function () {
+    var urlQuery = location.search;
+    if(urlQuery !== "") var urlQuery = location.search + "&fd=t"
+    else var urlQuery = "?fd=t";
+    document.getElementById("linkToDefault").setAttribute("href","../" + urlQuery + location.hash);
     //Get Url Parameters
     var arg = new Object;
     var pair = location.search.substring(1).split('&');

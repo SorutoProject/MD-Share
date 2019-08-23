@@ -7,6 +7,8 @@ editable: false
 <span class="showOnOther">* This markdown is optimized for viewing on MD Share.<br>Some elements in this document does not work well on other sites.</span>
 
 # MD Share 更新情報
+## Ver.2019.08.23
+* スマホでLite版から通常版に移動できない不具合を修正しました。
 ## Ver.2019.08.22
 * LINEで共有するときに、MD Shareでドキュメントを共有している旨のテキストを付与するようにしました。
 * ブラウザによる動作の差異やサイトの軽量化のため、html2canvasによる画像ダウンロード機能を削除しました。

@@ -15,7 +15,14 @@
                 return 'other';
             }
         })();
-        if(getDevice === "sp"){
+        //Get Url Parameters
+        var arg = new Object;
+        var pair = location.search.substring(1).split('&');
+        for (var i = 0; pair[i]; i++) {
+            var kv = pair[i].split('=');
+            arg[kv[0]] = kv[1];
+        }
+        if (getDevice === "sp" && typeof arg["fd"] === "undefined") {
             window.stop();
             location.replace("./lite/" + location.search + location.hash);
         }
