@@ -22,7 +22,7 @@
             var kv = pair[i].split('=');
             arg[kv[0]] = kv[1];
         }
-        if (getDevice === "sp" && typeof arg["fd"] === "undefined") {
+        if (getDevice === "sp" && typeof arg["fd"] === "undefined" && typeof arg["article"] === "undefined") {
             window.stop();
             location.replace("./lite/" + location.search + location.hash);
         }
