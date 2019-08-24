@@ -1,15 +1,16 @@
 /*
-	MD Share
+	MD Share Lite
 	White Style
 */
 
 body {
     background: #eee;
     color: #000;
-    font-family: 'メイリオ', Meiryo,'ヒラギノ角ゴシック','Hiragino Sans',sans-serif;
+    font-family: 'メイリオ', Meiryo, 'ヒラギノ角ゴシック', 'Hiragino Sans', sans-serif;
 }
+
 ::selection {
-    background:#009e8f;
+    background: #009e8f;
     color: #fff;
 }
 
@@ -19,57 +20,46 @@ body {
     color: #fff;
 }
 
-#presenSave{
-    width:1920px;
-    height:1080px;
-}
 #header {
     position: fixed;
     background: #ddd;
     width: 100%;
     bottom: 0;
     left: 0;
-    height: 70px;
+    height: 60px;
     z-index: 1;
-}
-
-#menuButton {
-    position: absolute;
-    top: 0;
-    right: 5px;
-    height: 50px;
 }
 
 #doc {
     position: absolute;
     top: 10px;
     left: 0px;
-    right:0px;
-    margin:auto;
-    padding-left:5px;
-    padding-right:5px;
-    padding-bottom:80px;
+    right: 0px;
+    margin: auto;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 80px;
     width: calc(100% - 10px);
-    max-width:750px;
+    max-width: 750px;
     /*height: calc(100% - 60px);*/
     overflow: auto;
     background: #fff;
 }
 
-#scrollToTop{
+#scrollToTop {
     position: fixed;
-    bottom:80px;
-    right:20px;
-    width:80px;
-    min-height:30px;
-    background:rgba(0,0,0,0.5);
-    color:#fff;
+    bottom: 80px;
+    right: 20px;
+    width: 80px;
+    min-height: 30px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
     border-radius: 5px;
     text-align: center;
     display: none;
 }
 
-#scrollToTop.neverShow{
+#scrollToTop.neverShow {
     display: none !important;
 }
 
@@ -77,119 +67,42 @@ body {
 #docTitle {
     font-size: 14pt;
     font-weight: bold;
+    display: block;
+    width: calc(100% - 180px);
+    overflow: hidden;
+    white-space: nowrap;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
 }
 
 #author {
     font-size: 10pt;
     color: #4c4c4c;
+    display: block;
+    width: calc(100% - 180px);
+    overflow: hidden;
+    white-space: nowrap;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
 }
 
-#liteDescription{
+#liteDescription {
     font-size: 10pt;
     display: inline-block;
     position: absolute;
-    bottom:0;
-    right:0;
+    bottom: 0;
+    right: 0;
     text-align: right;
-    color:#4c4c4c;
-}
-#liteDescription a{
-    color:#4c4c4c;
+    color: #4c4c4c;
+    width: 160px;
 }
 
-/*端末別設定*/
-/*スマホ用*/
-@media (max-width:600px) {
-
-    #tools {
-        position: fixed;
-        top: 0px;
-        right: 0px;
-        height: calc(100% - 60px);
-        width: 100%;
-        background: rgba(200, 200, 200, 0.8);
-        z-index: 2;
-        transition-duration: 0.2s;
-        overflow: auto;
-    }
-
-    #tools.close {
-        opacity: 0;
-        pointer-events: none;
-    }
-
-    #tools button {
-        color: #000;
-        height: 50px;
-        width: 100%;
-        background: #ddd;
-        border: none;
-        border-top: 1px solid #bbb;
-        border-bottom: 1px solid #bbb;
-    }
-    
-    .md-tools{
-        font-size:1.3em;
-    }
-
-    #tools button:active {
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6) inset;
-    }
-
-    #menuButton {
-        background: none;
-        border: none;
-    }
-    .md-menu{
-        font-size:2em;
-    }
-}
-
-/*PC用*/
-@media (min-width:601px) {
-    #tools {
-        position: fixed;
-        bottom: 0;
-        right: 0;
-        z-index: 2;
-    }
-
-    #tools button {
-        height: 60px;
-        width: auto;
-        background: none;
-        border: none;
-        border-left:1px solid #bbb;
-        border-right:1px solid #bbb;
-    }
-
-    #menuButton {
-        display: none;
-    }
-    .md-tools{
-        font-size:1.8em;
-    }
-    .md-tools-text{
-        display: none;
-    }
-}
-
-/*スマホで横画面で入力しているとき*/
-@media (max-height:160px) {
-    #save {
-        display: none;
-    }
-
-    #preview,
-    #edit {
-        height: calc(100% - 3em);
-    }
+#liteDescription a {
+    color: #4c4c4c;
 }
 
 /*選択不可の設定*/
-#header,
-#new label,
-#tools{
+#header {
     -ms-user-select: none;
     /* IE 10+ */
     -moz-user-select: -moz-none;
@@ -199,9 +112,6 @@ body {
 }
 
 /*マークダウン設定*/
-
-#preview th,
-#preview td,
 #doc th,
 #doc td {
     border: solid 1px;
@@ -219,100 +129,86 @@ table {
     /* セルの線を重ねる */
 }
 
-#preview h1,
 #doc h1 {
     border-bottom: 1px solid #aaa;
     padding-left: 5px;
 }
 
-#preview h2,
 #doc h2 {
     border-bottom: 1px solid #aaa;
     padding-left: 5px;
 }
 
-#preview h3,
 #doc h3 {
     border-left: 8px solid #aaa;
     border-bottom: 1px solid #aaa;
     padding-left: 5px;
 }
 
-#preview code,
-#doc code{
-    border-radius:3px;
+#doc code {
+    border-radius: 3px;
 }
 
-#preview code:not(.hljs),
-#doc code:not(.hljs){
-    background:#f8f8f8;
-    padding-left:10px;
-    padding-right:10px;
+#doc code:not(.hljs) {
+    background: #f8f8f8;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
-#preview div.docIndex,
-#doc div.docIndex{
-    background:#eee;
-    border-radius:4px;
-    margin:10px;
+#doc div.docIndex {
+    background: #eee;
+    border-radius: 4px;
+    margin: 10px;
 }
 
-#preview div.docIndex b,
-#doc div.docIndex b{
-    font-size:16pt;
+#doc div.docIndex b {
+    font-size: 16pt;
 }
 
-#preview div.docIndex span,
-#doc div.docIndex span{
-    display:block;
-    background:#ddd;
-    border-top:1px solid #aaa;
+#doc div.docIndex span {
+    display: block;
+    background: #ddd;
+    border-top: 1px solid #aaa;
     text-decoration: none;
-    color:#000;
+    color: #000;
     padding: 10px;
-    
-    font-size:12pt;
-    cursor:pointer;
+
+    font-size: 12pt;
+    cursor: pointer;
 }
 
-#preview div.docIndex span.h1,
-#doc div.docIndex span.h1{
-    padding-left:10px;
+#doc div.docIndex span.h1 {
+    padding-left: 10px;
     font-weight: bold;
-    background:#fafafa;
+    background: #fafafa;
 }
 
-#preview div.docIndex span.h2,
-#doc div.docIndex span.h2{
-    padding-left:20px;
-    background:#eaeaea;
+#doc div.docIndex span.h2 {
+    padding-left: 20px;
+    background: #eaeaea;
 }
 
-#preview div.docIndex span.h3,
-#doc div.docIndex span.h3{
-    padding-left:30px;
-    background:#dadada;
+#doc div.docIndex span.h3 {
+    padding-left: 30px;
+    background: #dadada;
 }
 
-#preview div.docIndex span.h4,
-#doc div.docIndex span.h4{
-    padding-left:40px;
-    background:#cacaca;
+#doc div.docIndex span.h4 {
+    padding-left: 40px;
+    background: #cacaca;
 }
 
 #preview div.docIndex span.h5,
-#doc div.docIndex span.h5{
-    padding-left:50px;
-    background:#bababa;
+#doc div.docIndex span.h5 {
+    padding-left: 50px;
+    background: #bababa;
 }
 
-#preview div.docIndex span.h6,
-#doc div.docIndex span.h6{
-    padding-left:60px;
-    background:#aaa;
+#doc div.docIndex span.h6 {
+    padding-left: 60px;
+    background: #aaa;
 }
 
-#preview blockquote,
 #doc blockquote {
     border-left: 7px solid #ccc;
     padding-left: 10px;
@@ -320,157 +216,21 @@ table {
     color: #7c7c7c;
 }
 
-#preview hr,
-#doc hr{
-    height:1px;
-    background-color:#6c6c6c;
-    border:none;
+#doc hr {
+    height: 1px;
+    background-color: #6c6c6c;
+    border: none;
 }
 
 /*他サイトで表示するコメントを非表示にする*/
-#preview span.showOnOther,
-#doc span.showOnOther,
-#presentationView span.showOnOther{
+#doc span.showOnOther {
     display: none;
-}
-
-/*スライドの表示用*/
-
-#presentationView th,
-#presentationView td {
-    border: solid 1px;
-    /* 枠線指定 */
-    padding: 10px;
-    /* 余白指定 */
-}
-
-#presentationView table tr:nth-child(even) {
-    background: #ddd;
-}
-
-#presentationView table {
-    border-collapse: collapse;
-    /* セルの線を重ねる */
-}
-
-#presentationView * {
-    font-size: 16pt;
-}
-
-#presentationView h1{
-    border-bottom: 1px solid #aaa;
-    padding-left: 5px;
-    font-size: 32pt;
-}
-
-#presentationView h2{
-    border-bottom: 1px solid #aaa;
-    padding-left: 5px;
-    font-size: 24pt;
-}
-
-#presentationView h3{
-    border-left: 8px solid #aaa;
-    border-bottom: 1px solid #aaa;
-    padding-left: 5px;
-    font-size: 20pt;
-}
-
-#presentationView h4{
-    font-size: 18pt;
-}
-
-#presentation h5{
-    font-size: 14pt;
-}
-
-#presentationView h6{
-    font-size: 12pt;
-}
-
-#presentationView blockquote{
-    border-left: 7px solid #ccc;
-    padding-left: 10px;
-    color: #7c7c7c;
-}
-
-#presentationView .mjx-chtml span{
-    font-size:24pt;
-}
-
-/*スクショ領域*/
-#presenScreenShot{
-    width:1920px;
-    height:1080px;
-}
-
-#presenScreenShot th,
-#presenScreenShot td {
-    border: solid 1px;
-    /* 枠線指定 */
-    padding: 10px;
-    /* 余白指定 */
-}
-
-#presenScreenShot table tr:nth-child(even) {
-    background: #ddd;
-}
-
-#presenScreenShot table {
-    border-collapse: collapse;
-    /* セルの線を重ねる */
-}
-
-#presenScreenShot * {
-    font-size: 30pt;
-}
-
-#presenScreenShot h1{
-    border-bottom: 1px solid #aaa;
-    padding-left: 5px;
-    font-size: 60pt;
-}
-
-#presenScreenShot h2{
-    background: #3c3c3c;
-    padding: 5px;
-    color: #fff;
-    font-size: 54pt;
-}
-
-#presenScreenShot h3{
-    border-left: 8px solid #aaa;
-    border-bottom: 1px solid #aaa;
-    padding-left: 5px;
-    font-size: 48pt;
-}
-
-#presenScreenShot h4{
-    font-size: 40pt;
-}
-
-#presenScreenShot h5{
-    font-size: 36pt;
-}
-
-#presenScreenShot h6{
-    font-size: 30pt;
-}
-
-#presenScreenShot blockquote{
-    border-left: 7px solid #ccc;
-    padding-left: 10px;
-    color: #7c7c7c;
 }
 
 /*印刷用*/
 @media print {
 
     #header,
-    #tools,
-    #save,
-    #newWindowClose,
-    #mdSymbol,
     .printDelete {
         display: none;
     }
@@ -480,46 +240,13 @@ table {
         width: calc(100% - 5px);
         max-width: 100%;
         height: calc(100% - 65px);
-        overflow:auto;
+        overflow: auto;
         top: 0;
         left: 0;
         overflow: visible;
         box-shadow: none;
-        padding:0;
-        margin:0
+        padding: 0;
+        margin: 0
     }
 
-
-    #preview.show {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        min-height: 100%;
-        z-index: 3;
-        border: none;
-    }
-    
-}
-
-/*keyframes*/
-@keyframes zoomIn {
-    0% {
-        display: block;
-        -webkit-transform: scale(0.8);
-        -moz-transform: scale(0.8);
-        -o-transform: scale(0.8);
-        -ms-transform: scale(0.8);
-        transform: scale(0.8);
-        opacity: 0;
-    }
-
-    100% {
-        -webkit-transform: scale(1);
-        -moz-transform: scale(1);
-        -o-transform: scale(1);
-        -ms-transform: scale(1);
-        transform: scale(1);
-        opacity: 1;
-    }
 }

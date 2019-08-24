@@ -428,9 +428,26 @@ button{
     #menuButton {
         background: none;
         border: none;
+        width:55px;
     }
     .md-menu{
         font-size:2em;
+    }
+    #docTitle{
+        display: block;
+        width:calc(100% - 70px);
+        overflow: hidden;
+        white-space: nowrap;
+        -ms-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+    }
+    #author{
+        display: block;
+        width:calc(100% - 70px);
+        overflow: hidden;
+        white-space: nowrap;
+        -ms-text-overflow: ellipsis;
+        text-overflow: ellipsis;
     }
 }
 
@@ -445,7 +462,6 @@ button{
 
     #tools button {
         height: 60px;
-        width: auto;
         background: none;
         border: none;
         border-left:1px solid #bbb;
@@ -460,6 +476,22 @@ button{
     }
     .md-tools-text{
         display: none;
+    }
+    #docTitle{
+        display: block;
+        width:calc(100% - 350px);
+        overflow: hidden;
+        white-space: nowrap;
+        -ms-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+    }
+    #author{
+        display: block;
+        width:calc(100% - 350px);
+        overflow: hidden;
+        white-space: nowrap;
+        -ms-text-overflow: ellipsis;
+        text-overflow: ellipsis;
     }
 }
 

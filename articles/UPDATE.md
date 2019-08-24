@@ -7,6 +7,9 @@ editable: false
 <span class="showOnOther">* This markdown is optimized for viewing on MD Share.<br>Some elements in this document does not work well on other sites.</span>
 
 # MD Share 更新情報
+## Ver.2019.08.24
+* タイトル及びライター名が長いときに省略するようにしました。
+
 ## Ver.2019.08.23
 * スマホでLite版から通常版に移動できない不具合を修正しました。
 * 公式ドキュメントは、どのデバイスからアクセスされても通常版で表示するように変更しました。
