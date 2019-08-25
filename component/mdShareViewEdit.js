@@ -27,12 +27,27 @@ version = "2019.08.24";
 const deniedTagCondition = /^<\/?(script|style|link|iframe|embed|object|html|head|meta|body|form|input|button)/i
 const deniedAttrCondition = /^(on.+|style|href|action|id|class|data-.*)/i
 
+
 function escape(txt) {
-    if (txt.match(deniedTagCondition) || txt.indexOf('<!') === 0 || txt.indexOf('<?') === 0 || txt.indexOf('<\\') === 0) {
-        return ''
+    //特定のサイトの埋め込みを許可する
+    if(txt.indexOf('<iframe') === 0){
+        var outer = document.createElement("div");
+        outer.innerHTML = txt;
+        var iframeEl = outer.querySelector("iframe");
+        if(iframeEl !== null){
+            var src = iframeEl.src;
+            var srcHost = src.match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)[1];
+            var whiteList = ["www.google.com", "www.youtube.com"];
+            if(whiteList.indexOf(srcHost) !== -1) return txt;
+            else return '';
+        }
     }
     if (txt.indexOf('</') === 0) {
         return txt
+    }
+    
+    if (txt.match(deniedTagCondition) || txt.indexOf('<!') === 0 || txt.indexOf('<?') === 0 || txt.indexOf('<\\') === 0) {
+        return ''
     }
     //letにすると、古いブラウザでバグるのでvarにした。
     var outer = document.createElement('div')

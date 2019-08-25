@@ -9,7 +9,7 @@ editable: false
 # MD Share 更新情報
 ## Ver.2019.08.25
 * 軽微な動作の修正を行いました。
-
+* Google Maps および YouTubeのiframe埋め込みを許可しました。
 ## Ver.2019.08.24
 * タイトル及びライター名が長いときに省略するようにしました。
 
