@@ -4,7 +4,7 @@
  (c)2019 Soruto Project.
 */
 
-version = "2019.08.24";
+version = "2019.08.25";
 
 /*
  
@@ -120,9 +120,9 @@ window.onhashchange = function () {
 //ページの読み込み完了時
 window.onload = function () {
     var urlQuery = location.search;
-    if(urlQuery !== "") var urlQuery = location.search + "&fd=t"
+    if (urlQuery !== "") var urlQuery = location.search + "&fd=t"
     else var urlQuery = "?fd=t";
-    document.getElementById("linkToDefault").setAttribute("href","../" + urlQuery + location.hash);
+    document.getElementById("linkToDefault").setAttribute("href", "../" + urlQuery + location.hash);
     //Get Url Parameters
     var arg = new Object;
     var pair = location.search.substring(1).split('&');
@@ -140,11 +140,21 @@ window.onload = function () {
     }
 
     if (arg["q"]) {
-        var md = LZString.decompressFromEncodedURIComponent(arg["q"]);
-        loadMd(md);
+        try {
+            var md = LZString.decompressFromEncodedURIComponent(arg["q"]);
+            loadMd(md);
+        } catch (e) {
+            var md = '---\ntitle: 内部エラー\nauthor: SorutoProject\n---\n# 内部エラー\nURLパラメータからMDをデコードするときにエラーが発生しました。\n* URLパラメータに不正な値が含まれている可能性があります。';
+            loadMd(md);
+        }
     } else if (hashParams["q"]) {
-        var md = LZString.decompressFromEncodedURIComponent(hashParams["q"]);
-        loadMd(md);
+        try {
+            var md = LZString.decompressFromEncodedURIComponent(hashParams["q"]);
+            loadMd(md);
+        } catch (e) {
+            var md = '---\ntitle: 内部エラー\nauthor: SorutoProject\n---\n# 内部エラー\nURLハッシュからMDをデコードするときにエラーが発生しました。\n* URLパラメータに不正な値が含まれている可能性があります。';
+            loadMd(md);
+        }
     } else {
         //ホームページ
         var pageData = "---\ntitle: エラー\nauthor: SorutoProject\n---\n# パラメータが指定されていません\n* URLクエリまたはURLハッシュに適切な値が見つかりませんでした。\n[通常版サイトに移動](../)";

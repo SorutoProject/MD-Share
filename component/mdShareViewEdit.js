@@ -181,11 +181,21 @@ window.onload = function () {
         xhr.send(null);
 
     } else if (arg["q"]) {
-        var md = LZString.decompressFromEncodedURIComponent(arg["q"]);
-        loadMd(md);
+        try {
+            var md = LZString.decompressFromEncodedURIComponent(arg["q"]);
+            loadMd(md);
+        } catch (e) {
+            var md = '---\ntitle: 内部エラー\nauthor: SorutoProject\n---\n# 内部エラー\nURLパラメータからMDをデコードするときにエラーが発生しました。\n* URLパラメータに不正な値が含まれている可能性があります。';
+            loadMd(md);
+        }
     } else if (hashParams["q"]) {
-        var md = LZString.decompressFromEncodedURIComponent(hashParams["q"]);
-        loadMd(md);
+        try {
+            var md = LZString.decompressFromEncodedURIComponent(hashParams["q"]);
+            loadMd(md);
+        } catch (e) {
+            var md = '---\ntitle: 内部エラー\nauthor: SorutoProject\n---\n# 内部エラー\nURLハッシュからMDをデコードするときにエラーが発生しました。\n* URLパラメータに不正な値が含まれている可能性があります。';
+            loadMd(md);
+        }
     } else {
         //ホームページ
         var pageData = "LQhQBcEtwGwUwFwAICyARJBlAFgQwE5yAeDIBEMgYgyDKDILoMouAruNgPb7KYsNNIAK+TAVnADG4UCGCgAxKgw4CcUAB4AtgBNgANzj4AzpCYA7AHyKA9Gs3a9ho0p3LcMGEcDxDIGkGQFEMgEIZAmgyB5BkBRg0BGDUAkhkBceUAJBnJAIAYze0dnUFAAKlSk5KRABtNAdQZAEQZAPYZAH4ZAeoZAAYZAMoZAZ4ZASYZAWoZAU4ZAQ4ZKwAmGEMAdeUAEIx9AaIZAawZAewZAQAZQJDGkDO4AYUA7BkAWDUAIFWHAGAZFSCQhGFwdHQBeACIAMwIkY+AABxg6HWAdAEc6eX2TU0gjQFgGEOLAK4ZAYYZi7KAPwYfNFRuMMoBOhnygG2GeZLIardabbZ7I7bU64YAAIwIOmeZje70ASYSIjZbHYHY74DEXK43e6PQj415GLKAeMj3jNAGAZfR+-yBIJSSEAjoqASHNAKoMgBiGQD6DIA5hkKLUAMgyACwjAFyeUsAVgy5RbDACqACUADKARYZAJcMjUKgH6GRWAY2tsn5ALRRgCztKWAMwZcj03IAuj0AsVHZV1+QAGDOLcqCMoAacwA6nAsYAihkA6wzfGaAf3lABSugE7TQCrNkNTYAShkA3QyVCHBDWASwYBmCxpNZjqEWsySjKeizg84DooIZgEJIPhNnBmYSvn8Aa7fYBzBkAsgzA0HjCZIKGw2uk5EUtE6Gk43QDj4k+sr1HHdctuhtjsGLs9vvbpCADYZANcM8c5PL5I-HU5BoJSaSFUZjCe+AwoAAkgAKkghqQEIcAGDocAzIA0HJ9IANoqANGpbq5NOYygMBYEQVBMFwYAQZaAIGRAyAKdy8EzIAFgyAFIMHhjoKrIAIwAHRIBQMyAL0MgCrDC05SAOUMsYhIADVFjoAQQyAISOgD4imOEmAGxKgAKaX0gCORoAxgyuoA9kGhlhrLSoG2RDIA6iHtIAlFZqjRJCAM4M4aAIxRgB-UWqIQ8XxgkzD4gCeDK6MyAOCRgC-EYC0oDIAs4nERqgAXCYAYEp9IAGFGAJDx2QaoAigySoADgwaoAkQxaqCrIAExse0gCgAQFAzGSZBXDM5Amxn0gBFqf6ihYiYdBGBqgDJDOlgA1MYA33IhIABTEuFlZjNWYjWgLYrKAKj6qaAMKKgBY-zh4GQdBsFIMASCRpAADWkDnHAqiQLgP7RnGiYhGmvQUFRfQkB4QwLXhy1wYAoYqAJ3afSADAqgDwhlK0pidRgD+DBqUqYUgSQABRTAAlDlAAMTEAJxYBw4BcLwAjCOAYP3UtBGqCxkNAA";
