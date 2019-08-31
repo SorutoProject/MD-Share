@@ -4,7 +4,7 @@
  (c)2019 Soruto Project.
 */
 
-version = "2019.08.25";
+version = "2019.08.31";
 
 /*
  
@@ -301,7 +301,7 @@ function loadMd(mdData) {
 }
 
 function exportMdWithInfo(mdwithinfo) {
-    mdWithInfo = mdwithinfo;
+    mdWithInfo = null;
 }
 
 function generateHeadingList(md, docOrPreview) {

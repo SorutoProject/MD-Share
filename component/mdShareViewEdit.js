@@ -4,7 +4,7 @@
  (c)2019 Soruto Project.
 */
 
-version = "2019.08.24";
+version = "2019.08.31";
 
 /*
  
