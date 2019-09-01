@@ -1,0 +1,55 @@
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"] + label.check {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    width: 140px;
+    height: 28px;
+    color: #fff;
+    border: 1px solid #464646;
+    border-radius: 3px;
+    background-color: #464646;
+}
+
+
+input[type="checkbox"]:checked + label.check {
+    border: 1px solid #4db4e4;
+    background-color: #4db4e4;
+}
+
+input[type="checkbox"] + label.check::before {
+    content: "編集";
+    position: absolute;
+    top: 4px;
+    left: auto;
+    left: 3px;
+    font-size:9pt;
+}
+label.check::after {
+    content: "プレビュー";
+    position: absolute;
+    top:4px;
+    right: 3px;
+    color: #ffffff;
+    font-size:9pt;
+}
+
+input[type="checkbox"] + label.check > div {
+    position: absolute;
+    top: 2px;
+    left: 35px;
+    width: 6px;
+    height: 22px;
+    border: 1px solid #a3a3a3;
+    border-radius: 3px;
+    background-color: #ffffff;
+    transition-duration: 0.2s;
+}
+
+input[type="checkbox"]:checked + label.check > div {
+    border: 1px solid transparent;
+    left:63px;
+}

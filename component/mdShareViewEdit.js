@@ -274,6 +274,7 @@ window.onload = function () {
         };
         flags.edited = true;
     });
+    
     $$('#editor').addEventListener('keydown', function (e) {
         var elem, end, start, value;
         if (e.keyCode === 9) {

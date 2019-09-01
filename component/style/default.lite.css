@@ -119,6 +119,7 @@ body {
     padding:10px;
     transition-duration: 0.3s;
     font-size:10pt;
+    word-break: break-all;
 }
 
 #linkConfirm.show{

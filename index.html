@@ -43,8 +43,9 @@
     <!--<link rel="stylesheet" href="component/style/dark.css">-->
     <link rel="stylesheet" href="component/ms-deco.css">
     <link rel="stylesheet" href="component/github.highlight.css">
+    <link rel="stylesheet" href="component/canToggle.css">
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-
+    
     <script src="component/highlight.min.js"></script>
     <script src="component/marked.min.js"></script>
     <script src="component/sweetalert2.min.js"></script>
@@ -73,9 +74,8 @@
         <i class="fas fa-arrow-up"></i>
     </div>
     <div id="new">
-        <label class="printDelete">
-            <input type="checkbox" id="previewCheck"><span glot-model="previewShowText">プレビュー表示</span>
-        </label>
+    <input type="checkbox" id="previewCheck"/>
+    <label class="check" for="previewCheck"><div></div></label>
         <button id="newWindowClose" glot-model="newWindowCloseButton"><i class="far fa-window-close"></i> 閉じる</button><br>
         <div id="edit">
             <textarea id="editor" placeholder="新規マークダウンを入力...(多く書きすぎると保存時にエラーが出ます。ご注意ください。)"></textarea>
