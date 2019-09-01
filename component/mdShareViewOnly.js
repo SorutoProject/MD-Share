@@ -270,6 +270,7 @@ function loadMd(mdData) {
     //var html = html.replace(/\[x\]/g, '<input type="checkbox" checked="checked">');
     //var html = html.replace(/\[ \]/g, '<input type="checkbox">');
     $$("#doc").innerHTML = html;
+    addLinkEvent("doc");
     addHeadingListEvent("doc");
     document.documentElement.scrollTop = 0; //一番上までスクロール
     //for MathJax
@@ -338,4 +339,28 @@ function goToAnchor(e) {
         console.log(rect);
         document.documentElement.scrollTop = rect;
     }
+}
+
+function addLinkEvent(elemId){
+    var pageLinks = document.querySelectorAll("#" + elemId + " a");
+    for(var i = 0; i < pageLinks.length; i++){
+        pageLinks[i].addEventListener("click", function(e){
+            //urlのドメイン名を取得
+            var domain = e.target.href.match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)[1];
+            //他サイトへのリンクだったとき
+            if(domain !== location.host){
+                e.preventDefault();
+                showLinkConfirm(e.target.href);
+            }
+        });
+    }
+}
+
+function showLinkConfirm(url){
+    $$("#linkConfirm").className = "show";
+    $$("#linkConfirmURL").innerHTML = '<a href="' + url + '" target="_blank">' + url + '</a>'
+    setTimeout(function(){
+        $$("#linkConfirm").className = "";
+        $$("#linkConfirmURL").innerHTML = "";
+    },8000);
 }

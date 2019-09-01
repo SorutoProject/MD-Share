@@ -101,6 +101,37 @@ body {
     color: #4c4c4c;
 }
 
+#linkConfirm{
+    position: fixed;
+    bottom:-180px;
+    left:0;
+    right:0;
+    margin:auto;
+    width:calc(100% - 40px);
+    max-width:450px;
+    opacity: 0;
+    pointer-events: none;
+    background:rgba(255,255,255,1);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    box-shadow: 0 0 3px rgba(0,0,0,0.5);
+    text-align: center;
+    padding:10px;
+    transition-duration: 0.3s;
+    font-size:10pt;
+}
+
+#linkConfirm.show{
+    opacity: 1;
+    bottom:60px;
+    pointer-events: auto;
+    transition-duration: 0.3s;
+}
+
+#linkConfirmURL{
+    font-size:12pt;
+}
+
 /*選択不可の設定*/
 #header {
     -ms-user-select: none;

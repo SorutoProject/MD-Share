@@ -134,6 +134,8 @@ var $$ = function (e) {
     }
 }
 
+var showLinkConfirmTimeout = null;
+
 //クリックイベント
 var clickEv = "click";
 
@@ -617,6 +619,7 @@ function getBrowserName() {
 }
 
 function newDoc() {
+    $$("#previewCheck").checked = false;
     $$("#preview").style.display = "none";
     $$("#edit").style.display = "block";
     $$("#preview").className = "";
@@ -629,6 +632,7 @@ function newDoc() {
 
 function editDoc() {
     if (mdWithInfo !== undefined) {
+        $$("#previewCheck").checked = false;
         $$("#preview").style.display = "none";
         $$("#edit").style.display = "block";
         $$("#preview").className = "";
@@ -1177,6 +1181,7 @@ function loadMd(mdData) {
     //var html = html.replace(/\[x\]/g, '<input type="checkbox" checked="checked">');
     //var html = html.replace(/\[ \]/g, '<input type="checkbox">');
     $$("#doc").innerHTML = html;
+    addLinkEvent("doc");
     addHeadingListEvent("doc");
     document.documentElement.scrollTop = 0; //一番上までスクロール
     //for MathJax
@@ -1397,7 +1402,8 @@ function preview() {
     //var previewHtml = previewHtml.replace(/\[x\]/g, '<input type="checkbox" checked="checked">');
     //var previewHtml = previewHtml.replace(/\[ \]/g, '<input type="checkbox">');
     $$("#preview").innerHTML = previewHtml;
-    addHeadingListEvent("preview");
+    //addHeadingListEvent("preview");
+    addLinkEvent("preview");
     //for MathJax
     if (previewHtml.indexOf("$") !== -1) {
         if (flags.mathjaxLoaded === false) {
@@ -1426,4 +1432,32 @@ function preview() {
     }
 
     return docTitle;
+}
+
+function addLinkEvent(elemId){
+    var pageLinks = document.querySelectorAll("#" + elemId + " a");
+    for(var i = 0; i < pageLinks.length; i++){
+        pageLinks[i].addEventListener("click", function(e){
+            //urlのドメイン名を取得
+            var domain = e.target.href.match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)[1];
+            //他サイトへのリンクだったとき
+            if(domain !== location.host){
+                e.preventDefault();
+                showLinkConfirm(e.target.href);
+            }
+        });
+    }
+}
+
+function showLinkConfirm(url){
+    $$("#linkConfirm").className = "show";
+    $$("#linkConfirmURL").innerHTML = '<a href="' + url + '" target="_blank">' + url + '</a>';
+    if(showLinkConfirmTimeout !== null){
+        clearTimeout(showLinkConfirmTimeout);
+    }
+    showLinkConfirmTimeout = setTimeout(function(){
+        $$("#linkConfirm").className = "";
+        $$("#linkConfirmURL").innerHTML = "";
+        showLinkConfirmTimeout = null;
+    },8000);
 }
