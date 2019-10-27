@@ -8,6 +8,9 @@ editable: false
 
 # MD Share 更新情報
 
+## Ver.2019.10.27
+* プレゼンテーション機能を[reveal.js](https://github.com/hakimel/reveal.js/)による実装に切り替えました。
+
 ## Ver.2019.09.01
 * 編集画面の構成を変更しました。
 * 編集画面を、ダークテーマに変更し、目に優しくなりました。

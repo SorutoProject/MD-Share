@@ -7,18 +7,18 @@
 version = "2019.09.01";
 
 /*
- 
+
  MIT Licensed.
- 
+
  Required:
- 
+
  	lz-string(https://github.com/pieroxy/lz-string/)(MIT Licensed)
 	marked.js(https://github.com/markedjs/marked)(MIT Licensed)(Load From CDN)
 	highlight.js(https://github.com/highlightjs/highlight.js)(3-Clause BSD Licensed)
     js-yaml(https://github.com/nodeca/js-yaml)(MIT Licensed)
     screenfull.js(https://github.com/sindresorhus/screenfull.js/)(MIT Licensed)
     MathJax(https://mathjax.org)(MIT Licensed)
-    
+
 */
 //marked.js config
 
@@ -29,6 +29,10 @@ const deniedAttrCondition = /^(on.+|style|href|action|id|class|data-.*)/i
 
 
 function escape(txt) {
+    //reveal.jsのやつ
+    if(txt == "----"){
+      return "<hr>";
+    }
     //特定のサイトの埋め込みを許可する
     if(txt.indexOf('<iframe') === 0){
         var outer = document.createElement("div");
@@ -45,7 +49,7 @@ function escape(txt) {
     if (txt.indexOf('</') === 0) {
         return txt
     }
-    
+
     if (txt.match(deniedTagCondition) || txt.indexOf('<!') === 0 || txt.indexOf('<?') === 0 || txt.indexOf('<\\') === 0) {
         return ''
     }
@@ -274,7 +278,7 @@ window.onload = function () {
         };
         flags.edited = true;
     });
-    
+
     $$('#editor').addEventListener('keydown', function (e) {
         var elem, end, start, value;
         if (e.keyCode === 9) {
@@ -498,11 +502,13 @@ window.onload = function () {
     });*/
 
     $$("#presenButton").addEventListener(clickEv, function () {
-        presentation.start(mdWithInfo);
+        window.open("./presentation/index.html#q=" + LZString.compressToEncodedURIComponent(generatePresenMd(mdWithInfo)));
     });
 
     $$("#presenPreview").addEventListener(clickEv, function () {
-        presentation.start($$("#editor").value);
+        //presentation.start($$("#editor").value);
+        window.open("./presentation/index.html#q=" + LZString.compressToEncodedURIComponent(generatePresenMd($$("#editor").value)));
+
     });
     $$("#presentationBack").addEventListener(clickEv, function () {
         presentation.back();
@@ -1461,4 +1467,41 @@ function showLinkConfirm(url){
         $$("#linkConfirmURL").innerHTML = "";
         showLinkConfirmTimeout = null;
     },8000);
+}
+
+function generatePresenMd(mdWithInfo){
+  if (mdWithInfo == "" || mdWithInfo == undefined) {
+      var returnVal = "";
+  }
+  //md with document info
+  if (mdWithInfo.indexOf("<!---") !== -1) {
+      var returnVal = mdWithInfo.split("--->")[1];
+
+  }
+  //normal md or with yaml
+  else {
+      try {
+          var mayYaml = mdWithInfo.split("---")[1].split("---")[0].trim();
+
+          //console.log(mayYaml);
+          var mdInfoJson = jsyaml.load(mayYaml);
+          if (typeof mdInfoJson === "object"){
+              var md = "";
+              var preMd = mdWithInfo.split("---");
+              //console.log(preMd.length);
+              for (var i = 2; i < preMd.length; i++) {
+                  md += preMd[i] + "---";
+              }
+              var returnVal = md.slice(0, -3);
+          } else {
+              //console.log(mdInfoJson);
+              var mdInfo = "";
+              var returnVal = mdWithInfo;
+          }
+      } catch (e) {
+          var returnVal = mdWithInfo;
+      }
+  }
+  //最終処理
+  return returnVal;
 }
