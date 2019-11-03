@@ -4,7 +4,7 @@
  (c)2019 Soruto Project.
 */
 
-version = "2019.09.01";
+version = "2019.11.03";
 
 /*
 
@@ -525,14 +525,24 @@ window.onload = function () {
     });
 
     //#doc 一番上に戻るボタンを表示・非表示
-    window.addEventListener("scroll", function (e) {
+    /*window.addEventListener("scroll", function (e) {
         var scrollTop = document.documentElement.scrollTop;
         if (scrollTop < 200) {
             $$("#scrollToTop").style.display = "none";
         } else {
             $$("#scrollToTop").style.display = "block";
         }
-    });
+    });*/
+
+    //上のコードだとスマホで重くなるので変更
+    setInterval(function(){
+      var scrollTop = document.documentElement.scrollTop;
+      if (scrollTop < 200) {
+          $$("#scrollToTop").style.display = "none";
+      } else {
+          $$("#scrollToTop").style.display = "block";
+      }
+    },500);
 
     $$("#scrollToTop").addEventListener(clickEv, function () {
         document.documentElement.scrollTop = 0;

@@ -4,21 +4,21 @@
  (c)2019 Soruto Project.
 */
 
-version = "2019.09.01";
+version = "2019.11.03";
 
 /*
- 
+
  MIT Licensed.
- 
+
  Required:
- 
+
  	lz-string(https://github.com/pieroxy/lz-string/)(MIT Licensed)
 	marked.js(https://github.com/markedjs/marked)(MIT Licensed)(Load From CDN)
 	highlight.js(https://github.com/highlightjs/highlight.js)(3-Clause BSD Licensed)
     js-yaml(https://github.com/nodeca/js-yaml)(MIT Licensed)
     screenfull.js(https://github.com/sindresorhus/screenfull.js/)(MIT Licensed)
     MathJax(https://mathjax.org)(MIT Licensed)
-    
+
 */
 //marked.js config
 
@@ -174,14 +174,24 @@ window.onload = function () {
         loadMd(pageData);
     }
     //#doc 一番上に戻るボタンを表示・非表示
-    window.addEventListener("scroll", function (e) {
+    /*window.addEventListener("scroll", function (e) {
         var scrollTop = document.documentElement.scrollTop;
         if (scrollTop < 200) {
             $$("#scrollToTop").style.display = "none";
         } else {
             $$("#scrollToTop").style.display = "block";
         }
-    });
+    });*/
+
+    //上のコードだとスマホで重くなるので変更
+    setInterval(function(){
+      var scrollTop = document.documentElement.scrollTop;
+      if (scrollTop < 200) {
+          $$("#scrollToTop").style.display = "none";
+      } else {
+          $$("#scrollToTop").style.display = "block";
+      }
+    },500);
 
     $$("#scrollToTop").addEventListener(clickEv, function () {
         document.documentElement.scrollTop = 0;

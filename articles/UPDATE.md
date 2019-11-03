@@ -8,6 +8,9 @@ editable: false
 
 # MD Share 更新情報
 
+## Ver.2019.11.03
+* スマートフォン版Chromeでアクセス時、ドキュメントをスクロールしたときにカクつく不具合を修正しました。
+
 ## Ver.2019.10.27
 * プレゼンテーション機能を[reveal.js](https://github.com/hakimel/reveal.js/)による実装に切り替えました。
 
