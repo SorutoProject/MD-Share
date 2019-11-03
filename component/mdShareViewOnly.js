@@ -170,7 +170,7 @@ window.onload = function () {
         }
     } else {
         //ホームページ
-        var pageData = "---\ntitle: エラー\nauthor: SorutoProject\n---\n# パラメータが指定されていません\n* URLクエリまたはURLハッシュに適切な値が見つかりませんでした。\n[通常版サイトに移動](../)";
+        var pageData = "---\ntitle: エラー\nauthor: SorutoProject\n---\n# パラメータが指定されていません\n* URLクエリまたはURLハッシュに適切な値が見つかりませんでした。\n[通常版サイトに移動](../?fd=t)";
         loadMd(pageData);
     }
     //#doc 一番上に戻るボタンを表示・非表示
