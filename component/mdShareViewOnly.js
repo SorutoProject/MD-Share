@@ -191,7 +191,7 @@ window.onload = function () {
       } else {
           $$("#scrollToTop").style.display = "block";
       }
-    },500);
+    },250);
 
     $$("#scrollToTop").addEventListener(clickEv, function () {
         document.documentElement.scrollTop = 0;
