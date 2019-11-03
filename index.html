@@ -4,6 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="theme-color" content="#2c2c2c">
+    <!--Supports for PWA-->
+  <!-- アドレスバー等のブラウザのUIを非表示 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <!-- default（Safariと同じ） / black（黒） / black-translucent（ステータスバーをコンテンツに含める） -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <!-- ホーム画面に表示されるアプリ名 -->
+  <meta name="apple-mobile-web-app-title" content="MD Share">
+  <!-- ホーム画面に表示されるアプリアイコン -->
+  <link rel="apple-touch-icon" href="component/mdShareAppIcon152x152.png">
+  <!-- ウェブアプリマニフェストの読み込み -->
+  <link rel="manifest" href="manifest.json">
+  <!-- ServiceWorkerの登録 -->
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+      .then((reg) => {
+        console.log('Service worker registered.', reg);
+      });
+  }
+  </script>
     <script>
         //スマホでアクセスされたときにLite版に移動させる
         var getDevice = (function() {
@@ -23,9 +43,20 @@
             var kv = pair[i].split('=');
             arg[kv[0]] = kv[1];
         }
-        if (getDevice === "sp" && typeof arg["fd"] === "undefined" && typeof arg["article"] === "undefined") {
-            window.stop();
-            location.replace("./lite/" + location.search + location.hash);
+        //get Hash Params
+        var hashParams = new Object;
+        var pair = location.hash.substring(1).split("&");
+        for (var i = 0; pair[i]; i++) {
+            var hashKv = pair[i].split("=");
+            hashParams[hashKv[0]] = hashKv[1];
+        }
+
+        if (getDevice === "sp" && typeof arg["fd"] === "undefined" && typeof arg["article"] === "undefined" && typeof arg["q"] === "string") {
+          window.stop();
+          location.replace("./lite/" + location.search + location.hash);
+        }else if(getDevice === "sp" && typeof hashParams["fd"] === "undefined" && typeof hashParams["article"] === "undefined" && typeof hashParams["q"] === "string"){
+          window.stop();
+          location.replace("./lite/" + location.search + location.hash);
         }
 
     </script>
