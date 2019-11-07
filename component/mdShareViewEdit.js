@@ -4,7 +4,7 @@
  (c)2019 Soruto Project.
 */
 
-version = "2019.11.03";
+version = "2019.11.07";
 
 /*
 
@@ -82,6 +82,19 @@ function escape(txt) {
         return '<pre><code class="hljs">' + hljs.highlightAuto(code).value + '</code></pre>';
     };
 
+    renderer.heading = function (text, level) {
+        var testElem = document.createElement("div");
+        testElem.innerHTML = text;
+        if(testElem.querySelector("a") !== null){
+          var name = testElem.querySelector("a").innerHTML;
+        }else{
+          var name = text;
+        }
+
+        return '<h' + level + '><a class="anchor" name="' + name + '"><span class="header-link"></span></a>' +
+            text + '</h' + level + '>';
+    }
+
     renderer.link = function (href, title, text) {
         //console.log("href:" + href + "\ntitle:" + title + "\ntext:" + text);
         if (href.slice(0, 1) === "#") {
@@ -98,13 +111,6 @@ function escape(txt) {
         } else {
             return text;
         }
-    }
-
-    renderer.heading = function (text, level) {
-        var escapedText = text.toLowerCase();
-
-        return '<h' + level + '><a class="anchor" name="' + text + '"><span class="header-link"></span></a>' +
-            text + '</h' + level + '>';
     }
 
     marked.setOptions({

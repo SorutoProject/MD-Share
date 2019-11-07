@@ -4,7 +4,7 @@
  (c)2019 Soruto Project.
 */
 
-version = "2019.11.03";
+version = "2019.11.07";
 
 /*
 
@@ -95,9 +95,15 @@ function escape(txt) {
     }
 
     renderer.heading = function (text, level) {
-        var escapedText = text.toLowerCase();
+        var testElem = document.createElement("div");
+        testElem.innerHTML = text;
+        if(testElem.querySelector("a") !== null){
+          var name = testElem.querySelector("a").innerHTML;
+        }else{
+          var name = text;
+        }
 
-        return '<h' + level + '><a class="anchor" name="' + text + '"><span class="header-link"></span></a>' +
+        return '<h' + level + '><a class="anchor" name="' + name + '"><span class="header-link"></span></a>' +
             text + '</h' + level + '>';
     }
 
