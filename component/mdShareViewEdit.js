@@ -564,7 +564,7 @@ window.onload = function () {
     for (var i = 0; i < editSymbolButtons.length; i++) {
         editSymbolButtons[i].addEventListener(clickEv, function (e) {
             if (e.target.dataset.text) {
-                addTextToEditor(e.target.dataset.text, e.target.dataset.fs);
+                addTextToEditor(e.target.dataset.text.split("<br>").join("\r\n"), e.target.dataset.fs);
             } else {
                 addTextToEditor(e.target.textContent, e.target.dataset.fs);
             }

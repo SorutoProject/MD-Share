@@ -24,7 +24,7 @@
 	</head>
 	<body>
 		<div class="reveal">
-			<div class="slides">
+			<div class="slides" id="slides">
 				<section data-markdown
     data-separator="\n---\n$"
     data-separator-vertical="\n----\n">
@@ -35,6 +35,7 @@
 		</div>
 
 		<script src="../component/lz-string.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML"></script>
 		<script>
 		//get Hash Params
 		var hashParams = new Object;
@@ -45,6 +46,15 @@
 		}
 			 document.getElementById("markdown").innerHTML = LZString.decompressFromEncodedURIComponent(hashParams["q"]);
 			 console.log(LZString.decompressFromEncodedURIComponent(hashParams["q"]));
+
+			 //mathJax config
+			 MathJax.Hub.Config({
+					 tex2jax: {
+							 inlineMath: [['$', '$'], ["\\(", "\\)"]],
+							 displayMath: [['$$', '$$'], ["\\[", "\\]"]]
+					 }
+			 });
+			 MathJax.Hub.Queue(["Typeset", MathJax.Hub, "slides"]);
 		</script>
 		<script src="js/reveal.js"></script>
 
@@ -60,6 +70,8 @@
 					{ src: 'plugin/highlight/highlight.js', async: true }
 				]
 			});
+
+
 		</script>
 	</body>
 </html>
