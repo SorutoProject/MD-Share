@@ -13,6 +13,11 @@
   #doc{width:100%;}
   #printButton{position:fixed;bottom:0;right:0;}
   @media print{#printButton{display:none;}}
+  /*Line Maker*/
+  #doc strong > em{
+    font-style: normal;
+    background: linear-gradient(transparent 60%, #ffff66 60%);
+  }
   </style>
   <script src="../component/highlight.min.js"></script>
   <script src="../component/marked.min.js"></script>
