@@ -1181,6 +1181,11 @@ function loadMd(mdData) {
         var NMDPageData = "DwQgtBBQDekJACIAuBLJAbApggXAgogE6ED2hABGOQLIAi5AygBYCGh2ANPAiwK5JMyuBAwCeAZySYAtgkgBfSBDAA+SAGJyRUoQ2btZcgGMSAE0w5yAFSaZ25FOPIA7EknKmSR3tMzP3pixILAB0kICncoDQcoB2DIAiDIBaDIAxDIDSDNGA+cqAB2qA1gyAEQyAUQyAgAyAWwyAPwyAHQyASQyAFhGAXJ6A5gyAsgyAfgyA2gyAyQyAQAyQkABU5ACqAEoAMoCLDICXDICHDCWA-QzR5AgAjgjkE9MzWYCEjoCdSoBWDIAkCoAyDIDgxoBZ2oCqDImAZgyxgNEMXX2AYwyAtQyAnQyAEwyAowaAjBqHAAyABYZACUM72igEmGZ6AU4ZJoBnhnedUAQgz3XrkQDKDNFAGsM40AZQyANoZDgUhmMprN5ksVmtSfsKoAzxUAYC6NXaxDpAA";
         mdWithInfo = LZString.decompressFromEncodedURIComponent(NMDPageData);
         $$("#editButton").style.display = "none";
+        if(getBrowserName() == "IE" || getBrowserName() == "Edge"){
+          if(location.href.length >= 2083){
+            sysMessage("Microsoft系以外のブラウザでは閲覧できる可能性があります<br>(IE及びEdgeではURLの長さが2083字までになっているため)",10000);
+          }
+        }
     }
     //md with document info
     if (mdWithInfo.indexOf("<!---") !== -1) {
