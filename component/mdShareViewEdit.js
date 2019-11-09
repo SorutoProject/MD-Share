@@ -184,7 +184,7 @@ window.onload = function () {
         $$("#editButton").style.display = "none";
         $$("#downloadHTMLButton").style.display = "none";
         $$("#presenButton").style.display = "none";
-        $$(".printButton")[0].style.display = "none";
+        $$("#printButtonDoc").style.display = "none";
         sysMessage('<u>Internet Explorerでは、ドキュメントの閲覧のみ可能です。</u><br><span style="font-size:11pt">すべての機能を使用したい場合は、<br>ChromeやFirefoxなどの他のブラウザからアクセスしてください。</a></span>', 10000);
     }
     //Get Url Parameters
