@@ -104,8 +104,15 @@ function escape(txt) {
     renderer.heading = function (text, level) {
         var testElem = document.createElement("div");
         testElem.innerHTML = text;
-        if(testElem.querySelector("a") !== null){
-          var name = testElem.querySelector("a").innerHTML;
+        if(testElem.querySelector("*") !== null){
+          var elements = testElem.querySelectorAll("*");
+          var name = "";
+          var found = false;//文字列がある要素を見つけたかどうか
+          for(var i = 0; i < elements.length; i++){
+            if(found === false && elements[i].innerHTML !== ""){
+              var name = elements[i].innerHTML;
+            }
+          }
         }else{
           var name = text;
         }
