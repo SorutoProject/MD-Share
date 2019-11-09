@@ -4,7 +4,7 @@
  (c)2019 Soruto Project.
 */
 
-version = "2019.11.07";
+version = "2019.11.09";
 
 /*
 
@@ -73,7 +73,14 @@ function escape(txt) {
 (function () {
     var renderer = new marked.Renderer()
     renderer.code = function (code, language) {
+      if(language === "math"){
+        return "$$" + code + "$$";
+      }else if(language !== ""){
+        return '<pre><code class="hljs">' + hljs.highlight(language,code).value + '</code></pre>';
+      }
+      else{
         return '<pre><code class="hljs">' + hljs.highlightAuto(code).value + '</code></pre>';
+      }
     };
 
     renderer.link = function (href, title, text) {
@@ -253,7 +260,14 @@ function loadMd(mdData) {
                 } else {
                     $$("#scrollToTop").className = "";
                 }
-                
+
+                //docTheme
+                if(mdInfoJson.theme){
+                  $$("#docTheme").href = "../component/style/docTheme/doc/" + mdInfoJson.theme + ".css";
+                }else{
+                  $$("#docTheme").href = "../component/style/docTheme/doc/default.css";
+                }
+
                 var md = "";
                 var preMd = mdWithInfo.split("---");
                 //console.log(preMd.length);
