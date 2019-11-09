@@ -1,0 +1,120 @@
+#preview th,
+#preview td {
+    border: solid 1px;
+    /* 枠線指定 */
+    padding: 10px;
+    /* 余白指定 */
+}
+
+table tr:nth-child(even) {
+    background: #ddd;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#preview h1 {
+    background:#f7f7f7;
+    border-left:5px solid #ff7300;
+    border-bottom: 3px solid #ccc;
+    padding-left: 5px;
+}
+
+#preview h2 {
+    background: #f7f7f7;
+    border-left:5px solid #ff7300;
+    border-bottom: 3px solid #ccc;
+    padding-left: 5px;
+}
+
+#preview h3 {
+    background: #f7f7f7;
+    border-left:5px solid #ff7300;
+    border-bottom: 3px solid #ccc;
+    padding-left: 5px;
+}
+
+#preview code {
+    border-radius: 3px;
+}
+
+#preview code:not(.hljs) {
+    background: #f8f8f8;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#preview div.docIndex {
+    background: #eee;
+    border-radius: 4px;
+    margin: 10px;
+}
+
+#preview div.docIndex b {
+    font-size: 16pt;
+}
+
+#preview div.docIndex span {
+    display: block;
+    background: #ddd;
+    border-top: 1px solid #aaa;
+    text-decoration: none;
+    color: #000;
+    padding: 10px;
+
+    font-size: 12pt;
+    cursor: pointer;
+}
+
+#preview div.docIndex span.h1 {
+    padding-left: 10px;
+    font-weight: bold;
+    background: #fafafa;
+}
+
+#preview div.docIndex span.h2 {
+    padding-left: 20px;
+    background: #eaeaea;
+}
+
+#preview div.docIndex span.h3 {
+    padding-left: 30px;
+    background: #dadada;
+}
+
+#preview div.docIndex span.h4 {
+    padding-left: 40px;
+    background: #cacaca;
+}
+
+#preview div.docIndex span.h5 {
+    padding-left: 50px;
+    background: #bababa;
+}
+
+#preview div.docIndex span.h6 {
+    padding-left: 60px;
+    background: #aaa;
+}
+
+#preview blockquote {
+    border-left: 7px solid #ccc;
+    padding-left: 10px;
+    margin-left: 0px;
+    color: #7c7c7c;
+}
+
+#preview hr {
+    height: 1px;
+    background-color: #6c6c6c;
+    border: none;
+}
+
+/*他サイトで表示するコメントを非表示にする*/
+
+#preview span.showOnOther,
+#presentationView span.showOnOther {
+    display: none;
+}

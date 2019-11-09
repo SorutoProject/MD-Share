@@ -3,6 +3,17 @@
 	White Style
 */
 
+/*Line Maker*/
+#doc strong > em{
+  font-style: normal;
+  background: linear-gradient(transparent 60%, #ffff66 60%);
+}
+
+#preview strong > em{
+  font-style: normal;
+  background: linear-gradient(transparent 60%, #ffff66 60%);
+}
+
 body {
     background: #eee;
     color: #000;
@@ -60,6 +71,11 @@ button {
     /*height: calc(100% - 60px);*/
     overflow: auto;
     background: #fff;
+}
+
+#doc img,
+#preview img{
+  max-width:100%;
 }
 
 #scrollToTop {
@@ -218,16 +234,34 @@ button {
     color:#eee;
 }
 
+#gen.checked{
+  background:#f00;
+}
+
+#themePicker{
+  position: absolute;
+  left:145px;
+  top:0;
+  height:28px;
+  width:120px;
+}
+
 
 #newWindowClose {
     position: absolute;
     top: 0;
-    right: 0;
-    width: 7em;
-    height: 2em;
-    background: #aa0000;
-    border: 3px solid #ff0000;
+    right: 5px;
+    width: 28px;
+    height: 24px;
+    background: #ee0000;
+    border:none;
+    font-size:13px;
+    text-align:center;
+    padding-top:4px;
+    box-shadow:0 0 10px rgba(0,0,0,0.6);
     color: #fff;
+    border-radius:50%;
+    font-weight: bold;
 }
 
 #docTitle {
@@ -592,8 +626,12 @@ table tr:nth-child(even) {
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
+  padding:10px 0;
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  border-collapse: collapse;
 }
 
 #preview h1,

@@ -54,7 +54,7 @@
         if (getDevice === "sp" && typeof arg["fd"] === "undefined" && typeof arg["article"] === "undefined" && typeof arg["q"] === "string") {
           window.stop();
           location.replace("./lite/" + location.search + location.hash);
-        }else if(getDevice === "sp" && typeof hashParams["fd"] === "undefined" && typeof hashParams["article"] === "undefined" && typeof hashParams["q"] === "string"){
+        }else if(getDevice === "sp" && typeof arg["fd"] === "undefined" && typeof hashParams["article"] === "undefined" && typeof hashParams["q"] === "string"){
           window.stop();
           location.replace("./lite/" + location.search + location.hash);
         }
@@ -72,6 +72,8 @@
     <!--doc styles-->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="component/style/default.css">
+    <link rel="stylesheet" id="docTheme">
+    <link rel="stylesheet" id="previewTheme">
     <!--<link rel="stylesheet" href="component/style/dark.css">-->
     <link rel="stylesheet" href="component/ms-deco.css">
     <link rel="stylesheet" href="component/github.highlight.css">
@@ -109,7 +111,22 @@
     <div id="new">
     <input type="checkbox" id="previewCheck"/>
     <label class="check" for="previewCheck"><div></div></label>
-        <button id="newWindowClose" glot-model="newWindowCloseButton"><i class="far fa-window-close"></i> 閉じる</button><br>
+
+    <!--Theme Picker-->
+    <select id="themePicker">
+      <option value="selectATheme">テーマを選択...</option>
+      <option value="default">デフォルト</option>
+      <option value="callout-red">吹き出し(赤)</option>
+      <option value="callout-yellow">吹き出し(黄)</button>
+      <option value="callout-green">吹き出し(緑)</option>
+      <option value="callout-blue">吹き出し(青)</option>
+      <option value="callout-waterblue">吹き出し(水色)</option>
+      <option value="callout-pink">吹き出し(ピンク)</option>
+      <option value="glay-orange">オレンジ+灰</option>
+      <option value="waterblue-pink">水色+ピンク</option>
+    </select>
+
+        <div id="newWindowClose" glot-model="newWindowCloseButton"><!--<i class="far fa-window-close"></i>-->×</div><br>
         <div id="edit">
             <textarea id="editor" placeholder="新規マークダウンを入力...(多く書きすぎると保存時にエラーが出ます。ご注意ください。)"></textarea>
             <div id="mdSymbols">

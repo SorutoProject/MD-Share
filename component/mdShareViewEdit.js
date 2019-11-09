@@ -79,7 +79,14 @@ function escape(txt) {
 (function () {
     var renderer = new marked.Renderer()
     renderer.code = function (code, language) {
-        return '<pre><code class="hljs">' + hljs.highlightAuto(code).value + '</code></pre>';
+        if(language === "math"){
+          return "$$" + code + "$$";
+        }else if(language !== ""){
+          return '<pre><code class="hljs">' + hljs.highlight(language,code).value + '</code></pre>';
+        }
+        else{
+          return '<pre><code class="hljs">' + hljs.highlightAuto(code).value + '</code></pre>';
+        }
     };
 
     renderer.heading = function (text, level) {
@@ -233,6 +240,8 @@ window.onload = function () {
         if (document.querySelector("#doc md-version") !== null) {
             document.querySelector("#doc md-version").innerHTML = "<small>Ver." + version + "</small>";
         }
+
+        $$("#homeButton").style.display = "none";
     }
 
 
@@ -283,14 +292,19 @@ window.onload = function () {
         }
     });
 
-    $$("#editor").addEventListener("change", function () {
+    $$("#themePicker").addEventListener("change", function(e){
+      $$("#gen").className = "checked";
+      var themeName = e.target.value;
+      if(themeName !== "selectATheme") $$("#previewTheme").href = "component/style/docTheme/preview/" + themeName + ".css";
+    });
+
+    $$('#editor').addEventListener('keydown', function (e) {
+        $$("#gen").className = "checked";
         window.onbeforeunload = function (e) {
             return "編集内容が破棄されます。続行しますか？";
         };
         flags.edited = true;
-    });
 
-    $$('#editor').addEventListener('keydown', function (e) {
         var elem, end, start, value;
         if (e.keyCode === 9) {
             if (e.preventDefault) {
@@ -310,7 +324,9 @@ window.onload = function () {
         //Change to yaml
         try {
             var mayYaml = $$("#editor").value.split("---")[1].split("---")[0].trim();
+            var md = $$("#editor").value.split()
             var mdInfoJson = jsyaml.load(mayYaml);
+            //yamlがあるか確認
             if (typeof mdInfoJson !== "object") {
                 //console.log("input user info");
 
@@ -356,7 +372,15 @@ window.onload = function () {
                                 localStorage.authorName = author;
                             } catch (e) {}
                         }
-                        var updateMd = '---\ntitle: ' + title + '\nauthor: ' + author + '\n---\n\n' + $$("#editor").value;
+                        //カラーピッカーを取得
+                        var themePicker = $$("#themePicker").value;
+                        if(themePicker == "selectATheme" || themePicker == "default"){
+                          var updateMd = '---\ntitle: ' + title + '\nauthor: ' + author + '\n---\n\n' + $$("#editor").value;
+
+                        }else{
+                          var updateMd = '---\ntitle: ' + title + '\nauthor: ' + author + '\ntheme: ' + themePicker +'\n---\n\n' + $$("#editor").value;
+
+                        }
                         $$("#editor").value = updateMd;
                         var userMd = LZString.compressToEncodedURIComponent($$("#editor").value);
                         var genURL = location.protocol + "//" + location.host + location.pathname + "#q=" + userMd;
@@ -373,7 +397,26 @@ window.onload = function () {
                         share(genURL, genQueryURL, title, author);
                     }
                 });
+              //YAMLがあるとき
             } else {
+                //テーマが更新されているかもしれないので書き換える
+                //MDだけ取得
+                var md = "";
+                var preMd = $$("#editor").value.split("---");
+                //console.log(preMd.length);
+                for (var i = 2; i < preMd.length; i++) {
+                    md += preMd[i] + "---";
+                }
+                var md = md.slice(0, -3);
+                var themePicker = $$("#themePicker").value;
+                if(themePicker == "selectATheme" || themePicker == "default"){
+                  var updateMd = '---\ntitle: ' + mdInfoJson.title + '\nauthor: ' + mdInfoJson.author + '\n---\n\n' + md;
+
+                }else{
+                  var updateMd = '---\ntitle: ' + mdInfoJson.title + '\nauthor: ' + mdInfoJson.author + '\ntheme: ' + themePicker +'\n---\n\n' + md;
+
+                }
+                $$("#editor").value = updateMd;
                 var userMd = LZString.compressToEncodedURIComponent($$("#editor").value);
                 var genURL = location.protocol + "//" + location.host + location.pathname + "#q=" + userMd;
                 var genQueryURL = location.protocol + "//" + location.host + location.pathname + "?q=" + userMd;
@@ -436,7 +479,14 @@ window.onload = function () {
                             localStorage.authorName = author;
                         } catch (e) {}
                     }
-                    var updateMd = '---\ntitle: ' + title + '\nauthor: ' + author + '\n---\n\n' + $$("#editor").value;
+                    var themePicker = $$("#themePicker").value;
+                    if(themePicker == "selectATheme" || themePicker == "default"){
+                      var updateMd = '---\ntitle: ' + title + '\nauthor: ' + author + '\n---\n\n' + $$("#editor").value;
+
+                    }else{
+                      var updateMd = '---\ntitle: ' + title + '\nauthor: ' + author + '\ntheme: ' + themePicker +'\n---\n\n' + $$("#editor").value;
+
+                    }
                     $$("#editor").value = updateMd;
                     var userMd = LZString.compressToEncodedURIComponent($$("#editor").value);
                     var genURL = location.protocol + "//" + location.host + location.pathname + "#q=" + userMd;
@@ -647,6 +697,7 @@ function getBrowserName() {
 }
 
 function newDoc() {
+    $$("#gen").className = "";
     $$("#previewCheck").checked = false;
     $$("#preview").style.display = "none";
     $$("#edit").style.display = "block";
@@ -660,6 +711,7 @@ function newDoc() {
 
 function editDoc() {
     if (mdWithInfo !== undefined) {
+        $$("#gen").className = "";
         $$("#previewCheck").checked = false;
         $$("#preview").style.display = "none";
         $$("#edit").style.display = "block";
@@ -716,6 +768,8 @@ function addTextToEditor(t, firstSelection) {
     window.onbeforeunload = function (e) {
         return "編集内容が破棄されます。続行しますか？";
     };
+
+    $$("#gen").className = "checked";
 }
 //プレゼン機能の関数群
 var presentation = {
@@ -864,6 +918,7 @@ var presentation = {
 
 //共有
 function share(url, queryUrl, title, author) {
+    $$("#gen").className = "";
     var introText = "[MD Share]\n" + author + "さんが、MD Shareで「" + title + "」というドキュメントを共有しています。\nドキュメントを開くには、下のURLをタップしてください。";
     var encodedIntroText = encodeURIComponent(introText);
 
@@ -1170,10 +1225,11 @@ function loadMd(mdData) {
                 } else {
                     $$("#scrollToTop").className = "";
                 }
-                if (mdInfoJson.style) {
-                    $$("#doc").className = mdInfoJson.style;
-                } else {
-                    $$("#doc").className = "";
+                //docTheme
+                if(mdInfoJson.theme){
+                  $$("#docTheme").href = "component/style/docTheme/doc/" + mdInfoJson.theme + ".css";
+                }else{
+                  $$("#docTheme").href = "component/style/docTheme/doc/default.css";
                 }
                 var md = "";
                 var preMd = mdWithInfo.split("---");

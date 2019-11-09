@@ -253,6 +253,7 @@ function loadMd(mdData) {
                 } else {
                     $$("#scrollToTop").className = "";
                 }
+                
                 var md = "";
                 var preMd = mdWithInfo.split("---");
                 //console.log(preMd.length);
