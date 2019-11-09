@@ -629,15 +629,16 @@ window.onload = function () {
     }
 
     //印刷ボタン
-    var printButton = $$(".printButton");
-    for (var i = 0; i < printButton.length; i++) {
-        printButton[i].addEventListener(clickEv, function () {
-            if (getBrowserName() === "Edge") {
-                if (confirm("このブラウザ(Microsoft Edge)で印刷すると、レイアウトが崩れる可能性がありますが続行しますか？") == false) return false;
-            }
-            window.print();
-        })
-    }
+    $$("#printButtonDoc").addEventListener("click", function(){
+      var docUrl = LZString.compressToEncodedURIComponent(mdWithInfo);
+      window.open("print/index.html#q=" + docUrl);
+    });
+
+    $$("#printButtonPreview").addEventListener("click", function(){
+      var docUrl = LZString.compressToEncodedURIComponent($$("#editor").value);
+      window.open("print/index.html#q=" + docUrl);
+    });
+
 
     //URLパラメーターによる動作
     if (arg.e === "t") {
