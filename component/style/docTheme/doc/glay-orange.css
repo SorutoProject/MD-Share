@@ -18,7 +18,7 @@
     border-bottom: 3px solid #ccc;
     padding-left: 5px;
 }
-
+/*
 #doc code {
     border-radius: 3px;
 }
@@ -94,10 +94,11 @@
     background-color: #6c6c6c;
     border: none;
 }
-
+/*
 /*他サイトで表示するコメントを非表示にする*/
-
+/*
 #doc span.showOnOther,
 #presentationView span.showOnOther {
     display: none;
 }
+*/
